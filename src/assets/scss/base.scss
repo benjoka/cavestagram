@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import "font";
+@import "typo";
+
+body {
+  height: 100vh;
+  color: white;
+  background: black;
+}
+#root {
+  height: 100%;
+}
+.cv-app {
+  width: 100%;
+  height: 100%;
+}

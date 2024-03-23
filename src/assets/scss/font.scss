@@ -1,0 +1,30 @@
+$travesty-font-path: "../fonts/Travesty";
+$vtksseven-font-path: "../fonts/VtksSeven";
+$teenidle-font-path: "../fonts/Teenidle";
+
+@font-face {
+  src: url("#{$travesty-font-path}/Travesty.ttf") format("truetype");
+  font-family: "Travesty";
+  font-weight: 400;
+}
+
+@font-face {
+  src: url("#{$travesty-font-path}/TravestyBold.ttf") format("truetype");
+
+  font-family: "Travesty";
+  font-weight: 700;
+}
+
+@font-face {
+  src: url("#{$teenidle-font-path}/Teenidle.ttf") format("truetype");
+
+  font-family: "Teenidle";
+  font-weight: 400;
+}
+
+@font-face {
+  src: url("#{$vtksseven-font-path}/VtksSeven.ttf") format("truetype");
+
+  font-family: "VtksSeven";
+  font-weight: 400;
+}
