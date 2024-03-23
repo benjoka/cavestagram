@@ -37,6 +37,7 @@ export default function Video({ id, url }: Props) {
         muted={muted}
         loop
         ref={video}
+        playsInline
         style={{ height: "100%", width: "100%", objectFit: "cover" }}
       >
         <source
