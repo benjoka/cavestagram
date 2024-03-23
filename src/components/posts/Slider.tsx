@@ -25,7 +25,7 @@ export default function Slider({ files }: SliderProps) {
   return (
     <div className="w-full h-full">
       <div className="w-full h-full aspect-square relative">
-        <div className="absolute z-10 w-full h-full pointer-events-none bg-media-mask bg-[length:101%] bg-center" />
+        <div className="absolute z-10 w-full h-full pointer-events-none bg-media-mask bg-cover bg-center" />
         <Swiper
           className="h-full"
           resistanceRatio={0}

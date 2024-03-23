@@ -32,7 +32,7 @@ export default function Video({ id, url }: Props) {
       onClick={() => setMuted(!muted)}
     >
       <div ref={videoIndicator}></div>
-      <div className="absolute z-10 w-full h-full pointer-events-none bg-media-mask bg-[length:101%] bg-center" />
+      <div className="absolute z-10 w-full h-full pointer-events-none bg-media-mask bg-cover bg-center" />
       <video
         muted={muted}
         loop
