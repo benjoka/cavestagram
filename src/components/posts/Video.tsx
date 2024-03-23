@@ -19,9 +19,9 @@ export default function Video({ id, url }: Props) {
         !video.current.ended &&
         video.current.readyState > video.current.HAVE_CURRENT_DATA;
       if (videoVisible && !isPlaying) {
-        video.current?.play();
+        video.current.play();
       } else if (!videoVisible && isPlaying) {
-        video.current?.pause();
+        video.current.pause();
       }
     }
   }, [videoVisible]);
