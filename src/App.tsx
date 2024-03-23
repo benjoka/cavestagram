@@ -27,7 +27,6 @@ export default function App() {
   return (
     <div className="cv-app flex flex-col">
       <main className="cv-content flex-1 w-full pt-[20px] pb-[80px]">
-        <button onClick={(e: any) => onClick(e)}>Install</button>
         <Content />
       </main>
       <footer className="cv-footer w-full h-[80px] flex justify-center fixed z-20 bg-black bottom-0">
