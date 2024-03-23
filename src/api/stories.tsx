@@ -24,3 +24,40 @@ export async function fetchStories(): Promise<Story[]> {
   });
   return res?.data;
 }
+
+export async function postStory(selfieUrl: string, mediaUrl: string) {
+  const selfieBlob = await fetch(selfieUrl).then((r) => r.blob());
+  const formData = new FormData();
+  formData.append("files", selfieBlob);
+  fetch(`${process.env.REACT_APP_API_URL}/api/upload`, {
+    method: "POST",
+    body: formData,
+  })
+    .then((selfieFile) => selfieFile.json())
+    .then(async (selfieFile) => {
+      const mediaBlob = await fetch(mediaUrl).then((r) => r.blob());
+      const formData = new FormData();
+      formData.append("files", mediaBlob);
+      fetch(`${process.env.REACT_APP_API_URL}/api/upload`, {
+        method: "POST",
+        body: formData,
+      })
+        .then((mediaFile) => mediaFile.json())
+        .then((mediaFile) => {
+          fetch(`${process.env.REACT_APP_API_URL}/api/stories`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              data: {
+                selfie: selfieFile[0].id,
+                media: mediaFile[0].id,
+              },
+            }),
+          }).catch((error) => {
+            console.error(error);
+          });
+        });
+    });
+}
