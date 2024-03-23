@@ -32,7 +32,7 @@ export default function App() {
           style={{
             transform: scrollTop > 0 ? "scale(0.6)" : "scale(1)",
             padding: scrollTop > 0 ? "20px" : "30px 40px 20px 40px",
-            transition: "transform 0.3s linear",
+            transition: "transform 0.1s linear",
           }}
         >
           {activeView === "grotte-passe" && (
