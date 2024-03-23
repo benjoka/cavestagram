@@ -14,7 +14,7 @@ const VideoPreview = ({ stream }: any) => {
   if (!stream) {
     return null;
   }
-  return <video ref={videoRef} autoPlay />;
+  return <video playsInline ref={videoRef} autoPlay />;
 };
 
 export default function VideoRecorder() {
@@ -46,7 +46,13 @@ export default function VideoRecorder() {
               )}
               {mediaBlobUrl && (
                 <div>
-                  <video src={mediaBlobUrl} controls autoPlay loop />
+                  <video
+                    playsInline
+                    src={mediaBlobUrl}
+                    controls
+                    autoPlay
+                    loop
+                  />
                   <button onClick={() => upload(mediaBlobUrl)}>Upload</button>
                 </div>
               )}
