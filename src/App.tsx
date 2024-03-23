@@ -1,32 +1,58 @@
 import Content from "components/layout/Content";
-import Header from "components/layout/Header";
 import Navigation from "components/layout/Navigation";
 import { useEffect, useState } from "react";
+import { useAppStore } from "stores/AppStore";
 
 export default function App() {
-  const [supportsPWA, setSupportsPWA] = useState(false);
-  const [promptInstall, setPromptInstall] = useState<any>(null);
+  const { activeView } = useAppStore();
+
+  const [scrollTop, setScrollTop] = useState(0);
+
+  const handleNavbarOnScroll = (e: any) => {
+    setScrollTop(e.target.scrollingElement.scrollTop);
+  };
 
   useEffect(() => {
-    const handler = (e: any) => {
-      e.preventDefault();
-      setSupportsPWA(true);
-      setPromptInstall(e);
+    window.addEventListener("scroll", handleNavbarOnScroll);
+    return () => {
+      window.removeEventListener("scroll", handleNavbarOnScroll);
     };
-    window.addEventListener("beforeinstallprompt", handler);
-    return () => window.removeEventListener("transitionend", handler);
-  }, []);
-  const onClick = (e: any) => {
-    e.preventDefault();
-    if (promptInstall) {
-      promptInstall.prompt();
-    } else {
-      return;
-    }
-  };
+  }, [scrollTop]);
+
   return (
     <div className="cv-app flex flex-col">
-      <main className="cv-content flex-1 w-full pt-[20px] pb-[80px]">
+      <div className="fixed bg-black w-full z-30">
+        {activeView === "grotte-passe" && (
+          <h1
+            className="mb-0"
+            style={{
+              fontSize: scrollTop > 0 ? "1.5rem" : "2rem",
+              lineHeight: scrollTop > 0 ? "1.5rem" : "2rem",
+              padding:
+                scrollTop > 0 ? "20px 40px 15px 40px" : "30px 40px 20px 40px",
+              transition: "all 0.1s ease-out",
+            }}
+          >
+            La Grotte du Passé
+          </h1>
+        )}
+        {activeView === "grotte-present" && (
+          <h1
+            className="mb-0"
+            style={{
+              fontSize: scrollTop > 0 ? "1.5rem" : "2rem",
+              lineHeight: scrollTop > 0 ? "1.5rem" : "2rem",
+              padding:
+                scrollTop > 0 ? "20px 40px 15px 40px" : "30px 40px 20px 40px",
+              transition: "all 0.1s ease-out",
+            }}
+          >
+            La Grotte du Présent
+          </h1>
+        )}
+      </div>
+
+      <main className="cv-content flex-1 w-full pt-[100px] pb-[80px]">
         <Content />
       </main>
       <footer className="cv-footer w-full h-[80px] flex justify-center fixed z-20 bg-black bottom-0">

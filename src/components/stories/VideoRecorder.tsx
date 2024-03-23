@@ -3,20 +3,6 @@ import { useEffect, useRef } from "react";
 import { ReactMediaRecorder } from "react-media-recorder";
 import { useAppStore } from "stores/AppStore";
 
-const VideoPreview = ({ stream }: any) => {
-  const videoRef = useRef<HTMLVideoElement>(null);
-
-  useEffect(() => {
-    if (videoRef.current && stream) {
-      videoRef.current.srcObject = stream;
-    }
-  }, [stream]);
-  if (!stream) {
-    return null;
-  }
-  return <video playsInline ref={videoRef} autoPlay />;
-};
-
 export default function VideoRecorder() {
   const { selfie, setParticipateMode } = useAppStore();
 
@@ -64,3 +50,17 @@ export default function VideoRecorder() {
     </div>
   );
 }
+
+const VideoPreview = ({ stream }: any) => {
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    if (videoRef.current && stream) {
+      videoRef.current.srcObject = stream;
+    }
+  }, [stream]);
+  if (!stream) {
+    return null;
+  }
+  return <video playsInline ref={videoRef} autoPlay />;
+};

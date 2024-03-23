@@ -1,8 +1,6 @@
 import { useStoriesQuery } from "api/stories";
 import Story from "components/stories/Story";
-import { useState } from "react";
 import Participate from "components/stories/Participate";
-import { render } from "@testing-library/react";
 import { useAppStore } from "stores/AppStore";
 
 export default function GrottePresent() {
@@ -50,7 +48,6 @@ export default function GrottePresent() {
   };
   return (
     <div>
-      <h1>La Grotte du Présent</h1>
       {!participateMode && renderStories()}
       {participateMode && renderParticipate()}
     </div>

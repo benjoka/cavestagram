@@ -2,9 +2,9 @@ import { usePostsQuery } from "api/posts";
 import Post from "components/posts/Post";
 export default function GrottePasse() {
   const { data: posts } = usePostsQuery();
+
   return (
     <div>
-      <h1>La Grotte du Passé</h1>
       <p className="text-justify">
         Du befindest dich in der Höhle der Vergangenheit. Die Höhlenwände
         erzählen von der paläolithischen Höhlenmalerei und beschäftigen sich mit
