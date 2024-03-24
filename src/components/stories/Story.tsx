@@ -31,6 +31,7 @@ export default function Story({ id, media, selfie }: StoryProps) {
           <video
             preload="none"
             ref={file}
+            controls
             playsInline
             onEnded={() => setPlaying(false)}
             className="w-full h-full object-cover"
