@@ -8,7 +8,7 @@ export default function Story({ id, media, selfie }: StoryProps) {
   const file = useRef<any>(null);
 
   const triggerMedia = () => {
-    alert("triggered");
+    alert({ file: file.current, palying: playing });
     if (file.current) {
       if (!playing) {
         setPlaying(true);
