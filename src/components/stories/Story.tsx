@@ -29,6 +29,7 @@ export default function Story({ id, media, selfie }: StoryProps) {
           onClick={triggerVideo}
         >
           <video
+            preload="none"
             ref={file}
             playsInline
             onEnded={() => setPlaying(false)}
@@ -40,6 +41,7 @@ export default function Story({ id, media, selfie }: StoryProps) {
       {media.mime.includes("audio") && (
         <div className="absolute top-0 w-full h-full" onClick={triggerVideo}>
           <audio
+            preload="none"
             ref={file}
             onEnded={() => setPlaying(false)}
             className="opacity-0"

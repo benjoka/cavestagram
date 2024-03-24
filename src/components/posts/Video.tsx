@@ -34,6 +34,7 @@ export default function Video({ id, url }: Props) {
       <div ref={videoIndicator}></div>
       <div className="absolute z-10 w-full h-full pointer-events-none bg-media-mask bg-cover bg-center" />
       <video
+        preload="none"
         muted={muted}
         loop
         ref={video}

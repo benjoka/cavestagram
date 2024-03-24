@@ -13,6 +13,7 @@ export default function Media({ files }: MediaProps) {
       <div className="w-full h-full aspect-square">
         <div className="absolute z-10 w-full h-full pointer-events-none bg-media-mask bg-cover bg-center" />
         <img
+          loading="lazy"
           src={`${process.env.REACT_APP_API_URL}${files[0].url}`}
           className="object-cover"
         />
