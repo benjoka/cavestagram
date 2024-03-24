@@ -7,7 +7,8 @@ export default function Story({ id, media, selfie }: StoryProps) {
   const [playing, setPlaying] = useState(false);
   const file = useRef<any>(null);
 
-  const triggerVideo = () => {
+  const triggerMedia = () => {
+    alert("triggered");
     if (file.current) {
       if (!playing) {
         setPlaying(true);
@@ -26,7 +27,7 @@ export default function Story({ id, media, selfie }: StoryProps) {
         <div
           className="absolute top-0 w-full h-full flex items-center overflow-hidden"
           style={{ opacity: playing ? 1 : 0, transition: "opacity 0.5s ease" }}
-          onClick={triggerVideo}
+          onClick={triggerMedia}
         >
           <video
             preload="none"
@@ -39,7 +40,7 @@ export default function Story({ id, media, selfie }: StoryProps) {
         </div>
       )}
       {media.mime.includes("audio") && (
-        <div className="absolute top-0 w-full h-full" onClick={triggerVideo}>
+        <div className="absolute top-0 w-full h-full" onClick={triggerMedia}>
           <audio
             preload="none"
             ref={file}
