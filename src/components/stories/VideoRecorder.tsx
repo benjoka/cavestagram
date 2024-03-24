@@ -11,7 +11,7 @@ export default function VideoRecorder() {
     setParticipateMode(null);
   };
   return (
-    <div>
+    <div className="w-full h-full relative">
       <ReactMediaRecorder
         askPermissionOnMount
         video
@@ -22,27 +22,41 @@ export default function VideoRecorder() {
           mediaBlobUrl,
           previewStream,
         }) => {
+          console.log(status);
           return (
-            <div>
-              {status !== "recording" && (
-                <button onClick={startRecording}>Start Recording</button>
-              )}
-              {status === "recording" && (
-                <button onClick={stopRecording}>Stop Recording</button>
-              )}
-              {mediaBlobUrl && (
-                <div>
+            <div className="w-full h-full flex flex-col justify-evenly">
+              <div className="w-full relative aspect-square ">
+                <div className="absolute z-10 w-full h-full pointer-events-none bg-media-mask bg-cover bg-center" />
+                {mediaBlobUrl && (
                   <video
+                    className="w-full h-full object-cover"
                     playsInline
                     src={mediaBlobUrl}
-                    controls
                     autoPlay
                     loop
                   />
+                )}
+                {!mediaBlobUrl && <VideoPreview stream={previewStream} />}
+              </div>
+              <div className="w-full h-[60px] flex items-center justify-center">
+                {status === "idle" && (
+                  <button onClick={startRecording}>
+                    <div className="p-[2px] border-white border-2 border-solid rounded-full w-[50px] h-[50px]">
+                      <div className="rounded-full bg-red-500 w-full h-full"></div>
+                    </div>
+                  </button>
+                )}
+                {status === "recording" && (
+                  <button onClick={stopRecording}>
+                    <div className="p-[2px] border-white border-2 border-solid rounded-full flex items-center justify-center w-[50px] h-[50px]">
+                      <div className="rounded bg-red-500 w-1/2 h-1/2"></div>
+                    </div>
+                  </button>
+                )}
+                {status === "stopped" && mediaBlobUrl && (
                   <button onClick={() => upload(mediaBlobUrl)}>Upload</button>
-                </div>
-              )}
-              <VideoPreview stream={previewStream} />
+                )}
+              </div>
             </div>
           );
         }}
@@ -62,5 +76,12 @@ const VideoPreview = ({ stream }: any) => {
   if (!stream) {
     return null;
   }
-  return <video playsInline ref={videoRef} autoPlay />;
+  return (
+    <video
+      className="w-full h-full object-cover"
+      playsInline
+      ref={videoRef}
+      autoPlay
+    />
+  );
 };

@@ -36,7 +36,7 @@ export default function GrottePresent() {
   };
   const renderParticipate = () => {
     return (
-      <div>
+      <div className="h-full flex flex-col">
         <p className="text-justify">
           Dies ist die Höhle der Gegenwart. An den Wänden der Höhle wird
           interaktiv verewigt, warum wir uns heute Bilder machen und diese mit
@@ -47,7 +47,7 @@ export default function GrottePresent() {
     );
   };
   return (
-    <div>
+    <div className="h-full">
       {!participateMode && renderStories()}
       {participateMode && renderParticipate()}
     </div>
