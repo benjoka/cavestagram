@@ -8,12 +8,16 @@ export default function Story({ id, media, selfie }: StoryProps) {
   const file = useRef<any>(null);
 
   const triggerMedia = () => {
-    alert({ file: file.current, palying: playing });
+    console.log(file.current);
+    alert(playing);
     if (file.current) {
+      alert("inside 1");
       if (!playing) {
+        alert("inside 1.1");
         setPlaying(true);
         file.current.play();
       } else {
+        alert("inside 1.2");
         setPlaying(false);
         file.current.pause();
       }
