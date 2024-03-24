@@ -13,7 +13,6 @@ export default function VideoRecorder() {
   return (
     <div className="w-full h-full relative">
       <ReactMediaRecorder
-        askPermissionOnMount
         video
         render={({
           status,
