@@ -8,16 +8,12 @@ export default function Story({ id, media, selfie }: StoryProps) {
   const file = useRef<any>(null);
 
   const triggerMedia = () => {
-    console.log(file.current);
     alert(playing);
     if (file.current) {
-      alert("inside 1");
       if (!playing) {
-        alert("inside 1.1");
         setPlaying(true);
         file.current.play();
       } else {
-        alert("inside 1.2");
         setPlaying(false);
         file.current.pause();
       }
@@ -30,7 +26,6 @@ export default function Story({ id, media, selfie }: StoryProps) {
       {media.mime.includes("video") && (
         <div
           className="absolute top-0 w-full h-full flex items-center overflow-hidden"
-          style={{ opacity: playing ? 1 : 0, transition: "opacity 0.5s ease" }}
           onClick={triggerMedia}
         >
           <video
@@ -49,7 +44,6 @@ export default function Story({ id, media, selfie }: StoryProps) {
             preload="none"
             ref={file}
             onEnded={() => setPlaying(false)}
-            className="opacity-0"
             src={`${process.env.REACT_APP_API_URL}${media.url}`}
           />
         </div>
