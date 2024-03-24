@@ -13,6 +13,7 @@ export default function VideoRecorder() {
   return (
     <div className="w-full h-full relative">
       <ReactMediaRecorder
+        askPermissionOnMount
         video
         render={({
           status,
@@ -21,7 +22,6 @@ export default function VideoRecorder() {
           mediaBlobUrl,
           previewStream,
         }) => {
-          console.log(status);
           return (
             <div className="w-full h-full flex flex-col">
               <div className="w-full relative aspect-square">
