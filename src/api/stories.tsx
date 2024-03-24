@@ -37,7 +37,12 @@ export async function postStory(selfieUrl: string, mediaUrl: string) {
     .then(async (selfieFile) => {
       const mediaBlob = await fetch(mediaUrl).then((r) => r.blob());
       const formData = new FormData();
-      formData.append("files", mediaBlob);
+      const mediaMp4 = new File([mediaBlob], "media.mp4", {
+        type: "video/mp4",
+      });
+
+      formData.append("files", mediaMp4);
+
       fetch(`${process.env.REACT_APP_API_URL}/api/upload`, {
         method: "POST",
         body: formData,
