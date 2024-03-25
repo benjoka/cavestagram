@@ -30,7 +30,6 @@ export default function App() {
         <div
           className="origin-top-left bg-black/90 px-[40px]"
           style={{
-            transition: "transform 0.1s linear",
             paddingTop: scrollTop > 0 ? 10 : 20,
             paddingBottom: scrollTop > 0 ? 5 : 10,
           }}
@@ -39,7 +38,6 @@ export default function App() {
             <h1
               className="mb-0 text-center"
               style={{
-                transition: "font-size 0.1s linear",
                 fontSize: scrollTop > 0 ? "1.5rem" : "2rem",
               }}
             >
@@ -50,7 +48,6 @@ export default function App() {
             <h1
               className="mb-0 text-center"
               style={{
-                transition: "font-size 0.1s linear",
                 fontSize: scrollTop > 0 ? "1.5rem" : "2rem",
               }}
             >
