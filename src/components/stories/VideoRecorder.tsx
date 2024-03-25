@@ -23,7 +23,7 @@ export default function VideoRecorder() {
           previewStream,
         }) => {
           return (
-            <div className="w-full h-full flex flex-col">
+            <div className="w-full h-full flex flex-col items-center justify-evenly">
               <div className="w-full relative aspect-square">
                 <div className="absolute z-10 w-full h-full pointer-events-none bg-media-mask bg-cover bg-center" />
                 {mediaBlobUrl && (
