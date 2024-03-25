@@ -12,6 +12,7 @@ export default function VideoRecorder() {
       setUploading(true);
       await postStory(selfie, uri);
       setUploading(false);
+      setSelfie(null);
       setParticipateMode(null);
     }
   };

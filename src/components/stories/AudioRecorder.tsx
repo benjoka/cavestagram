@@ -3,10 +3,11 @@ import { ReactMediaRecorder } from "react-media-recorder";
 import { useAppStore } from "stores/AppStore";
 
 export default function AudioRecorder() {
-  const { selfie, setParticipateMode } = useAppStore();
+  const { selfie, setParticipateMode, setSelfie } = useAppStore();
   const upload = async (uri: string) => {
     if (selfie) {
       postStory(selfie, uri);
+      setSelfie(null);
       setParticipateMode(null);
     }
   };

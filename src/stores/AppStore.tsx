@@ -6,7 +6,7 @@ export interface AppStore {
   selfie: string | null;
   setActiveView: (view: string) => void;
   setParticipateMode: (mode: string | null) => void;
-  setSelfie: (selfie: string) => void;
+  setSelfie: (selfie: string | null) => void;
 }
 
 export const useAppStore = create<AppStore>((set) => ({
@@ -16,5 +16,5 @@ export const useAppStore = create<AppStore>((set) => ({
   setActiveView: (view: string) => set(() => ({ activeView: view })),
   setParticipateMode: (mode: string | null) =>
     set(() => ({ participateMode: mode })),
-  setSelfie: (selfie: string) => set(() => ({ selfie: selfie })),
+  setSelfie: (selfie: string | null) => set(() => ({ selfie: selfie })),
 }));
