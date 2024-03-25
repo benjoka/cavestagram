@@ -2,7 +2,7 @@ import { useStoriesQuery } from "api/stories";
 import Story from "components/stories/Story";
 import Participate from "components/stories/Participate";
 import { useAppStore } from "stores/AppStore";
-
+import buttonBorder from "assets/images/icons/button_border.png";
 export default function GrottePresent() {
   const { data: stories } = useStoriesQuery();
   const { participateMode, setParticipateMode } = useAppStore();
@@ -16,8 +16,16 @@ export default function GrottePresent() {
           <br />
           <br />
           {!participateMode && (
-            <button onClick={() => setParticipateMode("selfie")}>
-              Darum mache ich mir Bilder
+            <button
+              className="w-full caves-button"
+              onClick={() => setParticipateMode("selfie")}
+              style={{
+                backgroundImage: `url(${buttonBorder})`,
+                backgroundSize: "100% 100%",
+                padding: "30px 60px",
+              }}
+            >
+              TEILNEHMEN
             </button>
           )}
         </p>

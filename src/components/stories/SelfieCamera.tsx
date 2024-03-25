@@ -3,6 +3,8 @@ import Webcam from "react-webcam";
 import { useAppStore } from "stores/AppStore";
 import iconCam from "assets/images/icons/icon_cam.png";
 import iconMic from "assets/images/icons/icon_mic.png";
+import iconRecordCircle from "assets/images/icons/icon_record_circle.png";
+
 export default function SelfieCamera() {
   const webcamRef = useRef<any>(null);
   const { selfie, setSelfie, participateMode, setParticipateMode } =
@@ -32,18 +34,16 @@ export default function SelfieCamera() {
       <div className="w-full h-[60px] flex items-center justify-center">
         {!selfie && (
           <button onClick={capture}>
-            <div className="p-[2px] border-white border-2 border-solid rounded-full">
-              <div className="rounded-full bg-white w-[50px] h-[50px]"></div>
-            </div>
+            <img width={80} src={iconRecordCircle} />
           </button>
         )}
         {selfie && (
           <div className="w-full flex justify-evenly">
             <button className="p-4" onClick={() => setParticipateMode("video")}>
-              <img width={50} src={iconCam} />
+              <img width={70} src={iconCam} />
             </button>
             <button className="p-4" onClick={() => setParticipateMode("audio")}>
-              <img width={50} src={iconMic} />
+              <img width={60} src={iconMic} />
             </button>
           </div>
         )}

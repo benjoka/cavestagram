@@ -3,7 +3,9 @@ import { useState } from "react";
 import { ReactMediaRecorder } from "react-media-recorder";
 import { useAppStore } from "stores/AppStore";
 import iconCircle from "assets/images/icons/icon_circle.png";
-import iconMic from "assets/images/icons/icon_mic.png";
+import iconMicCircle from "assets/images/icons/icon_mic_circle.png";
+import iconStopCircle from "assets/images/icons/icon_stop_circle.png";
+import buttonBorder from "assets/images/icons/button_border.png";
 
 export default function AudioRecorder() {
   const { selfie, setParticipateMode, setSelfie } = useAppStore();
@@ -23,7 +25,7 @@ export default function AudioRecorder() {
     <div className="w-full h-full">
       {uploading && (
         <div className="flex items-center justify-center w-full h-full">
-          <img src={iconCircle} width={50} className="animate-spin-slow" />
+          <img src={iconCircle} width={70} className="animate-spin-slow" />
         </div>
       )}
       {!uploading && (
@@ -35,14 +37,12 @@ export default function AudioRecorder() {
               <div className="w-full h-full flex items-center justify-center">
                 {status !== "recording" && !mediaBlobUrl && (
                   <button onClick={startRecording}>
-                    <img width={50} src={iconMic} />
+                    <img width={150} src={iconMicCircle} />
                   </button>
                 )}
                 {status === "recording" && (
                   <button onClick={stopRecording}>
-                    <div className="p-[2px] border-white border-2 border-solid rounded-full flex items-center justify-center w-[50px] h-[50px]">
-                      <div className="rounded bg-red-500 w-1/2 h-1/2"></div>
-                    </div>
+                    <img width={150} src={iconStopCircle} />
                   </button>
                 )}
                 {mediaBlobUrl && (
@@ -63,7 +63,17 @@ export default function AudioRecorder() {
                         />
                       </div>
                     )}
-                    <button onClick={() => upload(mediaBlobUrl)}>Upload</button>
+                    <button
+                      className="w-full caves-button"
+                      onClick={() => upload(mediaBlobUrl)}
+                      style={{
+                        backgroundImage: `url(${buttonBorder})`,
+                        backgroundSize: "100% 100%",
+                        padding: "20px 60px",
+                      }}
+                    >
+                      TEILEN
+                    </button>
                   </div>
                 )}
               </div>
