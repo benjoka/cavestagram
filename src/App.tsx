@@ -27,14 +27,7 @@ export default function App() {
           height: scrollTop > 0 ? "40px" : "80px",
         }}
       >
-        <div
-          className="origin-top-left bg-black/90 px-[40px]"
-          style={{
-            transition: "transform 0.1s linear",
-            paddingTop: scrollTop > 0 ? 10 : 20,
-            paddingBottom: scrollTop > 0 ? 5 : 10,
-          }}
-        >
+        <div className="origin-top-left bg-black/90 px-[40px] pt-[20px] pb-[20px]">
           {activeView === "grotte-passe" && (
             <h1
               className="mb-0 text-center"
