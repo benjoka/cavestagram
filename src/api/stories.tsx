@@ -25,7 +25,7 @@ export async function fetchStories(): Promise<Story[]> {
   return res?.data;
 }
 
-export async function postStory(selfieUrl: string, mediaUrl: string) {
+export async function postStory(selfieUrl: string, mediaBlob: Blob) {
   const selfieBlob = await fetch(selfieUrl).then((r) => r.blob());
   const formData = new FormData();
   formData.append("files", selfieBlob);
@@ -35,7 +35,6 @@ export async function postStory(selfieUrl: string, mediaUrl: string) {
   })
     .then((selfieFile) => selfieFile.json())
     .then(async (selfieFile) => {
-      const mediaBlob = await fetch(mediaUrl).then((r) => r.blob());
       const formData = new FormData();
       const mediaMp4 = new File([mediaBlob], "media.mp4", {
         type: "video/mp4",
