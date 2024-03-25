@@ -18,7 +18,7 @@ export default function Navigation() {
             src={passeIcon}
             width={50}
             height={50}
-            className="absolute top-[10px]"
+            className="absolute mt-[10px]"
           />
           {activeView === "grotte-passe" && (
             <img
