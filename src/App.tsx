@@ -60,7 +60,7 @@ export default function App() {
       <main className="cv-content flex-1 w-full pt-[70px] pb-[80px]">
         <Content />
       </main>
-      <footer className="cv-footer w-full h-[80px] flex justify-center fixed z-20 bg-black bottom-0">
+      <footer className="cv-footer w-full h-[80px] pt-[5px] flex justify-center fixed z-20 bg-black bottom-0">
         <Navigation />
       </footer>
     </div>
