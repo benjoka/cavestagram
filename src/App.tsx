@@ -37,7 +37,7 @@ export default function App() {
         >
           {activeView === "grotte-passe" && (
             <h1
-              className="mb-0 "
+              className="mb-0 text-center"
               style={{
                 transition: "font-size 0.1s linear",
                 fontSize: scrollTop > 0 ? "1.5rem" : "2rem",
@@ -48,7 +48,7 @@ export default function App() {
           )}
           {activeView === "grotte-present" && (
             <h1
-              className="mb-0"
+              className="mb-0 text-center"
               style={{
                 transition: "font-size 0.1s linear",
                 fontSize: scrollTop > 0 ? "1.5rem" : "2rem",

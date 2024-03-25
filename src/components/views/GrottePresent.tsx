@@ -9,7 +9,7 @@ export default function GrottePresent() {
   const renderStories = () => {
     return (
       <div>
-        <p className="text-justify">
+        <p className="text-center">
           Dies ist die Höhle der Gegenwart. An den Wänden der Höhle wird
           interaktiv verewigt, warum wir uns heute Bilder machen und diese mit
           anderen teilen.

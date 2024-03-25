@@ -14,7 +14,7 @@ export default function SelfieCamera() {
     }
   }, [webcamRef]);
   return (
-    <div className="w-full h-full flex flex-col items-center justify-evenly">
+    <div className="w-full h-full flex flex-col items-center">
       <div className="w-full relative">
         <div className="w-full h-full">
           <div className="w-full h-full aspect-square ">

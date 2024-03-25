@@ -5,7 +5,7 @@ export default function GrottePasse() {
 
   return (
     <div>
-      <p className="text-justify">
+      <p className="text-center">
         Du befindest dich in der Höhle der Vergangenheit. Die Höhlenwände
         erzählen von der paläolithischen Höhlenmalerei und beschäftigen sich mit
         der Frage, wieso sich die Menschen damals nicht nur Bilder gemacht,
