@@ -3,7 +3,7 @@ import { create } from "zustand";
 export interface AppStore {
   activeView: string;
   participateMode: string | null;
-  selfie: string;
+  selfie: string | null;
   setActiveView: (view: string) => void;
   setParticipateMode: (mode: string | null) => void;
   setSelfie: (selfie: string) => void;
@@ -12,7 +12,7 @@ export interface AppStore {
 export const useAppStore = create<AppStore>((set) => ({
   activeView: "grotte-passe",
   participateMode: null,
-  selfie: "",
+  selfie: null,
   setActiveView: (view: string) => set(() => ({ activeView: view })),
   setParticipateMode: (mode: string | null) =>
     set(() => ({ participateMode: mode })),

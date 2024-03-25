@@ -5,13 +5,15 @@ import { useAppStore } from "stores/AppStore";
 import iconCircle from "assets/images/icons/icon_circle.png";
 
 export default function VideoRecorder() {
-  const { selfie, setParticipateMode } = useAppStore();
+  const { selfie, setParticipateMode, setSelfie } = useAppStore();
   const [uploading, setUploading] = useState(false);
   const upload = async (uri: string) => {
-    setUploading(true);
-    await postStory(selfie, uri);
-    setUploading(false);
-    setParticipateMode(null);
+    if (selfie) {
+      setUploading(true);
+      await postStory(selfie, uri);
+      setUploading(false);
+      setParticipateMode(null);
+    }
   };
   return (
     <div className="w-full h-full relative">

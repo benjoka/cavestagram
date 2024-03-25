@@ -5,8 +5,10 @@ import { useAppStore } from "stores/AppStore";
 export default function AudioRecorder() {
   const { selfie, setParticipateMode } = useAppStore();
   const upload = async (uri: string) => {
-    postStory(selfie, uri);
-    setParticipateMode(null);
+    if (selfie) {
+      postStory(selfie, uri);
+      setParticipateMode(null);
+    }
   };
   return (
     <div>
