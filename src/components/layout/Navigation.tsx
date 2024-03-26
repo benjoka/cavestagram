@@ -2,6 +2,8 @@ import passeIcon from "assets/images/icons/icon_lamp.png";
 import passeIconFill from "assets/images/icons/icon_lamp_fill.png";
 import presentIcon from "assets/images/icons/icon_lighter.png";
 import presentIconFill from "assets/images/icons/icon_lighter_fill.png";
+import navigationMask from "assets/images/navigation_mask.png";
+
 import { useAppStore } from "stores/AppStore";
 
 export default function Navigation() {
@@ -9,6 +11,10 @@ export default function Navigation() {
 
   return (
     <div className="cv-app w-full h-full max-w-[500px] flex flex-row justify-around">
+      <img
+        src={navigationMask}
+        className="absolute w-full h-[40px] top-[-40px]"
+      />
       <div
         className="h-full flex items-start"
         onClick={() => setActiveView("grotte-passe")}
