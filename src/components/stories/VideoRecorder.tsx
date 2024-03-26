@@ -77,8 +77,8 @@ export default function VideoRecorder() {
         </div>
       )}
       {!uploading && (
-        <div className="w-full h-full flex flex-col items-center justify-evenly">
-          <div className="w-full relative aspect-square">
+        <div className="w-full h-full flex flex-col items-center justify-center relative">
+          <div className="w-full relative aspect-square mb-[20px]">
             <div className="absolute z-10 w-full h-full pointer-events-none bg-media-mask bg-cover bg-center" />
             {!recordedVideo && (
               <Webcam
@@ -99,7 +99,7 @@ export default function VideoRecorder() {
               />
             )}
           </div>
-          <div className="w-full h-[60px] flex items-center justify-center">
+          <div className="w-full h-[60px] flex items-center justify-center z-20 mt-[40px]">
             {!capturing && recordedChunks.length === 0 && (
               <button onClick={handleStartCaptureClick}>
                 <img width={80} src={iconRecordCircle} />

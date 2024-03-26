@@ -17,7 +17,7 @@ export default function SelfieCamera() {
     }
   }, [webcamRef]);
   return (
-    <div className="w-full h-full flex flex-col items-center justify-evenly">
+    <div className="w-full h-full flex flex-col items-center justify-center">
       <div className="w-full relative">
         <div className="w-full h-full flex">
           <div className="w-full h-full aspect-square ">
@@ -31,7 +31,7 @@ export default function SelfieCamera() {
           </div>
         </div>
       </div>
-      <div className="w-full h-[60px] flex items-center justify-center">
+      <div className="w-full h-[60px] flex items-center justify-center z-20 mt-[40px]">
         {!selfie && (
           <button onClick={capture}>
             <img width={80} src={iconRecordCircle} />

@@ -46,7 +46,7 @@ export default function AudioRecorder() {
                   </button>
                 )}
                 {mediaBlobUrl && (
-                  <div className="w-full h-full flex flex-col items-center justify-evenly">
+                  <div className="w-full h-full flex flex-col items-center justify-center">
                     <audio
                       src={mediaBlobUrl}
                       controls
