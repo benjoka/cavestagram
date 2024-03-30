@@ -72,7 +72,6 @@ export default function VideoRecorder() {
   };
 
   const stopRecording = () => {
-    setPermission(false);
     setRecordingStatus("inactive");
     if (mediaRecorder.current) {
       mediaRecorder.current.stop();
