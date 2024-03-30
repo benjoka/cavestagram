@@ -113,6 +113,7 @@ export default function VideoRecorder() {
             <div className="absolute z-10 w-full h-full pointer-events-none bg-media-mask bg-cover bg-center" />
             {!recordedVideo && (
               <video
+                playsInline
                 ref={liveVideoFeed}
                 autoPlay
                 className="w-full h-full object-cover"
@@ -120,6 +121,7 @@ export default function VideoRecorder() {
             )}
             {recordedVideo && (
               <video
+                playsInline
                 autoPlay
                 loop
                 className="w-full h-full object-cover"
@@ -159,14 +161,3 @@ export default function VideoRecorder() {
     </div>
   );
 }
-
-const VideoPreview = ({ stream }: any) => {
-  return (
-    <video
-      className="w-full h-full object-cover"
-      playsInline
-      ref={stream}
-      autoPlay
-    />
-  );
-};
