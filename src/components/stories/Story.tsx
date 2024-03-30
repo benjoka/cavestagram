@@ -1,6 +1,7 @@
 import { Story as StoryProps } from "types/Story";
 import Selfie from "./Selfie";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
+import audioBar from "assets/images/audio_playing_bar.png";
 
 export default function Story({ id, media, selfie }: StoryProps) {
   const [playing, setPlaying] = useState(false);
@@ -28,6 +29,7 @@ export default function Story({ id, media, selfie }: StoryProps) {
           onClick={triggerVideo}
         >
           <video
+            preload="none"
             ref={file}
             playsInline
             onEnded={() => setPlaying(false)}
@@ -37,13 +39,35 @@ export default function Story({ id, media, selfie }: StoryProps) {
         </div>
       )}
       {media.mime.includes("audio") && (
-        <div className="absolute top-0 w-full h-full" onClick={triggerVideo}>
+        <div
+          className="absolute top-0 w-full h-full audio-player"
+          onClick={triggerVideo}
+        >
           <audio
+            preload="none"
             ref={file}
             onEnded={() => setPlaying(false)}
             className="opacity-0"
             src={`${process.env.REACT_APP_API_URL}${media.url}`}
           />
+          {playing && (
+            <div className="playing-container">
+              <div className="playing">
+                <span
+                  className="playing__bar playing__bar1"
+                  style={{ backgroundImage: `url(${audioBar})` }}
+                ></span>
+                <span
+                  className="playing__bar playing__bar2"
+                  style={{ backgroundImage: `url(${audioBar})` }}
+                ></span>
+                <span
+                  className="playing__bar playing__bar3"
+                  style={{ backgroundImage: `url(${audioBar})` }}
+                ></span>
+              </div>
+            </div>
+          )}
         </div>
       )}
     </div>
