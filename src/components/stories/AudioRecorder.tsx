@@ -6,7 +6,11 @@ import iconCircle from "assets/images/icons/icon_circle.png";
 import iconMicCircle from "assets/images/icons/icon_mic_circle.png";
 import iconStopCircle from "assets/images/icons/icon_stop_circle.png";
 import buttonBorder from "assets/images/icons/button_border.png";
-const mimeType = "audio/webm";
+
+let mimeType: string | null = null;
+if (MediaRecorder.isTypeSupported("audio/webm")) {
+  mimeType = "audio/webm";
+}
 
 export default function AudioRecorder() {
   const { selfie, setParticipateMode, setSelfie } = useAppStore();
@@ -44,7 +48,9 @@ export default function AudioRecorder() {
   const startRecording = async () => {
     if (stream) {
       setRecordingStatus("recording");
-      const media = new MediaRecorder(stream, { mimeType });
+      const media = mimeType
+        ? new MediaRecorder(stream, { mimeType })
+        : new MediaRecorder(stream);
       mediaRecorder.current = media;
       mediaRecorder.current.start();
       let localAudioChunks: any = [];
@@ -62,7 +68,9 @@ export default function AudioRecorder() {
       setRecordingStatus("inactive");
       mediaRecorder.current.stop();
       mediaRecorder.current.onstop = async () => {
-        const audioBlob = new Blob(audioChunks, { type: mimeType });
+        const audioBlob = mimeType
+          ? new Blob(audioChunks, { type: mimeType })
+          : new Blob(audioChunks);
         setAudioBlob(audioBlob);
         setAudioUrl(URL.createObjectURL(audioBlob));
         setAudioChunks([]);
