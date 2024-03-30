@@ -20,7 +20,6 @@ export default function VideoRecorder() {
 
   useEffect(() => {
     getCameraPermission();
-    alert(MediaRecorder.isTypeSupported(mimeType));
   }, []);
   const getCameraPermission = async () => {
     setRecordedVideo(null);
