@@ -119,11 +119,11 @@ export default function VideoRecorder() {
             {recordedVideo && (
               <video
                 playsInline
-                muted
                 autoPlay
                 loop
                 className="w-full h-full object-cover"
                 src={recordedVideo}
+                controls
               ></video>
             )}
           </div>
