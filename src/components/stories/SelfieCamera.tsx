@@ -4,6 +4,7 @@ import { useAppStore } from "stores/AppStore";
 import iconCam from "assets/images/icons/icon_cam.png";
 import iconMic from "assets/images/icons/icon_mic.png";
 import iconRecordCircle from "assets/images/icons/icon_record_circle.png";
+import AudioRecorder from "./AudioRecorder";
 
 export default function SelfieCamera() {
   const webcamRef = useRef<any>(null);
@@ -39,12 +40,7 @@ export default function SelfieCamera() {
         )}
         {selfie && (
           <div className="w-full flex justify-evenly">
-            <button className="p-4" onClick={() => setParticipateMode("video")}>
-              <img width={70} src={iconCam} />
-            </button>
-            <button className="p-4" onClick={() => setParticipateMode("audio")}>
-              <img width={60} src={iconMic} />
-            </button>
+            <AudioRecorder></AudioRecorder>
           </div>
         )}
       </div>

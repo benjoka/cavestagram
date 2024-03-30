@@ -1,10 +1,8 @@
-import { postStory } from "api/stories";
 import { useEffect, useRef, useState } from "react";
 import { useAppStore } from "stores/AppStore";
 import iconCircle from "assets/images/icons/icon_circle.png";
 import iconMicCircle from "assets/images/icons/icon_mic_circle.png";
 import iconStopCircle from "assets/images/icons/icon_stop_circle.png";
-import buttonBorder from "assets/images/icons/button_border.png";
 
 let mimeType: string | null = null;
 if (MediaRecorder.isTypeSupported("audio/webm")) {
@@ -18,14 +16,13 @@ if (MediaRecorder.isTypeSupported("audio/webm")) {
 }
 
 export default function AudioRecorder() {
-  const { selfie, setParticipateMode, setSelfie } = useAppStore();
-  const [uploading, setUploading] = useState(false);
+  const { setAudioBlob } = useAppStore();
+  const [uploading] = useState(false);
   const [permission, setPermission] = useState(false);
   const mediaRecorder = useRef<MediaRecorder | null>(null);
   const [recordingStatus, setRecordingStatus] = useState("inactive");
   const [stream, setStream] = useState<MediaStream | null>(null);
   const [audioUrl, setAudioUrl] = useState<string | null>(null);
-  const [audioBlob, setAudioBlob] = useState<Blob | null>(null);
 
   const [audioChunks, setAudioChunks] = useState([]);
 
@@ -83,60 +80,31 @@ export default function AudioRecorder() {
     }
   };
 
-  const upload = async (uri: string) => {
-    if (selfie && audioBlob) {
-      setUploading(true);
-      postStory(selfie, audioBlob);
-      setSelfie(null);
-      setParticipateMode(null);
-      setUploading(false);
-      setAudioUrl(null);
-      setAudioBlob(null);
-    }
-  };
-
   return (
-    <div className="w-full h-full">
-      {uploading && (
-        <div className="flex items-center justify-center w-full h-full">
-          <img src={iconCircle} width={70} className="animate-spin-slow" />
-        </div>
-      )}
-      {!uploading && (
-        <div className="w-full h-full flex items-center justify-center">
-          {permission && recordingStatus === "inactive" && !audioUrl && (
-            <button onClick={startRecording}>
-              <img width={150} src={iconMicCircle} />
-            </button>
-          )}
-          {permission && recordingStatus === "recording" && (
-            <button onClick={stopRecording}>
-              <img width={150} src={iconStopCircle} />
-            </button>
-          )}
-          {recordingStatus === "inactive" && audioUrl && (
-            <div className="w-full h-full flex flex-col items-center justify-center">
-              <audio src={audioUrl} controls autoPlay loop className="hidden" />
-              {selfie && (
-                <div className="w-full aspect-square relative">
-                  <div className="absolute z-10 w-full h-full pointer-events-none bg-media-mask bg-cover bg-center" />
-                  <img src={selfie} className="object-cover w-full h-full" />
-                </div>
-              )}
-              <button
-                className="w-full caves-button"
-                onClick={() => upload(audioUrl)}
-                style={{
-                  backgroundImage: `url(${buttonBorder})`,
-                  backgroundSize: "100% 100%",
-                  padding: "20px 60px",
-                }}
-              >
-                TEILEN
+    <div>
+      <div className="w-full h-full">
+        {uploading && (
+          <div className="flex items-center justify-center w-full h-full">
+            <img src={iconCircle} width={70} className="animate-spin-slow" />
+          </div>
+        )}
+        {!uploading && !audioUrl && (
+          <div className="w-full h-full flex items-center justify-center">
+            {permission && recordingStatus === "inactive" && (
+              <button onClick={startRecording}>
+                <img width={70} src={iconMicCircle} />
               </button>
-            </div>
-          )}
-        </div>
+            )}
+            {permission && recordingStatus === "recording" && (
+              <button onClick={stopRecording}>
+                <img width={70} src={iconStopCircle} />
+              </button>
+            )}
+          </div>
+        )}
+      </div>
+      {recordingStatus === "inactive" && audioUrl && (
+        <audio src={audioUrl} controls autoPlay loop className="hidden" />
       )}
     </div>
   );
