@@ -5,7 +5,17 @@ import iconCircle from "assets/images/icons/icon_circle.png";
 import iconRecordCircle from "assets/images/icons/icon_record_circle.png";
 import iconStopCircle from "assets/images/icons/icon_stop_circle.png";
 import buttonBorder from "assets/images/icons/button_border.png";
-const mimeType = 'video/webm; codecs="opus,vp8"';
+
+let mimeType = "";
+if (MediaRecorder.isTypeSupported("video/webm; codecs=vp9")) {
+  mimeType = "video/webm; codecs=vp9";
+} else if (MediaRecorder.isTypeSupported("video/webm")) {
+  mimeType = "video/webm";
+} else if (MediaRecorder.isTypeSupported("video/mp4")) {
+  mimeType = "video/mp4";
+} else {
+  console.error("no suitable mimetype found for this device");
+}
 
 export default function VideoRecorder() {
   const { selfie, setParticipateMode, setSelfie } = useAppStore();
