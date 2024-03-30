@@ -58,7 +58,6 @@ export default function VideoRecorder() {
     if (stream) {
       setRecordingStatus("recording");
       const media = new MediaRecorder(stream);
-      alert(media);
       mediaRecorder.current = media;
       mediaRecorder.current.start();
       let localVideoChunks: any = [];
@@ -75,11 +74,9 @@ export default function VideoRecorder() {
     setRecordingStatus("inactive");
     if (mediaRecorder.current && stream) {
       mediaRecorder.current.stop();
-      alert(mediaRecorder.current);
       mediaRecorder.current.onstop = () => {
         const videoBlob = new Blob(videoChunks, { type: mimeType });
         const videoUrl = URL.createObjectURL(videoBlob);
-        alert(videoUrl);
         setRecordedVideo(videoUrl);
         stream.getTracks().forEach((track) => track.stop());
         setVideoChunks([]);
