@@ -88,7 +88,6 @@ export default function VideoRecorder() {
     if (selfie && recordedVideo) {
       setUploading(true);
       const blob = await fetch(recordedVideo).then((r) => r.blob());
-      alert(recordedVideo);
       await postStory(selfie, blob);
       setSelfie(null);
       setParticipateMode(null);
@@ -123,7 +122,6 @@ export default function VideoRecorder() {
                 loop
                 className="w-full h-full object-cover"
                 src={recordedVideo}
-                controls
               ></video>
             )}
           </div>
