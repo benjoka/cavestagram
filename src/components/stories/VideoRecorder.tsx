@@ -100,6 +100,7 @@ export default function VideoRecorder() {
       setSelfie(null);
       setParticipateMode(null);
       setRecordedVideo(null);
+      setBlob(null);
       setUploading(false);
     }
   };
