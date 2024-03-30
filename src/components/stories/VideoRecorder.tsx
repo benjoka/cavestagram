@@ -6,67 +6,98 @@ import Webcam from "react-webcam";
 import iconRecordCircle from "assets/images/icons/icon_record_circle.png";
 import iconStopCircle from "assets/images/icons/icon_stop_circle.png";
 import buttonBorder from "assets/images/icons/button_border.png";
+const mimeType = 'video/webm; codecs="opus,vp8"';
 
 export default function VideoRecorder() {
-  const webcamRef = useRef<any>(null);
-  const mediaRecorderRef = useRef<any>(null);
-
   const { selfie, setParticipateMode, setSelfie } = useAppStore();
   const [uploading, setUploading] = useState(false);
-  const [capturing, setCapturing] = useState(false);
-  const [recordedChunks, setRecordedChunks] = useState([]);
+  const [permission, setPermission] = useState(false);
+  const mediaRecorder = useRef<MediaRecorder | null>(null);
+  const liveVideoFeed = useRef<HTMLVideoElement | null>(null);
+  const [recordingStatus, setRecordingStatus] = useState("inactive");
+  const [stream, setStream] = useState<MediaStream | null>(null);
   const [recordedVideo, setRecordedVideo] = useState<string | null>(null);
-  const handleDataAvailable = useCallback(
-    ({ data }: { data: any }) => {
-      if (data.size > 0) {
-        setRecordedChunks((prev) => prev.concat(data));
-      }
-    },
-    [setRecordedChunks]
-  );
+  const [videoChunks, setVideoChunks] = useState([]);
 
   useEffect(() => {
-    if (recordedChunks.length !== 0) {
-      const blob = new Blob(recordedChunks, {
-        type: "video/webm",
-      });
-      setRecordedVideo(URL.createObjectURL(blob));
-    }
-  }, [recordedChunks]);
+    getCameraPermission();
+  }, []);
+  const getCameraPermission = async () => {
+    setRecordedVideo(null);
+    //get video and audio permissions and then stream the result media stream to the videoSrc variable
+    if ("MediaRecorder" in window && liveVideoFeed.current) {
+      try {
+        const videoConstraints = {
+          audio: false,
+          video: true,
+        };
+        const audioConstraints = { audio: true };
+        const audioStream = await navigator.mediaDevices.getUserMedia(
+          audioConstraints
+        );
+        const videoStream = await navigator.mediaDevices.getUserMedia(
+          videoConstraints
+        );
+        setPermission(true);
 
-  const handleStartCaptureClick = useCallback(() => {
-    setCapturing(true);
-    mediaRecorderRef.current = new MediaRecorder(webcamRef.current.stream, {
-      mimeType: "video/webm",
-    });
-    mediaRecorderRef.current.addEventListener(
-      "dataavailable",
-      handleDataAvailable
-    );
-    mediaRecorderRef.current.start();
-  }, [webcamRef, setCapturing, mediaRecorderRef, handleDataAvailable]);
+        const combinedStream = new MediaStream([
+          ...videoStream.getVideoTracks(),
+          ...audioStream.getAudioTracks(),
+        ]);
+        setStream(combinedStream);
 
-  const handleStopCaptureClick = useCallback(() => {
-    mediaRecorderRef.current.stop();
-    setCapturing(false);
-  }, [mediaRecorderRef, setCapturing]);
-
-  const upload = async () => {
-    if (selfie && recordedChunks.length) {
-      setUploading(true);
-      const blob = new Blob(recordedChunks, {
-        type: "video/webm",
-      });
-      await postStory(selfie, blob);
-      setSelfie(null);
-      setParticipateMode(null);
-      setRecordedChunks([]);
-      setUploading(false);
+        liveVideoFeed.current.srcObject = videoStream;
+      } catch (err: any) {
+        alert(err.message);
+      }
+    } else {
+      alert("The MediaRecorder API is not supported in your browser.");
     }
   };
 
-  const videoConstraints = {
-    facingMode: "user",
+  const startRecording = async () => {
+    if (stream) {
+      setRecordingStatus("recording");
+      const media = new MediaRecorder(stream, { mimeType });
+      mediaRecorder.current = media;
+      mediaRecorder.current.start();
+      let localVideoChunks: any = [];
+      mediaRecorder.current.ondataavailable = (event) => {
+        if (typeof event.data === "undefined") return;
+        if (event.data.size === 0) return;
+        localVideoChunks.push(event.data);
+      };
+      setVideoChunks(localVideoChunks);
+    }
+  };
+
+  const stopRecording = () => {
+    setPermission(false);
+    setRecordingStatus("inactive");
+    if (mediaRecorder.current) {
+      mediaRecorder.current.stop();
+
+      mediaRecorder.current.onstop = () => {
+        const videoBlob = new Blob(videoChunks, { type: mimeType });
+        const videoUrl = URL.createObjectURL(videoBlob);
+
+        setRecordedVideo(videoUrl);
+
+        setVideoChunks([]);
+      };
+    }
+  };
+
+  const upload = async () => {
+    if (selfie && recordedVideo) {
+      setUploading(true);
+      const blob = await fetch(recordedVideo).then((r) => r.blob());
+      await postStory(selfie, blob);
+      setSelfie(null);
+      setParticipateMode(null);
+      setRecordedVideo(null);
+      setUploading(false);
+    }
   };
 
   return (
@@ -81,14 +112,11 @@ export default function VideoRecorder() {
           <div className="w-full relative aspect-square mb-[20px]">
             <div className="absolute z-10 w-full h-full pointer-events-none bg-media-mask bg-cover bg-center" />
             {!recordedVideo && (
-              <Webcam
-                muted
-                audio
+              <video
+                ref={liveVideoFeed}
+                autoPlay
                 className="w-full h-full object-cover"
-                ref={webcamRef}
-                mirrored={false}
-                videoConstraints={videoConstraints}
-              />
+              ></video>
             )}
             {recordedVideo && (
               <video
@@ -96,21 +124,23 @@ export default function VideoRecorder() {
                 loop
                 className="w-full h-full object-cover"
                 src={recordedVideo}
-              />
+              ></video>
             )}
           </div>
           <div className="w-full h-[60px] flex items-center justify-center z-20 mt-[40px]">
-            {!capturing && recordedChunks.length === 0 && (
-              <button onClick={handleStartCaptureClick}>
+            {permission && recordingStatus === "inactive" && (
+              <button onClick={startRecording}>
                 <img width={80} src={iconRecordCircle} />
               </button>
             )}
-            {capturing && (
-              <button onClick={handleStopCaptureClick}>
-                <img width={80} src={iconStopCircle} />
-              </button>
-            )}
-            {!capturing && recordedChunks.length !== 0 && (
+            {permission &&
+              recordingStatus === "recording" &&
+              !recordedVideo && (
+                <button onClick={stopRecording}>
+                  <img width={80} src={iconStopCircle} />
+                </button>
+              )}
+            {recordingStatus === "inactive" && recordedVideo && (
               <button
                 className="w-full caves-button"
                 onClick={upload}
