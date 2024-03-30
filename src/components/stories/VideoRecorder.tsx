@@ -74,7 +74,7 @@ export default function VideoRecorder() {
     setRecordingStatus("inactive");
     if (mediaRecorder.current && stream) {
       mediaRecorder.current.stop();
-      mediaRecorder.current.onstop = () => {
+      mediaRecorder.current.onstop = async () => {
         const videoBlob = new Blob(videoChunks);
         const videoUrl = URL.createObjectURL(videoBlob);
         setRecordedVideo(videoUrl);
@@ -119,6 +119,7 @@ export default function VideoRecorder() {
               <video
                 playsInline
                 autoPlay
+                muted
                 loop
                 className="w-full h-full object-cover"
                 src={recordedVideo}
