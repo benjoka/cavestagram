@@ -5,7 +5,7 @@ import iconCircle from "assets/images/icons/icon_circle.png";
 import iconRecordCircle from "assets/images/icons/icon_record_circle.png";
 import iconStopCircle from "assets/images/icons/icon_stop_circle.png";
 import buttonBorder from "assets/images/icons/button_border.png";
-const mimeType = "video/mp4";
+const mimeType = 'video/webm; codecs="opus,vp8"';
 
 export default function VideoRecorder() {
   const { selfie, setParticipateMode, setSelfie } = useAppStore();
@@ -20,6 +20,7 @@ export default function VideoRecorder() {
 
   useEffect(() => {
     getCameraPermission();
+    alert(MediaRecorder.isTypeSupported(mimeType));
   }, []);
   const getCameraPermission = async () => {
     setRecordedVideo(null);
@@ -57,7 +58,7 @@ export default function VideoRecorder() {
   const startRecording = async () => {
     if (stream) {
       setRecordingStatus("recording");
-      const media = new MediaRecorder(stream, { mimeType });
+      const media = new MediaRecorder(stream);
       mediaRecorder.current = media;
       mediaRecorder.current.start();
       let localVideoChunks: any = [];
@@ -75,7 +76,7 @@ export default function VideoRecorder() {
     if (mediaRecorder.current && stream) {
       mediaRecorder.current.stop();
       mediaRecorder.current.onstop = async () => {
-        const videoBlob = new Blob(videoChunks, { type: mimeType });
+        const videoBlob = new Blob(videoChunks, { type: "video/mp4" });
         const videoUrl = URL.createObjectURL(videoBlob);
         setRecordedVideo(videoUrl);
         stream.getTracks().forEach((track) => track.stop());
@@ -119,6 +120,7 @@ export default function VideoRecorder() {
               <video
                 playsInline
                 autoPlay
+                muted
                 loop
                 className="w-full h-full object-cover"
                 src={recordedVideo}
