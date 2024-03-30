@@ -12,8 +12,8 @@ if (MediaRecorder.isTypeSupported("audio/webm")) {
   mimeType = "audio/webm";
 } else if (MediaRecorder.isTypeSupported("audio/ogg")) {
   mimeType = "audio/ogg";
-} else if (MediaRecorder.isTypeSupported("audio/mp3")) {
-  mimeType = "audio/mp3";
+} else if (MediaRecorder.isTypeSupported("audio/mpeg")) {
+  mimeType = "audio/mpeg";
 }
 
 export default function AudioRecorder() {
