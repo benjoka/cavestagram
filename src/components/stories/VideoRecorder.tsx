@@ -27,6 +27,7 @@ export default function VideoRecorder() {
   const [stream, setStream] = useState<MediaStream | null>(null);
   const [recordedVideo, setRecordedVideo] = useState<string | null>(null);
   const [videoChunks, setVideoChunks] = useState([]);
+  const [blob, setBlob] = useState<Blob | null>(null);
 
   useEffect(() => {
     getCameraPermission();
@@ -86,18 +87,17 @@ export default function VideoRecorder() {
       mediaRecorder.current.stop();
       mediaRecorder.current.onstop = async () => {
         const videoBlob = new Blob(videoChunks, { type: mimeType });
+        setBlob(videoBlob);
         const videoUrl = URL.createObjectURL(videoBlob);
         setRecordedVideo(videoUrl);
         stream.getTracks().forEach((track) => track.stop());
-        setVideoChunks([]);
       };
     }
   };
 
   const upload = async () => {
-    if (selfie && recordedVideo) {
+    if (selfie && blob) {
       setUploading(true);
-      const blob = await fetch(recordedVideo).then((r) => r.blob());
       await postStory(selfie, blob);
       setSelfie(null);
       setParticipateMode(null);
