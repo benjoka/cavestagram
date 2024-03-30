@@ -129,7 +129,6 @@ export default function VideoRecorder() {
               <video
                 playsInline
                 autoPlay
-                muted
                 loop
                 className="w-full h-full object-cover"
                 src={recordedVideo}
