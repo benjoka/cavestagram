@@ -75,7 +75,7 @@ export default function VideoRecorder() {
     if (mediaRecorder.current && stream) {
       mediaRecorder.current.stop();
       mediaRecorder.current.onstop = () => {
-        const videoBlob = new Blob(videoChunks, { type: mimeType });
+        const videoBlob = new Blob(videoChunks);
         const videoUrl = URL.createObjectURL(videoBlob);
         setRecordedVideo(videoUrl);
         stream.getTracks().forEach((track) => track.stop());
