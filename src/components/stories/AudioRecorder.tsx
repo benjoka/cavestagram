@@ -10,8 +10,10 @@ import buttonBorder from "assets/images/icons/button_border.png";
 let mimeType: string | null = null;
 if (MediaRecorder.isTypeSupported("audio/webm")) {
   mimeType = "audio/webm";
-} else if (MediaRecorder.isTypeSupported("audio/aac")) {
-  mimeType = "audio/aac";
+} else if (MediaRecorder.isTypeSupported("audio/ogg")) {
+  mimeType = "audio/ogg";
+} else if (MediaRecorder.isTypeSupported("audio/mp3")) {
+  mimeType = "audio/mp3";
 }
 
 export default function AudioRecorder() {
