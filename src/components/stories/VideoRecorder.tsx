@@ -2,7 +2,6 @@ import { postStory } from "api/stories";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useAppStore } from "stores/AppStore";
 import iconCircle from "assets/images/icons/icon_circle.png";
-import Webcam from "react-webcam";
 import iconRecordCircle from "assets/images/icons/icon_record_circle.png";
 import iconStopCircle from "assets/images/icons/icon_stop_circle.png";
 import buttonBorder from "assets/images/icons/button_border.png";
@@ -58,7 +57,7 @@ export default function VideoRecorder() {
   const startRecording = async () => {
     if (stream) {
       setRecordingStatus("recording");
-      const media = new MediaRecorder(stream, { mimeType });
+      const media = new MediaRecorder(stream);
       alert(media);
       mediaRecorder.current = media;
       mediaRecorder.current.start();
