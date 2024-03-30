@@ -59,6 +59,7 @@ export default function VideoRecorder() {
     if (stream) {
       setRecordingStatus("recording");
       const media = new MediaRecorder(stream, { mimeType });
+      alert(media);
       mediaRecorder.current = media;
       mediaRecorder.current.start();
       let localVideoChunks: any = [];
@@ -73,7 +74,7 @@ export default function VideoRecorder() {
 
   const stopRecording = () => {
     setRecordingStatus("inactive");
-    if (mediaRecorder.current) {
+    if (mediaRecorder.current && stream) {
       mediaRecorder.current.stop();
       alert(mediaRecorder.current);
       mediaRecorder.current.onstop = () => {
@@ -81,7 +82,7 @@ export default function VideoRecorder() {
         const videoUrl = URL.createObjectURL(videoBlob);
         alert(videoUrl);
         setRecordedVideo(videoUrl);
-
+        stream.getTracks().forEach((track) => track.stop());
         setVideoChunks([]);
       };
     }
@@ -129,7 +130,7 @@ export default function VideoRecorder() {
             )}
           </div>
           <div className="w-full h-[60px] flex items-center justify-center z-20 mt-[40px]">
-            {permission && recordingStatus === "inactive" && (
+            {permission && recordingStatus === "inactive" && !recordedVideo && (
               <button onClick={startRecording}>
                 <img width={80} src={iconRecordCircle} />
               </button>
