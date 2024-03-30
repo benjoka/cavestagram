@@ -88,6 +88,7 @@ export default function VideoRecorder() {
     if (selfie && recordedVideo) {
       setUploading(true);
       const blob = await fetch(recordedVideo).then((r) => r.blob());
+      alert(recordedVideo);
       await postStory(selfie, blob);
       setSelfie(null);
       setParticipateMode(null);
