@@ -1,6 +1,5 @@
 import { postStory } from "api/stories";
 import { useEffect, useRef, useState } from "react";
-import { ReactMediaRecorder } from "react-media-recorder";
 import { useAppStore } from "stores/AppStore";
 import iconCircle from "assets/images/icons/icon_circle.png";
 import iconMicCircle from "assets/images/icons/icon_mic_circle.png";
@@ -14,6 +13,8 @@ if (MediaRecorder.isTypeSupported("audio/webm")) {
   mimeType = "audio/ogg";
 } else if (MediaRecorder.isTypeSupported("audio/mpeg")) {
   mimeType = "audio/mpeg";
+} else if (MediaRecorder.isTypeSupported("audio/mp4")) {
+  mimeType = "audio/mp4";
 }
 
 export default function AudioRecorder() {

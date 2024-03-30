@@ -1,5 +1,5 @@
 import { postStory } from "api/stories";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useAppStore } from "stores/AppStore";
 import iconCircle from "assets/images/icons/icon_circle.png";
 import iconRecordCircle from "assets/images/icons/icon_record_circle.png";
