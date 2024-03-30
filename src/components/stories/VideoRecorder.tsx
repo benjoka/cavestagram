@@ -75,11 +75,11 @@ export default function VideoRecorder() {
     setRecordingStatus("inactive");
     if (mediaRecorder.current) {
       mediaRecorder.current.stop();
-
+      alert(mediaRecorder.current);
       mediaRecorder.current.onstop = () => {
         const videoBlob = new Blob(videoChunks, { type: mimeType });
         const videoUrl = URL.createObjectURL(videoBlob);
-
+        alert(videoUrl);
         setRecordedVideo(videoUrl);
 
         setVideoChunks([]);
