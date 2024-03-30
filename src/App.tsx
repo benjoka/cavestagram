@@ -2,6 +2,7 @@ import Content from "components/layout/Content";
 import Navigation from "components/layout/Navigation";
 import { useEffect, useState } from "react";
 import { useAppStore } from "stores/AppStore";
+import navigationMask from "assets/images/navigation_mask.png";
 
 export default function App() {
   const { activeView } = useAppStore();
@@ -27,11 +28,18 @@ export default function App() {
           height: scrollTop > 0 ? "40px" : "80px",
         }}
       >
+        <img
+          src={navigationMask}
+          style={{
+            bottom: scrollTop > 0 ? -30 : -10,
+            transform: "rotate(180deg)",
+          }}
+          className="absolute w-full h-[40px] left-0"
+        />
         <div
-          className="origin-top-left bg-black/90 px-[40px]"
+          className="absolute w-full origin-top-left bg-black px-[40px]"
           style={{
             paddingTop: scrollTop > 0 ? 10 : 20,
-            paddingBottom: scrollTop > 0 ? 5 : 10,
           }}
         >
           {activeView === "grotte-passe" && (
@@ -57,7 +65,7 @@ export default function App() {
         </div>
       </div>
 
-      <main className="cv-content flex-1 w-full pt-[70px] pb-[100px]">
+      <main className="cv-content flex-1 w-full pt-[90px] pb-[100px]">
         <Content />
       </main>
       <footer className="cv-footer w-full h-[100px] pt-[5px] flex justify-center fixed z-20 bg-black bottom-0">

@@ -1,7 +1,6 @@
-import Media from "components/posts/Media";
 import { Story as StoryProps } from "types/Story";
 import Selfie from "./Selfie";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export default function Story({ id, media, selfie }: StoryProps) {
   const [playing, setPlaying] = useState(false);

@@ -13,7 +13,7 @@ export default function Navigation() {
     <div className="cv-app w-full h-full max-w-[500px] flex flex-row justify-around">
       <img
         src={navigationMask}
-        className="absolute w-full h-[40px] top-[-40px]"
+        className="absolute w-full h-[40px] top-[-40px] left-0"
       />
       <div
         className="h-full flex items-start"

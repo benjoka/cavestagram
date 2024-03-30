@@ -13,8 +13,6 @@ if (MediaRecorder.isTypeSupported("video/webm; codecs=vp9")) {
   mimeType = "video/webm";
 } else if (MediaRecorder.isTypeSupported("video/mp4")) {
   mimeType = "video/mp4";
-} else {
-  console.error("no suitable mimetype found for this device");
 }
 
 export default function VideoRecorder() {
