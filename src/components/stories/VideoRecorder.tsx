@@ -58,7 +58,7 @@ export default function VideoRecorder() {
   const startRecording = async () => {
     if (stream) {
       setRecordingStatus("recording");
-      const media = new MediaRecorder(stream);
+      const media = new MediaRecorder(stream, { mimeType });
       mediaRecorder.current = media;
       mediaRecorder.current.start();
       let localVideoChunks: any = [];
@@ -76,7 +76,7 @@ export default function VideoRecorder() {
     if (mediaRecorder.current && stream) {
       mediaRecorder.current.stop();
       mediaRecorder.current.onstop = async () => {
-        const videoBlob = new Blob(videoChunks, { type: "video/mp4" });
+        const videoBlob = new Blob(videoChunks, { type: mimeType });
         const videoUrl = URL.createObjectURL(videoBlob);
         setRecordedVideo(videoUrl);
         stream.getTracks().forEach((track) => track.stop());
