@@ -79,20 +79,36 @@ self.addEventListener("message", (event) => {
   }
 });
 
-// Any other custom service worker logic can go here.
-
-self.addEventListener("fetch", (evt) => {
-  evt.respondWith(
-    caches.match(evt.request).then((cacheRes) => {
-      return (
-        cacheRes ||
-        fetch(evt.request).then((fetchRes) => {
-          return caches.open(dynamicCache).then((cache) => {
-            cache.put(evt.request.url, fetchRes.clone());
-            return fetchRes;
-          });
-        })
-      );
-    })
-  );
+self.addEventListener("fetch", (event) => {
+  if (event.request.url.includes("api")) {
+    event.respondWith(networkFirst(event.request));
+  } else {
+    event.respondWith(cacheFirstWithRefresh(event.request));
+  }
 });
+
+async function networkFirst(request: any) {
+  try {
+    const networkResponse = await fetch(request);
+    if (networkResponse.ok) {
+      const cache = await caches.open(dynamicCache);
+      cache.put(request, networkResponse.clone());
+    }
+    return networkResponse;
+  } catch (error) {
+    const cachedResponse = await caches.match(request);
+    return cachedResponse || Response.error();
+  }
+}
+
+async function cacheFirstWithRefresh(request: any) {
+  const fetchResponsePromise = fetch(request).then(async (networkResponse) => {
+    if (networkResponse.ok) {
+      const cache = await caches.open(dynamicCache);
+      cache.put(request, networkResponse.clone());
+    }
+    return networkResponse;
+  });
+
+  return (await caches.match(request)) || (await fetchResponsePromise);
+}
