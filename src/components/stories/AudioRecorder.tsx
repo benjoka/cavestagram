@@ -83,11 +83,6 @@ export default function AudioRecorder() {
   return (
     <div>
       <div className="w-full h-full">
-        {uploading && (
-          <div className="flex items-center justify-center w-full h-full">
-            <img src={iconCircle} width={70} className="animate-spin-slow" />
-          </div>
-        )}
         {!uploading && !audioUrl && (
           <div className="w-full h-full flex items-center justify-center">
             {permission && recordingStatus === "inactive" && (

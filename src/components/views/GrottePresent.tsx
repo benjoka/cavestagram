@@ -1,11 +1,25 @@
-import { useStoriesQuery } from "api/stories";
+import { fetchStories, useStoriesQuery } from "api/stories";
 import Story from "components/stories/Story";
 import Participate from "components/stories/Participate";
 import { useAppStore } from "stores/AppStore";
 import buttonBorder from "assets/images/icons/button_border.png";
+import { useEffect } from "react";
+import { useQuery } from "react-query";
 export default function GrottePresent() {
-  const { data: stories } = useStoriesQuery();
   const { participateMode, setParticipateMode } = useAppStore();
+
+  const { data: stories, refetch } = useQuery("stories", fetchStories);
+
+  const refetchStories = () => {
+    refetch();
+  };
+
+  useEffect(() => {
+    setTimeout(() => {
+      refetchStories();
+    }, 500);
+  }, [participateMode]);
+
   const renderStories = () => {
     return (
       <div>

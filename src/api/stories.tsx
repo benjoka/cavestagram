@@ -58,7 +58,6 @@ export async function postStory(selfieUrl: string, mediaBlob: Blob) {
             }),
           }).catch((error) => {
             alert(error);
-            console.error(error);
           });
         })
         .catch((error) => {
