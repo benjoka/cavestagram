@@ -5,4 +5,5 @@ export type Image = {
   width: number;
   height: number;
   mime: string;
+  provider?: string;
 };

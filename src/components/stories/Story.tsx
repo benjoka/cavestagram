@@ -35,7 +35,11 @@ export default function Story({ id, media, selfie }: StoryProps) {
             playsInline
             onEnded={() => setPlaying(false)}
             className="w-full h-full object-cover"
-            src={`${process.env.REACT_APP_API_URL}${media.url}`}
+            src={
+              media.provider === "cloudinary"
+                ? media.url
+                : `${process.env.REACT_APP_API_URL}${media.url}`
+            }
           />
         </div>
       )}
@@ -44,7 +48,13 @@ export default function Story({ id, media, selfie }: StoryProps) {
           className="absolute top-0 w-full h-full audio-player"
           onClick={triggerVideo}
         >
-          <AudioWave url={`${process.env.REACT_APP_API_URL}${media.url}`} />
+          <AudioWave
+            url={
+              media.provider === "cloudinary"
+                ? media.url
+                : `${process.env.REACT_APP_API_URL}${media.url}`
+            }
+          />
         </div>
       )}
     </div>

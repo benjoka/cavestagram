@@ -37,7 +37,11 @@ export default function Slider({ files }: SliderProps) {
                 <div className="w-full h-full relative">
                   <img
                     className="w-full h-full object-cover"
-                    src={`${process.env.REACT_APP_API_URL}${file.url}`}
+                    src={
+                      file.provider === "cloudinary"
+                        ? file.url
+                        : `${process.env.REACT_APP_API_URL}${file.url}`
+                    }
                   />
                 </div>
               </SwiperSlide>

@@ -13,7 +13,11 @@ export default function Media({ files }: MediaProps) {
       <div className="w-full h-full aspect-square">
         <div className="absolute z-10 w-full h-full pointer-events-none bg-media-mask bg-cover bg-center" />
         <img
-          src={`${process.env.REACT_APP_API_URL}${files[0].url}`}
+          src={
+            files[0].provider === "cloudinary"
+              ? files[0].url
+              : `${process.env.REACT_APP_API_URL}${files[0].url}`
+          }
           className="object-cover w-full h-full"
         />
       </div>
@@ -23,7 +27,16 @@ export default function Media({ files }: MediaProps) {
     if (files.length > 1 || !files[0].mime.includes("video")) {
       return null;
     }
-    return <Video id={files[0].id} url={files[0].url} />;
+    return (
+      <Video
+        id={files[0].id}
+        url={
+          files[0].provider === "cloudinary"
+            ? files[0].url
+            : `${process.env.REACT_APP_API_URL}${files[0].url}`
+        }
+      />
+    );
   };
   const renderSlider = () => {
     if (files.length === 1) {

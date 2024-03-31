@@ -7,22 +7,21 @@ export default function AudioWave({ url }: { url: string }) {
   const [loading, setLoading] = useState(true);
 
   const { wavesurfer, isPlaying, currentTime } = useWavesurfer({
+    url: url,
+
     container: waveContainer,
     cursorColor: "transparent",
     height: "auto",
     dragToSeek: true,
     normalize: true,
-    waveColor: "rgba(0,0,0,0.5)",
+    waveColor: "black",
     progressColor: "white",
-    url: url,
     interact: false,
   });
 
   useEffect(() => {
     if (wavesurfer) {
-      console.log("loading");
-      wavesurfer.on("ready", (data) => {
-        console.log("ready");
+      wavesurfer.on("ready", () => {
         setLoading(false);
       });
     }
@@ -58,7 +57,7 @@ export default function AudioWave({ url }: { url: string }) {
         {loading && renderLoadingSpinner()}
         <div
           ref={waveContainer}
-          className="w-full h-full"
+          className="w-full h-full opacity-80"
           style={{ display: loading ? "none" : "block" }}
         ></div>
       </div>
