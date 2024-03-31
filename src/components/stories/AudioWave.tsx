@@ -7,8 +7,7 @@ export default function AudioWave({ url }: { url: string }) {
   const [loading, setLoading] = useState(true);
 
   const { wavesurfer, isPlaying, currentTime } = useWavesurfer({
-    url: url,
-
+    url: url.replace(".webm", ".wav"),
     container: waveContainer,
     cursorColor: "transparent",
     height: "auto",
