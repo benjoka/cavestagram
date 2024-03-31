@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from "react";
 import { useAppStore } from "stores/AppStore";
-import iconCircle from "assets/images/icons/icon_circle.png";
 import iconMicCircle from "assets/images/icons/icon_mic_circle.png";
 import iconStopCircle from "assets/images/icons/icon_stop_circle.png";
 

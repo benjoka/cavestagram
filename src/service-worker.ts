@@ -1,6 +1,5 @@
 /// <reference lib="webworker" />
 /* eslint-disable no-restricted-globals */
-
 import { clientsClaim } from "workbox-core";
 import { precacheAndRoute } from "workbox-precaching";
 
@@ -12,7 +11,14 @@ precacheAndRoute(self.__WB_MANIFEST);
 const dynamicCache = "site-dynamic-v1";
 
 self.addEventListener("fetch", (event) => {
-  event.respondWith(cacheFirstWithRefresh(event.request));
+  if (
+    event.request.url.includes("/api/posts") ||
+    event.request.url.includes("/api/stories")
+  ) {
+    event.respondWith(networkFirst(event.request));
+  } else {
+    event.respondWith(cacheFirstWithRefresh(event.request));
+  }
 });
 
 async function networkFirst(request: any) {
