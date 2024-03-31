@@ -28,13 +28,18 @@ export default function AudioWave({ url }: { url: string }) {
     }
   }, [wavesurfer]);
 
-  const play = useCallback(() => {
-    wavesurfer && wavesurfer.play();
-  }, [wavesurfer]);
+  const play = () => {
+    console.log(loading);
+    if (!loading) {
+      wavesurfer && wavesurfer.play();
+    }
+  };
 
-  const pause = useCallback(() => {
-    wavesurfer && wavesurfer.pause();
-  }, [wavesurfer]);
+  const pause = () => {
+    if (!loading) {
+      wavesurfer && wavesurfer.pause();
+    }
+  };
 
   const renderLoadingSpinner = () => {
     return (

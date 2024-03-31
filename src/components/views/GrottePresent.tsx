@@ -12,7 +12,7 @@ export default function GrottePresent() {
   const { data: storyResponse } = useStoriesQuery();
 
   useEffect(() => {
-    if (storyResponse) {
+    if (storyResponse && storyResponse.length !== stories.length) {
       setStories(storyResponse);
     }
   }, [storyResponse]);
