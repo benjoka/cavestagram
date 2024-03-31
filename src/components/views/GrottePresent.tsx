@@ -6,19 +6,16 @@ import buttonBorder from "assets/images/icons/button_border.png";
 import { useEffect } from "react";
 import { useQuery } from "react-query";
 export default function GrottePresent() {
-  const { participateMode, setParticipateMode } = useAppStore();
+  const { stories, setStories, participateMode, setParticipateMode } =
+    useAppStore();
 
-  const { data: stories, refetch } = useQuery("stories", fetchStories);
-
-  const refetchStories = () => {
-    refetch();
-  };
+  const { data: storyResponse } = useStoriesQuery();
 
   useEffect(() => {
-    setTimeout(() => {
-      refetchStories();
-    }, 500);
-  }, [participateMode]);
+    if (storyResponse) {
+      setStories(storyResponse);
+    }
+  }, [storyResponse]);
 
   const renderStories = () => {
     return (

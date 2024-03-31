@@ -1,9 +1,9 @@
-import { useCallback, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import AudioRecorder from "./AudioRecorder";
 import { useAppStore } from "stores/AppStore";
 import iconRecordCircle from "assets/images/icons/icon_record_circle.png";
 import Webcam from "react-webcam";
-import { postStory } from "api/stories";
+import { fetchStories, postStory } from "api/stories";
 import buttonBorder from "assets/images/icons/button_border.png";
 import audioBar from "assets/images/audio_playing_bar.png";
 import iconCircle from "assets/images/icons/icon_circle.png";
@@ -12,8 +12,15 @@ export default function Participate() {
   const webcamRef = useRef<any>(null);
   const [uploading, setUploading] = useState(false);
 
-  const { selfie, setSelfie, audioBlob, setAudioBlob, setParticipateMode } =
-    useAppStore();
+  const {
+    selfie,
+    setSelfie,
+    setStories,
+    audioBlob,
+    setAudioBlob,
+    setParticipateMode,
+  } = useAppStore();
+
   const capture = useCallback(() => {
     if (webcamRef.current) {
       const imageSrc = webcamRef.current.getScreenshot();
@@ -24,12 +31,14 @@ export default function Participate() {
   const upload = async () => {
     if (selfie && audioBlob) {
       setUploading(true);
-      const res = await postStory(selfie, audioBlob);
-      console.log(res);
+      await postStory(selfie, audioBlob);
       setSelfie(null);
       setParticipateMode(null);
       setUploading(false);
       setAudioBlob(null);
+      setTimeout(async () => {
+        setStories(await fetchStories());
+      }, 500);
     }
   };
 
