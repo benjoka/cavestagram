@@ -28,6 +28,7 @@ precacheAndRoute(self.__WB_MANIFEST);
 // are fulfilled with your index.html shell. Learn more at
 // https://developers.google.com/web/fundamentals/architecture/app-shell
 const fileExtensionRegexp = new RegExp("/[^/?]+\\.[^/]+$");
+const dynamicCache = "site-dynamic-v1";
 registerRoute(
   // Return false to exempt requests from being fulfilled by index.html.
   ({ request, url }: { request: Request; url: URL }) => {
@@ -79,3 +80,19 @@ self.addEventListener("message", (event) => {
 });
 
 // Any other custom service worker logic can go here.
+
+self.addEventListener("fetch", (evt) => {
+  evt.respondWith(
+    caches.match(evt.request).then((cacheRes) => {
+      return (
+        cacheRes ||
+        fetch(evt.request).then((fetchRes) => {
+          return caches.open(dynamicCache).then((cache) => {
+            cache.put(evt.request.url, fetchRes.clone());
+            return fetchRes;
+          });
+        })
+      );
+    })
+  );
+});
