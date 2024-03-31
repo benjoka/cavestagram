@@ -3,7 +3,7 @@ import Story from "components/stories/Story";
 import Participate from "components/stories/Participate";
 import { useAppStore } from "stores/AppStore";
 import buttonBorder from "assets/images/icons/button_border.png";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useQuery } from "react-query";
 export default function GrottePresent() {
   const { stories, setStories, participateMode, setParticipateMode } =
@@ -40,16 +40,20 @@ export default function GrottePresent() {
             </button>
           )}
         </p>
-        {stories?.map((story) => {
-          return (
-            <Story
-              key={`story_${story.id}`}
-              id={story.id}
-              media={story.media}
-              selfie={story.selfie}
-            />
-          );
-        })}
+        <div className="w-full h-full flex flex-wrap items-center justify-center">
+          {stories?.map((story, index) => {
+            return (
+              <div className="md:w-1/3 md:px-[50px]">
+                <Story
+                  key={`story_${story.id}`}
+                  id={story.id}
+                  media={story.media}
+                  selfie={story.selfie}
+                />
+              </div>
+            );
+          })}
+        </div>
       </div>
     );
   };

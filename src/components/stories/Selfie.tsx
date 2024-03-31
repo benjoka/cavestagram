@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { Selfie as SelfieProps } from "types/Selfie";
 
 export default function Selfie({ image }: SelfieProps) {
