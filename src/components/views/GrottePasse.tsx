@@ -12,10 +12,11 @@ export default function GrottePasse() {
         sondern diese auch, in Form von Höhlenmalereien, mit ihren Mitmenschen
         geteilt haben.
       </p>
-      {posts?.map((post) => {
+      {posts?.map((post, index) => {
         return (
           <Post
             key={`post_${post.id}`}
+            reverse={index % 2 !== 0 ? true : false}
             id={post.id}
             text={post.text}
             title={post.title}

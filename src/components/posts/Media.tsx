@@ -14,14 +14,14 @@ export default function Media({ files }: MediaProps) {
         <div className="absolute z-10 w-full h-full pointer-events-none bg-media-mask bg-cover bg-center" />
         <img
           src={`${process.env.REACT_APP_API_URL}${files[0].url}`}
-          className="object-cover"
+          className="object-cover w-full h-full"
         />
       </div>
     );
   };
   const renderVideo = () => {
     if (files.length > 1 || !files[0].mime.includes("video")) {
-      return;
+      return null;
     }
     return <Video id={files[0].id} url={files[0].url} />;
   };
@@ -32,12 +32,10 @@ export default function Media({ files }: MediaProps) {
     return <Slider files={files} />;
   };
   return (
-    <div className="w-full relative">
-      <div className="w-full h-full">
-        {renderImage()}
-        {renderVideo()}
-        {renderSlider()}
-      </div>
+    <div className="w-full md:w-1/2 lg:w-4/12 relative">
+      {renderImage()}
+      {renderVideo()}
+      {renderSlider()}
     </div>
   );
 }

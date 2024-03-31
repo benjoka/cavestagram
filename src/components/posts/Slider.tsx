@@ -45,7 +45,7 @@ export default function Slider({ files }: SliderProps) {
           })}
         </Swiper>
       </div>
-      <div className="flex justify-center mb-[20px]">
+      <div className="flex justify-center mb-[20px] mt-[10px]">
         {files.map((file, index) => {
           return (
             <img

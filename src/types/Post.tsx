@@ -11,4 +11,5 @@ export type Post = {
   createdAt?: string;
   updatedAt?: string;
   publishedAt?: string;
+  reverse?: boolean;
 };

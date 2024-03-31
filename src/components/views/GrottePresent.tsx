@@ -17,7 +17,7 @@ export default function GrottePresent() {
           <br />
           {!participateMode && (
             <button
-              className="w-full caves-button"
+              className="w-full max-w-[400px] caves-button"
               onClick={() => setParticipateMode("selfie")}
               style={{
                 backgroundImage: `url(${buttonBorder})`,

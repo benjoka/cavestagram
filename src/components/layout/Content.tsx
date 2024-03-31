@@ -6,7 +6,7 @@ export default function Content() {
   const { activeView } = useAppStore();
 
   return (
-    <div className=" w-full h-full px-[40px]">
+    <div className="w-full h-full px-[40px] max-w-[1200px]">
       {activeView === "grotte-passe" && <GrottePasse />}
       {activeView === "grotte-present" && <GrottePresent />}
     </div>
