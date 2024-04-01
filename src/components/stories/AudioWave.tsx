@@ -2,11 +2,17 @@ import { useWavesurfer } from "@wavesurfer/react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import iconCircle from "assets/images/icons/icon_circle.png";
 
-export default function AudioWave({ url }: { url: string }) {
+export default function AudioWave({
+  url,
+  autoPlay = false,
+}: {
+  url: string;
+  autoPlay?: boolean;
+}) {
   const waveContainer = useRef<HTMLDivElement | null>(null);
   const [loading, setLoading] = useState(true);
 
-  const { wavesurfer, isPlaying, currentTime } = useWavesurfer({
+  const { wavesurfer, isPlaying } = useWavesurfer({
     url: url
       .replace(".wav", ".mp3")
       .replace(".mp4", ".mp3")
@@ -26,12 +32,14 @@ export default function AudioWave({ url }: { url: string }) {
     if (wavesurfer) {
       wavesurfer.on("ready", () => {
         setLoading(false);
+        if (autoPlay) {
+          wavesurfer.play();
+        }
       });
     }
   }, [wavesurfer]);
 
   const play = () => {
-    console.log(loading);
     if (!loading) {
       wavesurfer && wavesurfer.play();
     }

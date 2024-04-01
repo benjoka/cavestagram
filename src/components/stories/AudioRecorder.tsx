@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { useAppStore } from "stores/AppStore";
 import iconMicCircle from "assets/images/icons/icon_mic_circle.png";
 import iconStopCircle from "assets/images/icons/icon_stop_circle.png";
+import AudioAnalyser from "./AudioAnalyser";
 
 let mimeType: string | null = null;
 if (MediaRecorder.isTypeSupported("audio/webm")) {
@@ -15,17 +16,22 @@ if (MediaRecorder.isTypeSupported("audio/webm")) {
 }
 
 export default function AudioRecorder() {
-  const { setAudioBlob } = useAppStore();
+  const {
+    setAudioBlob,
+    audioStream,
+    setAudioStream,
+    recordingStatus,
+    setRecordingStatus,
+  } = useAppStore();
   const [uploading] = useState(false);
   const [permission, setPermission] = useState(false);
   const mediaRecorder = useRef<MediaRecorder | null>(null);
-  const [recordingStatus, setRecordingStatus] = useState("inactive");
-  const [stream, setStream] = useState<MediaStream | null>(null);
   const [audioUrl, setAudioUrl] = useState<string | null>(null);
 
   const [audioChunks, setAudioChunks] = useState([]);
 
   useEffect(() => {
+    setRecordingStatus("inactive");
     getMicrophonePermission();
   }, []);
 
@@ -37,7 +43,7 @@ export default function AudioRecorder() {
           video: false,
         });
         setPermission(true);
-        setStream(mediaStream);
+        setAudioStream(mediaStream);
       } catch (err: any) {
         alert(err.message);
       }
@@ -47,11 +53,11 @@ export default function AudioRecorder() {
   };
 
   const startRecording = async () => {
-    if (stream) {
+    if (audioStream) {
       setRecordingStatus("recording");
       const media = mimeType
-        ? new MediaRecorder(stream, { mimeType })
-        : new MediaRecorder(stream);
+        ? new MediaRecorder(audioStream, { mimeType })
+        : new MediaRecorder(audioStream);
       mediaRecorder.current = media;
       mediaRecorder.current.start();
       let localAudioChunks: any = [];
@@ -90,16 +96,15 @@ export default function AudioRecorder() {
               </button>
             )}
             {permission && recordingStatus === "recording" && (
-              <button onClick={stopRecording}>
-                <img width={70} src={iconStopCircle} />
-              </button>
+              <div>
+                <button onClick={stopRecording}>
+                  <img width={70} src={iconStopCircle} />
+                </button>
+              </div>
             )}
           </div>
         )}
       </div>
-      {recordingStatus === "inactive" && audioUrl && (
-        <audio src={audioUrl} controls autoPlay loop className="hidden" />
-      )}
     </div>
   );
 }

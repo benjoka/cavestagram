@@ -1979,6 +1979,11 @@
   dependencies:
     "@types/node" "*"
 
+"@types/debounce@*":
+  version "1.2.4"
+  resolved "https://registry.npmjs.org/@types/debounce/-/debounce-1.2.4.tgz"
+  integrity sha512-jBqiORIzKDOToaF63Fm//haOCHuwQuLa2202RK4MozpA6lh93eCBc+/8+wZn5OzjJt3ySdc+74SXWXB55Ewtyw==
+
 "@types/eslint-scope@^3.7.3":
   version "3.7.7"
   resolved "https://registry.npmjs.org/@types/eslint-scope/-/eslint-scope-3.7.7.tgz"
@@ -2235,6 +2240,13 @@
   integrity sha512-HuqO9ANrpKEz6EiTP8o9qaGy8QEcnM6vQ3DmmTOKsLDSr2YD6jrEyMS6XsWFEQpBOblfIuURpDQcuwC6HdwewQ==
   dependencies:
     "@types/react" "*"
+
+"@types/wavesurfer.js@^6.0.12":
+  version "6.0.12"
+  resolved "https://registry.npmjs.org/@types/wavesurfer.js/-/wavesurfer.js-6.0.12.tgz"
+  integrity sha512-oM9hYlPIVms4uwwoaGs9d0qp7Xk7IjSGkdwgmhUymVUIIilRfjtSQvoOgv4dpKiW0UozWRSyXfQqTobi0qWyCw==
+  dependencies:
+    "@types/debounce" "*"
 
 "@types/ws@^8.5.5":
   version "8.5.10"
@@ -10092,7 +10104,7 @@ watchpack@^2.4.1:
     glob-to-regexp "^0.4.1"
     graceful-fs "^4.1.2"
 
-wavesurfer.js@^7.6.3:
+wavesurfer.js@^7.6.3, wavesurfer.js@^7.7.7:
   version "7.7.7"
   resolved "https://registry.npmjs.org/wavesurfer.js/-/wavesurfer.js-7.7.7.tgz"
   integrity sha512-cFnzxi6T6A5UH5CgiXCpV8KPgDvwzK5S3b54Hq1g+o1KzXH2CouavRj1ciwLBLXf6MK1eG9JnbhxF/1ppZ2iGQ==

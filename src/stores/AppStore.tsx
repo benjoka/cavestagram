@@ -7,11 +7,15 @@ export interface AppStore {
   selfie: string | null;
   audioBlob: Blob | null;
   stories: Story[];
+  audioStream: MediaStream | null;
+  recordingStatus: string;
+  setRecordingStatus: (status: string) => void;
   setActiveView: (view: string) => void;
   setStories: (stories: Story[]) => void;
   setAudioBlob: (blob: Blob | null) => void;
   setParticipateMode: (mode: string | null) => void;
   setSelfie: (selfie: string | null) => void;
+  setAudioStream: (stream: MediaStream | null) => void;
 }
 
 export const useAppStore = create<AppStore>((set) => ({
@@ -20,6 +24,10 @@ export const useAppStore = create<AppStore>((set) => ({
   selfie: null,
   stories: [],
   audioBlob: null,
+  audioStream: null,
+  recordingStatus: "inactive",
+  setRecordingStatus: (status: string) =>
+    set(() => ({ recordingStatus: status })),
   setStories: (stories: Story[]) =>
     set(() => ({ stories: shuffleArray(stories) })),
   setActiveView: (view: string) => set(() => ({ activeView: view })),
@@ -27,6 +35,8 @@ export const useAppStore = create<AppStore>((set) => ({
   setParticipateMode: (mode: string | null) =>
     set(() => ({ participateMode: mode })),
   setSelfie: (selfie: string | null) => set(() => ({ selfie: selfie })),
+  setAudioStream: (stream: MediaStream | null) =>
+    set(() => ({ audioStream: stream })),
 }));
 
 const shuffleArray = (array: any[]) => {

@@ -5,8 +5,9 @@ import iconRecordCircle from "assets/images/icons/icon_record_circle.png";
 import Webcam from "react-webcam";
 import { fetchStories, postStory } from "api/stories";
 import buttonBorder from "assets/images/icons/button_border.png";
-import audioBar from "assets/images/audio_playing_bar.png";
 import iconCircle from "assets/images/icons/icon_circle.png";
+import AudioAnalyser from "./AudioAnalyser";
+import AudioWave from "./AudioWave";
 
 export default function Participate() {
   const webcamRef = useRef<any>(null);
@@ -17,6 +18,8 @@ export default function Participate() {
     setSelfie,
     setStories,
     audioBlob,
+    audioStream,
+    recordingStatus,
     setAudioBlob,
     setParticipateMode,
   } = useAppStore();
@@ -66,22 +69,17 @@ export default function Participate() {
               {selfie && (
                 <div className="relative w-full h-full">
                   <img src={selfie} className="w-full h-full object-cover" />
+                  {audioStream &&
+                    !audioBlob &&
+                    recordingStatus === "recording" && (
+                      <AudioAnalyser audio={audioStream} />
+                    )}
                   {audioBlob && (
-                    <div className="playing-container top-0 left-0">
-                      <div className="playing">
-                        <span
-                          className="playing__bar playing__bar1"
-                          style={{ backgroundImage: `url(${audioBar})` }}
-                        ></span>
-                        <span
-                          className="playing__bar playing__bar2"
-                          style={{ backgroundImage: `url(${audioBar})` }}
-                        ></span>
-                        <span
-                          className="playing__bar playing__bar3"
-                          style={{ backgroundImage: `url(${audioBar})` }}
-                        ></span>
-                      </div>
+                    <div className="absolute w-full h-full top-0">
+                      <AudioWave
+                        url={URL.createObjectURL(audioBlob)}
+                        autoPlay
+                      />
                     </div>
                   )}
                 </div>
