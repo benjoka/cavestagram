@@ -19,7 +19,7 @@ export default function AudioVisualiser({ audio }: { audio: any }) {
       let x = 0;
       const sliceWidth = (width * 1.0) / audio.length;
       if (context) {
-        context.lineWidth = 2;
+        context.lineWidth = 1;
         context.strokeStyle = "rgba(255,255,255,0.8)";
         context.clearRect(0, 0, width, height);
         context.beginPath();

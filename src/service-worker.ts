@@ -12,11 +12,9 @@ const dynamicCache = "site-dynamic-v1";
 
 self.addEventListener("fetch", (event) => {
   if (
-    event.request.url.includes("/api/posts") ||
-    event.request.url.includes("/api/stories")
+    !event.request.url.includes("/api/posts") &&
+    !event.request.url.includes("/api/stories")
   ) {
-    event.respondWith(networkFirst(event.request));
-  } else {
     event.respondWith(cacheFirstWithRefresh(event.request));
   }
 });
