@@ -19,7 +19,7 @@ export default function Media({ files }: MediaProps) {
               ? files[0].url
               : `${process.env.REACT_APP_API_URL}${files[0].url}`
           }
-          className="object-cover w-full h-full"
+          className="object-cover w-full h-full p-[2px]"
         />
       </div>
     );

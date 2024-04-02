@@ -39,7 +39,12 @@ export default function Video({ id, url }: Props) {
         loop
         ref={video}
         playsInline
-        style={{ height: "100%", width: "100%", objectFit: "cover" }}
+        style={{
+          padding: 2,
+          height: "100%",
+          width: "100%",
+          objectFit: "cover",
+        }}
       >
         <source
           src={url.replace("/upload", "/upload/q_auto")}

@@ -37,7 +37,7 @@ export default function Slider({ files }: SliderProps) {
                 <div className="w-full h-full relative">
                   <img
                     loading="lazy"
-                    className="w-full h-full object-cover"
+                    className="p-[2px] w-full h-full object-cover"
                     src={
                       file.provider === "cloudinary"
                         ? file.url
