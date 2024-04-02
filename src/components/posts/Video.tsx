@@ -41,7 +41,10 @@ export default function Video({ id, url }: Props) {
         playsInline
         style={{ height: "100%", width: "100%", objectFit: "cover" }}
       >
-        <source src={url} type="video/mp4" />
+        <source
+          src={url.replace("/upload", "/upload/q_auto")}
+          type="video/mp4"
+        />
       </video>
     </div>
   );

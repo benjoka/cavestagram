@@ -20,6 +20,7 @@ export async function fetchPosts(): Promise<Post[]> {
     populate: {
       media: true,
     },
+    sort: "rank",
   });
   return res?.data;
 }
