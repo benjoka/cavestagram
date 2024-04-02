@@ -20,7 +20,7 @@ export default function Selfie({ image }: SelfieProps) {
                 ? image.url
                 : `${process.env.REACT_APP_API_URL}${image.url}`
             }
-            className="object-cover w-full h-full"
+            className="object-cover w-full h-full p-[2px]"
           />
         </div>
       </div>

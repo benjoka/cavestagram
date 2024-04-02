@@ -23,26 +23,6 @@ export default function Story({ id, media, selfie }: StoryProps) {
   return (
     <div className="my-10 relative">
       <Selfie image={selfie} />
-      {media.mime.includes("video") && (
-        <div
-          className="absolute top-0 w-full h-full flex items-center overflow-hidden"
-          style={{ opacity: playing ? 1 : 0, transition: "opacity 0.5s ease" }}
-          onClick={triggerVideo}
-        >
-          <video
-            preload="auto"
-            ref={file}
-            playsInline
-            onEnded={() => setPlaying(false)}
-            className="w-full h-full object-cover"
-            src={
-              media.provider === "cloudinary"
-                ? media.url
-                : `${process.env.REACT_APP_API_URL}${media.url}`
-            }
-          />
-        </div>
-      )}
       {media.mime.includes("audio") && (
         <div
           className="absolute top-0 w-full h-full audio-player"
