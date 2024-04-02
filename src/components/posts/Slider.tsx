@@ -36,6 +36,7 @@ export default function Slider({ files }: SliderProps) {
               <SwiperSlide className="h-full" key={`slide_${file.id}`}>
                 <div className="w-full h-full relative">
                   <img
+                    loading="lazy"
                     className="w-full h-full object-cover"
                     src={
                       file.provider === "cloudinary"

@@ -13,6 +13,7 @@ export default function Media({ files }: MediaProps) {
       <div className="w-full h-full aspect-square">
         <div className="absolute z-10 w-full h-full pointer-events-none bg-media-mask bg-cover bg-center" />
         <img
+          loading="lazy"
           src={
             files[0].provider === "cloudinary"
               ? files[0].url
@@ -31,7 +32,7 @@ export default function Media({ files }: MediaProps) {
       <Video
         id={files[0].id}
         url={
-          files[0].provider === "cloudinary"
+          files[0].url.includes("res.cloudinary.com")
             ? files[0].url
             : `${process.env.REACT_APP_API_URL}${files[0].url}`
         }
