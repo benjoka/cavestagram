@@ -16,6 +16,8 @@ self.addEventListener("fetch", (event) => {
     !event.request.url.includes("/api/stories")
   ) {
     event.respondWith(cacheFirstWithRefresh(event.request));
+  } else {
+    event.respondWith(networkFirst(event.request));
   }
 });
 
