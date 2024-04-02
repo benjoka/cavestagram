@@ -34,17 +34,14 @@ export default function Video({ id, url }: Props) {
       <div ref={videoIndicator}></div>
       <div className="absolute z-10 w-full h-full pointer-events-none bg-media-mask bg-cover bg-center" />
       <video
-        preload="auto"
+        preload="none"
         muted={muted}
         loop
         ref={video}
         playsInline
         style={{ height: "100%", width: "100%", objectFit: "cover" }}
       >
-        <source
-          src={`${process.env.REACT_APP_API_URL}${url}`}
-          type="video/mp4"
-        />
+        <source src={url} type="video/mp4" />
       </video>
     </div>
   );
