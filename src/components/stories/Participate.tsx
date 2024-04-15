@@ -23,8 +23,14 @@ export default function Participate() {
     recordingStatus,
     setAudioBlob,
     setParticipateMode,
+    voicePresentAudio,
   } = useAppStore();
 
+  useEffect(() => {
+    if (voicePresentAudio) {
+      voicePresentAudio.pause();
+    }
+  }, []);
   const capture = useCallback(() => {
     if (webcamRef.current) {
       const imageSrc = webcamRef.current.getScreenshot();
