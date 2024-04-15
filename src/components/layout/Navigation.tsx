@@ -3,11 +3,24 @@ import passeIconFill from "assets/images/icons/icon_lamp_fill.png";
 import presentIcon from "assets/images/icons/icon_lighter.png";
 import presentIconFill from "assets/images/icons/icon_lighter_fill.png";
 import navigationMask from "assets/images/navigation_mask.png";
+import LighterAudio from "assets/audio/lighter.mp3";
+import FireAudio from "assets/audio/fire.mp3";
 
 import { useAppStore } from "stores/AppStore";
+import { useEffect } from "react";
 
 export default function Navigation() {
-  const { activeView, setActiveView } = useAppStore();
+  const { cavePasseeEntered, activeView, setActiveView } = useAppStore();
+  var lighter = new Audio(LighterAudio);
+  var fire = new Audio(FireAudio);
+  fire.volume = 0.3;
+  useEffect(() => {
+    if (cavePasseeEntered && activeView === "grotte-passe") {
+      fire.play();
+    } else if (cavePasseeEntered && activeView === "grotte-present") {
+      lighter.play();
+    }
+  }, [activeView]);
 
   return (
     <div className="cv-app w-full h-full max-w-[500px] flex flex-row justify-around">

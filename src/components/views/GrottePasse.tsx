@@ -1,7 +1,28 @@
 import { usePostsQuery } from "api/posts";
 import Post from "components/posts/Post";
+import { useEffect } from "react";
+import { useAppStore } from "stores/AppStore";
+
 export default function GrottePasse() {
   const { data: posts } = usePostsQuery();
+  const {
+    grottePasseeIntroPlayed,
+    cavePasseeEntered,
+    setGrottePasseeIntroPlayed,
+    voicePasseAudio,
+    voicePresentAudio,
+  } = useAppStore();
+  useEffect(() => {
+    if (!grottePasseeIntroPlayed && cavePasseeEntered) {
+      setGrottePasseeIntroPlayed(true);
+      if (voicePasseAudio) {
+        voicePasseAudio.play();
+      }
+    }
+    if (voicePresentAudio) {
+      voicePresentAudio.pause();
+    }
+  }, [cavePasseeEntered]);
 
   return (
     <div>

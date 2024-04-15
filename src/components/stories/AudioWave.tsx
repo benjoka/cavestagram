@@ -1,6 +1,7 @@
 import { useWavesurfer } from "@wavesurfer/react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import iconCircle from "assets/images/icons/icon_circle.png";
+import { useAppStore } from "stores/AppStore";
 
 export default function AudioWave({
   url,
@@ -9,6 +10,7 @@ export default function AudioWave({
   url: string;
   autoPlay?: boolean;
 }) {
+  const { currentStoryAudio, setCurrentStoryAudio } = useAppStore();
   const waveContainer = useRef<HTMLDivElement | null>(null);
   const [loading, setLoading] = useState(true);
 
@@ -39,9 +41,16 @@ export default function AudioWave({
     }
   }, [wavesurfer]);
 
+  useEffect(() => {
+    if (currentStoryAudio !== url) {
+      wavesurfer && wavesurfer.pause();
+    }
+  }, [currentStoryAudio]);
+
   const play = () => {
     if (!loading) {
       wavesurfer && wavesurfer.play();
+      setCurrentStoryAudio(url);
     }
   };
 

@@ -3,11 +3,32 @@ import Story from "components/stories/Story";
 import Participate from "components/stories/Participate";
 import { useAppStore } from "stores/AppStore";
 import buttonBorder from "assets/images/icons/button_border.png";
-import { useEffect, useState } from "react";
-import { useQuery } from "react-query";
+import { useEffect } from "react";
+
 export default function GrottePresent() {
-  const { stories, setStories, participateMode, setParticipateMode } =
-    useAppStore();
+  const {
+    grottePresentIntroPlayed,
+    setGrottePresentIntroPlayed,
+    stories,
+    setStories,
+    participateMode,
+    setParticipateMode,
+    voicePresentAudio,
+    voicePasseAudio,
+  } = useAppStore();
+  useEffect(() => {
+    if (!grottePresentIntroPlayed) {
+      setGrottePresentIntroPlayed(true);
+      if (voicePresentAudio) {
+        setTimeout(() => {
+          voicePresentAudio.play();
+        }, 1000);
+      }
+    }
+    if (voicePasseAudio) {
+      voicePasseAudio.pause();
+    }
+  }, []);
 
   const { data: storyResponse } = useStoriesQuery();
 
@@ -43,7 +64,7 @@ export default function GrottePresent() {
         <div className="w-full h-full flex flex-wrap items-center justify-center">
           {stories?.map((story, index) => {
             return (
-              <div className="w-full md:w-1/3 md:px-[50px]">
+              <div className="w-full md:w-1/3 md:px-[50px]" key={index}>
                 <Story
                   key={`story_${story.id}`}
                   id={story.id}

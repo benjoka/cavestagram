@@ -12,6 +12,7 @@
     "@types/react-dom": "^18.2.22",
     "@types/wavesurfer.js": "^6.0.12",
     "@wavesurfer/react": "^1.0.4",
+    "blobshape": "1.0.0",
     "handbrake-js": "^7.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -19,6 +20,7 @@
     "react-query": "^3.39.3",
     "react-record-webcam": "^1.1.4",
     "react-scripts": "5.0.1",
+    "react-spring": "9.5.4",
     "react-webcam": "^7.2.0",
     "sass": "^1.72.0",
     "strapi-sdk-js": "^2.3.3",
@@ -53,6 +55,7 @@
     ]
   },
   "devDependencies": {
+    "@types/blobshape": "^1.0.3",
     "@types/video-react": "^0.15.6",
     "tailwindcss": "^3.4.1"
   }

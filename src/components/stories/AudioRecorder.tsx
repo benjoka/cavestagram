@@ -17,6 +17,7 @@ if (MediaRecorder.isTypeSupported("audio/webm")) {
 
 export default function AudioRecorder() {
   const {
+    audioBlob,
     setAudioBlob,
     audioStream,
     setAudioStream,
@@ -88,7 +89,7 @@ export default function AudioRecorder() {
   return (
     <div>
       <div className="w-full h-full">
-        {!uploading && !audioUrl && (
+        {!uploading && !audioBlob && (
           <div className="w-full h-full flex items-center justify-center">
             {permission && recordingStatus === "inactive" && (
               <button onClick={startRecording}>

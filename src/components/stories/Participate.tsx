@@ -5,6 +5,7 @@ import iconRecordCircle from "assets/images/icons/icon_record_circle.png";
 import Webcam from "react-webcam";
 import { fetchStories, postStory } from "api/stories";
 import buttonBorder from "assets/images/icons/button_border.png";
+import iconRetake from "assets/images/icons/icon_retake.png";
 import iconCircle from "assets/images/icons/icon_circle.png";
 import AudioAnalyser from "./AudioAnalyser";
 import AudioWave from "./AudioWave";
@@ -87,21 +88,38 @@ export default function Participate() {
             </div>
           </div>
         </div>
-        <div className="w-full h-[60px] flex items-center justify-center z-20 mt-[40px]">
+        <div className="w-full h-[60px] flex items-center justify-center z-20 mt-[40px] relative">
           {!selfie && (
             <button onClick={capture}>
               <img width={80} src={iconRecordCircle} />
             </button>
           )}
+          {selfie && !audioBlob && (
+            <button
+              className="absolute bottom-0 right-0"
+              onClick={() => setSelfie(null)}
+            >
+              <img width={50} src={iconRetake} />
+            </button>
+          )}
+          {audioBlob && (
+            <button
+              className="absolute bottom-0 right-0"
+              onClick={() => setAudioBlob(null)}
+            >
+              <img width={50} src={iconRetake} />
+            </button>
+          )}
           {selfie && <AudioRecorder></AudioRecorder>}
           {audioBlob && (
             <button
-              className="w-full caves-button"
+              className="w-1/2 caves-button"
               onClick={() => upload()}
               style={{
                 backgroundImage: `url(${buttonBorder})`,
                 backgroundSize: "100% 100%",
-                padding: "20px 60px",
+                padding: "15px 20px",
+                fontSize: 23,
               }}
             >
               TEILEN
