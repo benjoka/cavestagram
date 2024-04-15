@@ -14,7 +14,7 @@ export default function App() {
     if (caveSound) {
       var audio = new Audio(AmbientSound);
       audio.loop = true;
-      audio.volume = 0.01;
+      audio.volume = 0.005;
       audio.play();
     }
   }, [caveSound]);
