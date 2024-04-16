@@ -26,3 +26,12 @@ p {
   font-family: "Travesty", Arial, sans-serif;
   font-size: 1.8rem;
 }
+
+.logo {
+  font-size: 100px;
+  line-height: 110px;
+  @media (max-width: 1000px) {
+    font-size: 80px;
+    line-height: 90px;
+  }
+}

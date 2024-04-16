@@ -4,7 +4,7 @@ import AudioWave from "./AudioWave";
 
 export default function Story({ id, media, selfie }: StoryProps) {
   return (
-    <div className="my-10 relative">
+    <div className="my-10 relative cursor-pointer">
       <Selfie image={selfie} />
       {media.mime.includes("audio") && (
         <div className="absolute top-0 w-full h-full audio-player">

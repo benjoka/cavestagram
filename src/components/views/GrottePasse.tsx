@@ -14,9 +14,11 @@ export default function GrottePasse() {
   } = useAppStore();
   useEffect(() => {
     if (!grottePasseeIntroPlayed && cavePasseeEntered) {
-      setGrottePasseeIntroPlayed(true);
       if (voicePasseAudio) {
         voicePasseAudio.play();
+        voicePasseAudio.addEventListener("ended", function () {
+          setGrottePasseeIntroPlayed(true);
+        });
       }
     }
     if (voicePresentAudio) {

@@ -1,6 +1,6 @@
 import { useAppStore } from "stores/AppStore";
-import passeIcon from "assets/images/icons/icon_lamp.png";
-import passeIconFill from "assets/images/icons/icon_lamp_fill.png";
+import passeIcon from "assets/images/logo/logo_unfilled.png";
+import passeIconFill from "assets/images/logo/logo_filled.png";
 import { useState } from "react";
 import FireAudio from "assets/audio/fire.mp3";
 import IntroAudio from "assets/audio/intro.mp3";
@@ -64,16 +64,16 @@ export default function Intro() {
           </div>
         </div>
       </div>
-      <div className="w-1/2 md:w-1/4 aspect-square relative h-full">
+      <div className="w-10/12 sm:w-1/2 lg:w-1/4 aspect-square relative h-full">
         <img
-          className={`w-full absolute bottom-0 left-0 mb-[150px] ${
+          className={`w-full absolute bottom-0 left-0 mb-[100px] sm:mb-[50px] lg:mb-[200px] cursor-pointer	${
             lampLit ? "" : "animate-wiggle origin-center"
           }`}
           src={passeIcon}
           onClick={enterCave}
         />
         <img
-          className={`w-full absolute bottom-0 left-0 pointer-events-none mb-[150px] ${
+          className={`w-full absolute bottom-0 left-0 pointer-events-none mb-[100px] sm:mb-[50px] lg:mb-[200px] ${
             lampLit ? "animate-pulse" : ""
           }`}
           src={passeIconFill}
