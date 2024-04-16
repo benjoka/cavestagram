@@ -12,7 +12,7 @@ export default function Story({ id, media, selfie }: StoryProps) {
     if (randomMaskRotation === 0 && randomSelfieRotation === 0) {
       setRandomMaskRotation([0, 90, 180, 270][Math.floor(Math.random() * 4)]);
       setRandomSelfieRotation(
-        [-2.5, -1.25, 0, 1.25, 2.5][Math.floor(Math.random() * 5)]
+        [-7.5, -5, -2.5, 0, 2.5, 5, 7.5][Math.floor(Math.random() * 7)]
       );
       setRandomMaskOrientation([-1, 1][Math.floor(Math.random() * 2)]);
     }
