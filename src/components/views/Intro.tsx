@@ -38,7 +38,6 @@ export default function Intro() {
   };
 
   useEffect(() => {
-    console.log("HI");
     if (introAudio) {
       if (playAudio) {
         introAudio.play();
