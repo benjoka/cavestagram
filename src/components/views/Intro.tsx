@@ -12,6 +12,7 @@ import buttonBorder from "assets/images/icons/button_border.png";
 export default function Intro() {
   const { setCaveSound, setCavePasseeEntered } = useAppStore();
   const [lampLit, setLampLit] = useState(false);
+  const [enlightCave, setEnlightCave] = useState(false);
   const [fadeOut, setFadeOut] = useState(false);
   const [introAudio, setIntroAudio] = useState<HTMLAudioElement | null>(null);
   const [playAudio, setPlayAudio] = useState(false);
@@ -20,11 +21,10 @@ export default function Intro() {
     var fireAudio = new Audio(FireAudio);
     fireAudio.play();
     setLampLit(true);
-    setTimeout(() => {
-      setCaveSound(true);
-    }, 500);
+
     setTimeout(() => {
       setPlayAudio(true);
+      setEnlightCave(true);
     }, 1000);
   };
 
@@ -55,7 +55,7 @@ export default function Intro() {
       className="bg-black z-50 w-full h-full flex justify-center items-center absolute top-0 left-0"
       style={{
         opacity: fadeOut ? 0 : 1,
-        transition: "opacity 2s ease",
+        transition: "opacity 3s linear",
       }}
     >
       <div
@@ -69,11 +69,11 @@ export default function Intro() {
           <div className="w-1/3 xl:p-[50px] hidden lg:block">
             <img
               src={Reindeers}
-              className="rotate-[-30deg] pointer-events-none"
+              className="rotate-[-30deg] pointer-events-none animate-motion"
             />
           </div>
           <div className="w-full sm:w-8/12 md:1/2 lg:w-1/3 lg:h-full">
-            <img src={Birdman} className="pointer-events-none" />
+            <img src={Birdman} className="pointer-events-none animate-motion" />
           </div>
           <div className="w-1/3 xl:p-[100px] hidden lg:block">
             <img
@@ -107,8 +107,8 @@ export default function Intro() {
             backgroundImage: `url(${buttonBorder})`,
             backgroundSize: "100% 100%",
             padding: "30px 60px",
-            opacity: lampLit ? 1 : 0,
-            transition: "opacity 1s ease",
+            opacity: enlightCave ? 1 : 0,
+            transition: "opacity 2s ease",
           }}
         >
           HÖHLE BETRETEN
