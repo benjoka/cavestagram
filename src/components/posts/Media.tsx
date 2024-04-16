@@ -6,6 +6,7 @@ export default function Media({
   files,
   maskRotation,
   postRotation,
+  maskOrientation,
 }: MediaProps) {
   const renderImage = () => {
     if (files.length > 1 || !files[0].mime.includes("image")) {
@@ -14,7 +15,9 @@ export default function Media({
     return (
       <div className="w-full h-full aspect-square">
         <div
-          style={{ transform: `rotate(${maskRotation}deg)` }}
+          style={{
+            transform: `rotate(${maskRotation}deg) scale(${maskOrientation})`,
+          }}
           className="absolute z-10 w-full h-full pointer-events-none bg-media-mask bg-cover bg-center"
         />
         <img
@@ -36,6 +39,8 @@ export default function Media({
     return (
       <Video
         id={files[0].id}
+        maskOrientation={maskOrientation}
+        maskRotation={maskRotation}
         url={
           files[0].provider === "cloudinary"
             ? files[0].url
@@ -48,7 +53,13 @@ export default function Media({
     if (files.length === 1) {
       return null;
     }
-    return <Slider files={files} maskRotation={maskRotation} />;
+    return (
+      <Slider
+        files={files}
+        maskRotation={maskRotation}
+        maskOrientation={maskOrientation}
+      />
+    );
   };
   return (
     <div

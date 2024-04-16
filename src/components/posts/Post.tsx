@@ -6,6 +6,7 @@ export default function Post({ reverse, title, text, media }: PostProps) {
   const [randomMaskRotation, setRandomMaskRotation] = useState(0);
   const [randomPostRotation, setRandomPostRotation] = useState(0);
   const [randomScale, setRandomScale] = useState(0);
+  const [randomMaskOrientation, setRandomMaskOrientation] = useState(1);
 
   useEffect(() => {
     if (
@@ -17,6 +18,7 @@ export default function Post({ reverse, title, text, media }: PostProps) {
       setRandomPostRotation(
         [-2.5, -1.25, 0, 1.25, 2.5][Math.floor(Math.random() * 5)]
       );
+      setRandomMaskOrientation([-1, 1][Math.floor(Math.random() * 2)]);
     }
   }, []);
   return (
@@ -33,6 +35,7 @@ export default function Post({ reverse, title, text, media }: PostProps) {
           files={media}
           postRotation={randomPostRotation}
           maskRotation={randomMaskRotation}
+          maskOrientation={randomMaskOrientation}
         />
         <div className="flex-1 text-center md:text-left md:px-[40px] lg:px-[100px] flex flex-col items-center justify-center">
           <div className="w-full">

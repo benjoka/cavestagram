@@ -5,9 +5,10 @@ type Props = {
   id: number;
   url: string;
   maskRotation?: number | undefined;
+  maskOrientation?: number | undefined;
 };
 
-export default function Video({ url, maskRotation }: Props) {
+export default function Video({ url, maskRotation, maskOrientation }: Props) {
   const videoIndicator = useRef<HTMLDivElement>(null);
   const videoVisible = useOnScreen(videoIndicator);
   const video = useRef<HTMLVideoElement>(null);
@@ -35,7 +36,9 @@ export default function Video({ url, maskRotation }: Props) {
       <div ref={videoIndicator}></div>
       <div
         className="absolute z-10 w-full h-full pointer-events-none bg-media-mask bg-cover bg-center"
-        style={{ transform: `rotate(${maskRotation}deg)` }}
+        style={{
+          transform: `rotate(${maskRotation}deg) scale(${maskOrientation})`,
+        }}
       />
       <video
         preload="none"

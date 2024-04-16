@@ -4,6 +4,7 @@ export default function Selfie({
   image,
   maskRotation,
   selfieRotation,
+  maskOrientation,
 }: SelfieProps) {
   let url = image.url;
   if (
@@ -20,7 +21,9 @@ export default function Selfie({
       <div className="w-full h-full">
         <div className="w-full h-full aspect-square ">
           <div
-            style={{ transform: `rotate(${maskRotation}deg)` }}
+            style={{
+              transform: `rotate(${maskRotation}deg) scaleX(${maskOrientation})`,
+            }}
             className="absolute z-10 w-full h-full pointer-events-none bg-media-mask bg-cover bg-center"
           />
           <img

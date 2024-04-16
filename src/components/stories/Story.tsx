@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 export default function Story({ id, media, selfie }: StoryProps) {
   const [randomMaskRotation, setRandomMaskRotation] = useState(0);
   const [randomSelfieRotation, setRandomSelfieRotation] = useState(0);
+  const [randomMaskOrientation, setRandomMaskOrientation] = useState(1);
 
   useEffect(() => {
     if (randomMaskRotation === 0 && randomSelfieRotation === 0) {
@@ -13,6 +14,7 @@ export default function Story({ id, media, selfie }: StoryProps) {
       setRandomSelfieRotation(
         [-2.5, -1.25, 0, 1.25, 2.5][Math.floor(Math.random() * 5)]
       );
+      setRandomMaskOrientation([-1, 1][Math.floor(Math.random() * 2)]);
     }
   }, []);
   return (
@@ -21,6 +23,7 @@ export default function Story({ id, media, selfie }: StoryProps) {
         image={selfie}
         selfieRotation={randomSelfieRotation}
         maskRotation={randomMaskRotation}
+        maskOrientation={randomMaskOrientation}
       />
       {media.mime.includes("audio") && (
         <div className="absolute top-0 w-full h-full audio-player">
