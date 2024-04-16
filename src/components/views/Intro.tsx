@@ -66,14 +66,14 @@ export default function Intro() {
       </div>
       <div className="w-1/2 md:w-1/4 aspect-square relative h-full">
         <img
-          className={`w-full absolute bottom-0 left-0 mb-[200px] ${
+          className={`w-full absolute bottom-0 left-0 mb-[150px] ${
             lampLit ? "" : "animate-wiggle origin-center"
           }`}
           src={passeIcon}
           onClick={enterCave}
         />
         <img
-          className={`w-full absolute bottom-0 left-0 pointer-events-none mb-[200px] ${
+          className={`w-full absolute bottom-0 left-0 pointer-events-none mb-[150px] ${
             lampLit ? "animate-pulse" : ""
           }`}
           src={passeIconFill}

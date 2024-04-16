@@ -8,6 +8,7 @@ module.exports = {
       animation: {
         "spin-slow": "spin 2s linear infinite",
         wiggle: "wiggle 4s linear infinite",
+        "pulse-soft": "pulse-soft 2s cubic-bezier(0.4, 0, 0.6, 1) infinite",
       },
       keyframes: {
         wiggle: {
@@ -18,6 +19,10 @@ module.exports = {
           "85%": { transform: "rotate(3deg)" },
           "90%": { transform: "rotate(-3deg)" },
           "95%": { transform: "rotate(0)" },
+        },
+        "pulse-soft": {
+          "0 100%": { opacity: 1 },
+          "50%": { opacity: 0.8 },
         },
       },
     },

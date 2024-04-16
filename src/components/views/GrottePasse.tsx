@@ -25,7 +25,7 @@ export default function GrottePasse() {
   }, [cavePasseeEntered]);
 
   return (
-    <div>
+    <div className="animate-pulse-soft">
       <p className="text-center">
         Du befindest dich in der Höhle der Vergangenheit. Die Höhlenwände
         erzählen von der paläolithischen Höhlenmalerei und beschäftigen sich mit
