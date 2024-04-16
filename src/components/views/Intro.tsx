@@ -112,7 +112,7 @@ export default function Intro() {
             transition: "opacity 1s ease",
           }}
         >
-          Höhle betreten
+          HÖHLE BETRETEN
         </button>
       </div>
     </div>
