@@ -7,7 +7,7 @@ import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 import { useEffect, useState } from "react";
 
-export default function Slider({ files }: SliderProps) {
+export default function Slider({ files, maskRotation }: SliderProps) {
   const [activeSlide, setActiveSlide] = useState(0);
   const [rotations, setRotations] = useState<Array<number>>([]);
   const [scales, setScales] = useState<Array<number>>([]);
@@ -25,7 +25,10 @@ export default function Slider({ files }: SliderProps) {
   return (
     <div className="w-full h-full">
       <div className="w-full h-full aspect-square relative">
-        <div className="absolute z-10 w-full h-full pointer-events-none bg-media-mask bg-cover bg-center" />
+        <div
+          style={{ transform: `rotate(${maskRotation}deg)` }}
+          className="absolute z-10 w-full h-full pointer-events-none bg-media-mask bg-cover bg-center"
+        />
         <Swiper
           className="h-full"
           resistanceRatio={0}

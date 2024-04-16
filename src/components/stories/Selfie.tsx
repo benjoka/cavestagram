@@ -1,7 +1,10 @@
-import { useEffect, useState } from "react";
 import { Selfie as SelfieProps } from "types/Selfie";
 
-export default function Selfie({ image }: SelfieProps) {
+export default function Selfie({
+  image,
+  maskRotation,
+  selfieRotation,
+}: SelfieProps) {
   let url = image.url;
   if (
     process.env.REACT_APP_API_URL &&
@@ -10,10 +13,16 @@ export default function Selfie({ image }: SelfieProps) {
     url = `${process.env.REACT_APP_API_URL}${image.url}`;
   }
   return (
-    <div className="w-full relative">
+    <div
+      className="w-full relative"
+      style={{ transform: `rotate(${selfieRotation}deg)` }}
+    >
       <div className="w-full h-full">
         <div className="w-full h-full aspect-square ">
-          <div className="absolute z-10 w-full h-full pointer-events-none bg-media-mask bg-cover bg-center" />
+          <div
+            style={{ transform: `rotate(${maskRotation}deg)` }}
+            className="absolute z-10 w-full h-full pointer-events-none bg-media-mask bg-cover bg-center"
+          />
           <img
             src={
               image.provider === "cloudinary"

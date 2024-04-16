@@ -1,17 +1,22 @@
 import { Media as MediaProps } from "types/Media";
 import Slider from "./Slider";
-import { useEffect, useRef } from "react";
-import useOnScreen from "hooks/OnScreen";
 import Video from "./Video";
 
-export default function Media({ files }: MediaProps) {
+export default function Media({
+  files,
+  maskRotation,
+  postRotation,
+}: MediaProps) {
   const renderImage = () => {
     if (files.length > 1 || !files[0].mime.includes("image")) {
       return null;
     }
     return (
       <div className="w-full h-full aspect-square">
-        <div className="absolute z-10 w-full h-full pointer-events-none bg-media-mask bg-cover bg-center" />
+        <div
+          style={{ transform: `rotate(${maskRotation}deg)` }}
+          className="absolute z-10 w-full h-full pointer-events-none bg-media-mask bg-cover bg-center"
+        />
         <img
           loading="lazy"
           src={
@@ -43,10 +48,15 @@ export default function Media({ files }: MediaProps) {
     if (files.length === 1) {
       return null;
     }
-    return <Slider files={files} />;
+    return <Slider files={files} maskRotation={maskRotation} />;
   };
   return (
-    <div className="w-full md:w-1/2 lg:w-4/12 relative">
+    <div
+      className="w-full md:w-1/2 lg:w-4/12 relative"
+      style={{
+        transform: `rotate(${postRotation}deg)`,
+      }}
+    >
       {renderImage()}
       {renderVideo()}
       {renderSlider()}

@@ -4,9 +4,10 @@ import useOnScreen from "hooks/OnScreen";
 type Props = {
   id: number;
   url: string;
+  maskRotation?: number | undefined;
 };
 
-export default function Video({ id, url }: Props) {
+export default function Video({ url, maskRotation }: Props) {
   const videoIndicator = useRef<HTMLDivElement>(null);
   const videoVisible = useOnScreen(videoIndicator);
   const video = useRef<HTMLVideoElement>(null);
@@ -32,7 +33,10 @@ export default function Video({ id, url }: Props) {
       onClick={() => setMuted(!muted)}
     >
       <div ref={videoIndicator}></div>
-      <div className="absolute z-10 w-full h-full pointer-events-none bg-media-mask bg-cover bg-center" />
+      <div
+        className="absolute z-10 w-full h-full pointer-events-none bg-media-mask bg-cover bg-center"
+        style={{ transform: `rotate(${maskRotation}deg)` }}
+      />
       <video
         preload="none"
         muted={muted}
