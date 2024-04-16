@@ -14,13 +14,19 @@ export default function Navigation() {
   var lighter = new Audio(LighterAudio);
   var fire = new Audio(FireAudio);
   fire.volume = 0.3;
-  useEffect(() => {
-    if (cavePasseeEntered && activeView === "grotte-passe") {
-      fire.play();
-    } else if (cavePasseeEntered && activeView === "grotte-present") {
-      lighter.play();
-    }
-  }, [activeView]);
+
+  const switchToGrottePasse = () => {
+    fire.play();
+    setTimeout(() => {
+      setActiveView("grotte-passe");
+    }, 200);
+  };
+  const switchToGrottePresent = () => {
+    lighter.play();
+    setTimeout(() => {
+      setActiveView("grotte-present");
+    }, 200);
+  };
 
   return (
     <div className="cv-app w-full h-full max-w-[500px] flex flex-row justify-around">
@@ -30,7 +36,7 @@ export default function Navigation() {
       />
       <div
         className="h-full flex items-start"
-        onClick={() => setActiveView("grotte-passe")}
+        onClick={() => switchToGrottePasse()}
       >
         <div className="w-[60px] h-[60px]">
           <img
@@ -44,19 +50,24 @@ export default function Navigation() {
               src={passeIconFill}
               width={50}
               height={50}
-              className="mt-[10px]"
+              className="mt-[10px] animate-pulse"
             />
           )}
         </div>
       </div>
       <div
         className="h-full flex items-start"
-        onClick={() => setActiveView("grotte-present")}
+        onClick={() => switchToGrottePresent()}
       >
         <div className="w-[60px] h-[60px]">
           <img src={presentIcon} width={60} height={60} className="absolute" />
           {activeView === "grotte-present" && (
-            <img src={presentIconFill} width={60} height={60} />
+            <img
+              src={presentIconFill}
+              width={60}
+              height={60}
+              className="animate-pulse"
+            />
           )}
         </div>
       </div>

@@ -1,9 +1,10 @@
 import Content from "components/layout/Content";
 import Navigation from "components/layout/Navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useAppStore } from "stores/AppStore";
 import navigationMask from "assets/images/navigation_mask.png";
 import Intro from "components/views/Intro";
+import Droplets1 from "assets/audio/droplets1.mp3";
 
 export default function App() {
   const { activeView, cavePasseeEntered } = useAppStore();
