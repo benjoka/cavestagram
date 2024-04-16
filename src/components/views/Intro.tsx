@@ -111,6 +111,7 @@ export default function Intro() {
             padding: "30px 60px",
             opacity: enlightCave ? 1 : 0,
             transition: "opacity 2s ease",
+            fontSize: "1.5rem",
           }}
         >
           HÖHLE BETRETEN

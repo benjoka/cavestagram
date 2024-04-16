@@ -6,6 +6,9 @@
 @import "typo";
 @import "audio";
 
+html:has(> body.no-scroll) {
+  overflow: hidden;
+}
 body {
   height: 100dvh;
   color: white;
