@@ -16,9 +16,7 @@ export default function GrottePasse() {
     if (!grottePasseeIntroPlayed && cavePasseeEntered) {
       if (voicePasseAudio) {
         voicePasseAudio.play();
-        voicePasseAudio.addEventListener("ended", function () {
-          setGrottePasseeIntroPlayed(true);
-        });
+        setGrottePasseeIntroPlayed(true);
       }
     }
     if (voicePresentAudio) {

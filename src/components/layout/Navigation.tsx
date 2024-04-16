@@ -35,7 +35,7 @@ export default function Navigation() {
         className="absolute w-full h-[40px] top-[-40px] left-0"
       />
       <div
-        className="h-full flex items-start"
+        className="h-full flex items-start cursor-pointer"
         onClick={() => switchToGrottePasse()}
       >
         <div className="w-[60px] h-[60px]">
@@ -56,7 +56,7 @@ export default function Navigation() {
         </div>
       </div>
       <div
-        className="h-full flex items-start"
+        className="h-full flex items-start cursor-pointer"
         onClick={() => switchToGrottePresent()}
       >
         <div className="w-[60px] h-[60px]">
