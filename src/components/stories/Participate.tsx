@@ -42,13 +42,11 @@ export default function Participate() {
     if (selfie && audioBlob) {
       setUploading(true);
       await postStory(selfie, audioBlob);
+      setStories(await fetchStories());
       setSelfie(null);
       setParticipateMode(null);
       setUploading(false);
       setAudioBlob(null);
-      setTimeout(async () => {
-        setStories(await fetchStories());
-      }, 500);
     }
   };
 
@@ -94,7 +92,7 @@ export default function Participate() {
             </div>
           </div>
         </div>
-        <div className="w-full h-[60px] flex items-center justify-center z-20 mt-[40px] relative">
+        <div className="w-full h-[60px] flex items-center justify-center z-20 relative">
           {!selfie && (
             <button onClick={capture}>
               <img width={80} src={iconRecordCircle} />

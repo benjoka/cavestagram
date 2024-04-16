@@ -16,6 +16,7 @@ export default function GrottePresent() {
     voicePresentAudio,
     voicePasseAudio,
   } = useAppStore();
+
   useEffect(() => {
     if (!grottePresentIntroPlayed) {
       setGrottePresentIntroPlayed(true);
@@ -33,7 +34,7 @@ export default function GrottePresent() {
   const { data: storyResponse } = useStoriesQuery();
 
   useEffect(() => {
-    if (storyResponse && storyResponse.length !== stories.length) {
+    if (storyResponse && stories.length === 0) {
       setStories(storyResponse);
     }
   }, [storyResponse]);

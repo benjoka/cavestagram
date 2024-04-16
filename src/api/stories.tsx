@@ -21,50 +21,54 @@ export async function fetchStories(): Promise<Story[]> {
       selfie: true,
       media: true,
     },
+    sort: "createdAt:desc",
   });
   return res?.data;
 }
 
 export async function postStory(selfieUrl: string, mediaBlob: Blob) {
   const selfieBlob = await fetch(selfieUrl).then((r) => r.blob());
-  const formData = new FormData();
+  let formData = new FormData();
   formData.append("files", selfieBlob);
-  return await fetch(`${process.env.REACT_APP_API_URL}/api/upload`, {
-    method: "POST",
-    body: formData,
-  })
-    .then((selfieFile) => selfieFile.json())
-    .then(async (selfieFile) => {
-      const formData = new FormData();
+  const selfieFile: any = await fetch(
+    `${process.env.REACT_APP_API_URL}/api/upload`,
+    {
+      method: "POST",
+      body: formData,
+    }
+  );
 
-      formData.append("files", mediaBlob);
+  const selfieJson = await selfieFile.json();
+  const selfieId = selfieJson[0].id;
 
-      fetch(`${process.env.REACT_APP_API_URL}/api/upload`, {
-        method: "POST",
-        body: formData,
-      })
-        .then((mediaFile) => mediaFile.json())
-        .then((mediaFile) => {
-          fetch(`${process.env.REACT_APP_API_URL}/api/stories`, {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              data: {
-                selfie: selfieFile[0].id,
-                media: mediaFile[0].id,
-              },
-            }),
-          }).catch((error) => {
-            alert(error);
-          });
-        })
-        .catch((error) => {
-          alert(error);
-        });
-    })
-    .catch((error) => {
-      alert(error);
-    });
+  formData = new FormData();
+  formData.append("files", mediaBlob);
+  const mediaFile: any = await fetch(
+    `${process.env.REACT_APP_API_URL}/api/upload`,
+    {
+      method: "POST",
+      body: formData,
+    }
+  );
+  const mediaJson = await mediaFile.json();
+  const mediaId = mediaJson[0].id;
+
+  const story: any = await fetch(
+    `${process.env.REACT_APP_API_URL}/api/stories`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        data: {
+          selfie: selfieId,
+          media: mediaId,
+        },
+      }),
+    }
+  );
+
+  const storyJson = await story.json();
+  return storyJson.data.id;
 }
