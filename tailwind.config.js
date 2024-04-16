@@ -40,7 +40,7 @@ module.exports = {
           "83%": { opacity: "0.1" },
           "84%": { opacity: "0" },
           "85%": { opacity: "0.1" },
-          "86%": { opacity: "0.0.5" },
+          "86%": { opacity: "0.05" },
           "87%": { opacity: "0.1" },
           "95%": { opacity: "0" },
         },
