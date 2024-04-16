@@ -61,7 +61,9 @@ export default function Intro() {
       }}
     >
       <div
-        className={`w-full h-full absolute ${lampLit ? "animate-pulse" : ""}`}
+        className={`w-full h-full absolute ${
+          lampLit ? "animate-pulse" : "animate-flash"
+        }`}
         style={{
           opacity: lampLit ? 1 : 0,
           transition: "opacity 2s ease",
@@ -89,7 +91,7 @@ export default function Intro() {
         <div className="w-10/12 max-w-[500px] aspect-square relative">
           <img
             className={`h-full absolute bottom-0 left-0 mb-[20px] cursor-pointer	${
-              lampLit ? "" : "animate-wiggle origin-center"
+              lampLit ? "" : "animate-wiggle-immediate origin-center"
             }`}
             src={passeIcon}
             onClick={enterCave}
