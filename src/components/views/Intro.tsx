@@ -29,12 +29,14 @@ export default function Intro() {
   };
 
   useEffect(() => {
+    document.body.classList.add("no-scroll");
     setIntroAudio(new Audio(IntroAudio));
   }, []);
 
   const enter = () => {
     setPlayAudio(false);
     setFadeOut(true);
+    document.body.classList.remove("no-scroll");
   };
 
   useEffect(() => {
