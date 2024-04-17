@@ -1,6 +1,7 @@
 import { useAppStore } from "stores/AppStore";
-import passeIcon from "assets/images/logo/logo_unfilled.png";
-import passeIconFill from "assets/images/logo/logo_filled.png";
+import LogoUnfilled from "assets/images/logo/logo_unfilled.png";
+import LogoFilled from "assets/images/logo/logo_filled.png";
+import MatchIconFill from "assets/images/icons/icon_match_filled.png";
 import { useEffect, useState } from "react";
 import FireAudio from "assets/audio/fire.mp3";
 import IntroAudio from "assets/audio/intro.mp3";
@@ -90,17 +91,24 @@ export default function Intro() {
       <div className="w-10/12 sm:w-1/2 lg:w-1/4 aspect-square relative h-full flex justify-end items-center flex-col">
         <div className="w-10/12 max-w-[500px] aspect-square relative">
           <img
+            className={`h-[70%] absolute top-[-100px] left-[calc(50%-50px)] mb-[20px] cursor-pointer	${
+              lampLit ? "hidden" : "animate-match"
+            }`}
+            src={MatchIconFill}
+            onClick={enterCave}
+          />
+          <img
             className={`h-full absolute bottom-0 left-0 mb-[20px] cursor-pointer	${
               lampLit ? "" : "animate-wiggle-immediate origin-center"
             }`}
-            src={passeIcon}
+            src={LogoUnfilled}
             onClick={enterCave}
           />
           <img
             className={`h-full absolute bottom-0 left-0 pointer-events-none mb-[20px] ${
               lampLit ? "animate-pulse" : ""
             }`}
-            src={passeIconFill}
+            src={LogoFilled}
             style={{ opacity: lampLit ? 1 : 0, transition: "opacity 1s ease" }}
           />
         </div>

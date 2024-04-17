@@ -1,13 +1,12 @@
 import passeIcon from "assets/images/icons/icon_lamp.png";
 import passeIconFill from "assets/images/icons/icon_lamp_fill.png";
-import presentIcon from "assets/images/icons/icon_lighter.png";
-import presentIconFill from "assets/images/icons/icon_lighter_fill.png";
+import presentIcon from "assets/images/icons/icon_match.png";
+import presentIconFill from "assets/images/icons/icon_match_filled.png";
 import navigationMask from "assets/images/navigation_mask.png";
 import LighterAudio from "assets/audio/lighter.mp3";
 import FireAudio from "assets/audio/fire.mp3";
 
 import { useAppStore } from "stores/AppStore";
-import { useEffect } from "react";
 
 export default function Navigation() {
   const { cavePasseeEntered, activeView, setActiveView } = useAppStore();
