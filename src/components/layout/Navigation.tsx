@@ -28,7 +28,7 @@ export default function Navigation() {
   };
 
   return (
-    <div className="cv-app w-full h-full max-w-[500px] flex flex-row justify-around">
+    <div className="cv-app w-full h-full max-w-[500px] lg:max-w-[90%] flex flex-row justify-around md:justify-between">
       <img
         src={navigationMask}
         className="absolute w-full h-[40px] top-[-40px] left-0"
@@ -37,19 +37,19 @@ export default function Navigation() {
         className="h-full flex items-start cursor-pointer"
         onClick={() => switchToGrottePasse()}
       >
-        <div className="w-[60px] h-[60px]">
+        <div className="w-[80px] h-[80px] md:w-[100px] md:h-[100px]">
           <img
             src={passeIcon}
             width={50}
             height={50}
-            className="absolute mt-[10px]"
+            className="mt-[10px] md:mt-0 absolute top-[-10px] w-[80px] h-[80px] md:w-[100px] md:h-[100px]"
           />
           {activeView === "grotte-passe" && (
             <img
               src={passeIconFill}
               width={50}
               height={50}
-              className="mt-[10px] animate-pulse"
+              className="mt-[10px] md:mt-0 absolute top-[-10px] animate-pulse w-[80px] h-[80px] md:w-[100px] md:h-[100px]"
             />
           )}
         </div>
@@ -58,14 +58,19 @@ export default function Navigation() {
         className="h-full flex items-start cursor-pointer"
         onClick={() => switchToGrottePresent()}
       >
-        <div className="w-[60px] h-[60px]">
-          <img src={presentIcon} width={60} height={60} className="absolute" />
+        <div className="w-[80px] h-[80px] md:w-[100px] md:h-[100px]">
+          <img
+            src={presentIcon}
+            width={60}
+            height={60}
+            className="mt-[10px] md:mt-0 absolute top-[-10px] w-[80px] h-[80px] md:w-[100px] md:h-[100px]"
+          />
           {activeView === "grotte-present" && (
             <img
               src={presentIconFill}
               width={60}
               height={60}
-              className="animate-pulse"
+              className="mt-[10px] md:mt-0 absolute top-[-10px] animate-pulse w-[80px] h-[80px] md:w-[100px] md:h-[100px]"
             />
           )}
         </div>

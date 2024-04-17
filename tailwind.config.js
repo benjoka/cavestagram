@@ -10,8 +10,8 @@ module.exports = {
         wiggle: "wiggle 4s linear infinite",
         "wiggle-immediate": "wiggle 2s linear infinite",
         "pulse-soft": "pulse-soft 2s cubic-bezier(0.4, 0, 0.6, 1) infinite",
-        flash: "flash 7s cubic-bezier(0.4, 0, 0.6, 1) infinite",
-        match: "match 7s linear infinite",
+        flash: "flash 8s cubic-bezier(0.4, 0, 0.6, 1) infinite",
+        match: "match 8s linear infinite",
       },
       keyframes: {
         "wiggle-immediate": {
