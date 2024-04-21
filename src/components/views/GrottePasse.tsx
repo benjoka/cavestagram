@@ -49,8 +49,6 @@ export default function GrottePasse() {
       })}
       <div className="w-full flex justify-end pb-[50px]">
         <h2 className="rotate-[-10deg] text-[12px] leading-[13px] text-center opacity-30">
-          WE WERE HERE
-          <br />
           03 | 12
         </h2>
       </div>
