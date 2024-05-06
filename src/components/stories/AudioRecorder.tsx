@@ -2,7 +2,6 @@ import { useEffect, useRef, useState } from "react";
 import { useAppStore } from "stores/AppStore";
 import iconMicCircle from "assets/images/icons/icon_mic_circle.png";
 import iconStopCircle from "assets/images/icons/icon_stop_circle.png";
-import AudioAnalyser from "./AudioAnalyser";
 
 let mimeType: string | null = null;
 if (MediaRecorder.isTypeSupported("audio/webm")) {

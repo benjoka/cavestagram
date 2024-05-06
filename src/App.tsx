@@ -4,12 +4,20 @@ import { useEffect, useState } from "react";
 import { useAppStore } from "stores/AppStore";
 import navigationMask from "assets/images/navigation_mask.png";
 import Intro from "components/views/Intro";
-import Droplets1 from "assets/audio/droplets1.mp3";
+import Ambient from "assets/audio/ambient.mp3";
 
 export default function App() {
   const { activeView, cavePasseeEntered } = useAppStore();
   const [scrollTop] = useState(0);
 
+  useEffect(() => {
+    if (cavePasseeEntered) {
+      var ambientAudio = new Audio(Ambient);
+      ambientAudio.loop = true;
+      ambientAudio.volume = 0.2;
+      ambientAudio.play();
+    }
+  }, [cavePasseeEntered]);
   return (
     <div className="cv-app flex flex-col">
       {!cavePasseeEntered && <Intro></Intro>}

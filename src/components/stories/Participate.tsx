@@ -77,9 +77,7 @@ export default function Participate() {
                   <img src={selfie} className="w-full h-full object-cover" />
                   {audioStream &&
                     !audioBlob &&
-                    recordingStatus === "recording" && (
-                      <AudioAnalyser audio={audioStream} />
-                    )}
+                    recordingStatus === "recording" && <></>}
                   {audioBlob && (
                     <div className="absolute w-full h-full top-0">
                       <AudioWave
