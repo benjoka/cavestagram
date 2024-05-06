@@ -65,7 +65,8 @@ export const useAppStore = create<AppStore>((set) => ({
   setGrottePresentIntroPlayed: (value: boolean) =>
     set(() => ({ grottePresentIntroPlayed: value })),
   setCaveSound: (value: boolean) => set(() => ({ caveSound: value })),
-  setStories: (stories: Story[]) => set(() => ({ stories: stories })),
+  setStories: (stories: Story[]) =>
+    set(() => ({ stories: shuffleArray(stories) })),
   setActiveView: (view: string) => set(() => ({ activeView: view })),
   setAudioBlob: (blob: Blob | null) => set(() => ({ audioBlob: blob })),
   setParticipateMode: (mode: string | null) =>
