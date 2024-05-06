@@ -6,6 +6,7 @@ import Webcam from "react-webcam";
 import { fetchStories, postStory } from "api/stories";
 import buttonBorder from "assets/images/icons/button_border.png";
 import iconRetake from "assets/images/icons/icon_retake.png";
+import iconUpload from "assets/images/icons/icon_upload.png";
 import iconCircle from "assets/images/icons/icon_circle.png";
 import AudioAnalyser from "./AudioAnalyser";
 import AudioWave from "./AudioWave";
@@ -105,6 +106,29 @@ export default function Participate() {
             >
               <img width={50} src={iconRetake} />
             </button>
+          )}
+          {!selfie && (
+            <>
+              <label
+                htmlFor="selfie-upload"
+                className="cursor-pointer absolute bottom-0 right-0"
+              >
+                <img src={iconUpload} width={50} />
+              </label>
+              <input
+                className="hidden"
+                id="selfie-upload"
+                type="file"
+                name="selfie"
+                onChange={async (event: any) => {
+                  const fileReader = new FileReader();
+                  fileReader.onload = function (event: any) {
+                    setSelfie(event.target.result);
+                  };
+                  fileReader.readAsDataURL(event.target.files[0]);
+                }}
+              />
+            </>
           )}
           {audioBlob && (
             <button
