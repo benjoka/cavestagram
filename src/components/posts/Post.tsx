@@ -61,11 +61,16 @@ export default function Post({
           <Parallax
             className={`absolute z-20 top-[100px] md:top-[150px] flex items-center justify-center w-full`}
             speed={-10}
+            translateX={reverse ? [-4, 4] : [4, -1]}
             opacity={[0.3, 0]}
           >
             <img
               src={painting}
-              className={`absolute w-full md:w-1/2 lg:w-1/3`}
+              className={`absolute w-full md:w-1/2 lg:w-1/3 ${
+                reverse
+                  ? "translate-x-[-30px] md:translate-x-[100px]"
+                  : "translateX-x-[30px] md:translate-x-[-100px]"
+              }`}
             />
           </Parallax>
         )}
