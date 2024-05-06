@@ -34,13 +34,15 @@ export default function GrottePasse() {
 
   return (
     <div className="animate-pulse-soft">
-      <p className="text-center">
-        Du befindest dich in der Höhle der Vergangenheit. Die Höhlenwände
-        erzählen von der paläolithischen Höhlenmalerei und beschäftigen sich mit
-        der Frage, wieso sich die Menschen damals nicht nur Bilder gemacht,
-        sondern diese auch, in Form von Höhlenmalereien, mit ihren Mitmenschen
-        geteilt haben.
-      </p>
+      <div className="w-full flex justify-center">
+        <p className="text-center w-full md:w-1/2">
+          Du befindest dich in der Höhle der Vergangenheit. Die Höhlenwände
+          erzählen von der paläolithischen Höhlenmalerei und beschäftigen sich
+          mit der Frage, wieso sich die Menschen damals nicht nur Bilder
+          gemacht, sondern diese auch, in Form von Höhlenmalereien, mit ihren
+          Mitmenschen geteilt haben.
+        </p>
+      </div>
       {posts?.map((post, index) => {
         return (
           <Post

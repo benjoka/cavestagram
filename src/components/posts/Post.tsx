@@ -45,15 +45,21 @@ export default function Post({
         />
         <div className="flex-1 text-center md:text-left md:px-[40px] lg:px-[100px] flex flex-col items-center justify-center relative ">
           <div className="w-full">
-            <h2 className="hidden md:block">{title}</h2>
-            <p>{text}</p>
+            <Parallax
+              className="w-full h-full mt-[30px]"
+              speed={-5}
+              rotate={reverse ? [3, -2] : [-3, 2]}
+            >
+              <h2 className="hidden md:block">{title}</h2>
+              <p>{text}</p>
+            </Parallax>
           </div>
         </div>
       </div>
       <div className="h-[200px] relative">
         {painting && (
           <Parallax
-            className={`absolute z-20 top-[100px] flex items-center justify-center w-full`}
+            className={`absolute z-20 top-[100px] md:top-[150px] flex items-center justify-center w-full`}
             speed={-10}
             opacity={[0.3, 0]}
           >

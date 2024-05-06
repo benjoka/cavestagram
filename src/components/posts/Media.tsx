@@ -1,6 +1,7 @@
 import { Media as MediaProps } from "types/Media";
 import Slider from "./Slider";
 import Video from "./Video";
+import { Parallax } from "react-scroll-parallax";
 
 export default function Media({
   files,
@@ -20,15 +21,17 @@ export default function Media({
           }}
           className="absolute z-10 w-full h-full pointer-events-none bg-media-mask bg-cover bg-center"
         />
-        <img
-          loading="lazy"
-          src={
-            files[0].provider === "cloudinary"
-              ? files[0].url
-              : `${process.env.REACT_APP_API_URL}${files[0].url}`
-          }
-          className="object-cover w-full h-full p-[2px]"
-        />
+        <Parallax className="w-full h-full" opacity={[1, 0.3]}>
+          <img
+            loading="lazy"
+            src={
+              files[0].provider === "cloudinary"
+                ? files[0].url
+                : `${process.env.REACT_APP_API_URL}${files[0].url}`
+            }
+            className="object-cover w-full h-full p-[2px]"
+          />
+        </Parallax>
       </div>
     );
   };
@@ -37,16 +40,18 @@ export default function Media({
       return null;
     }
     return (
-      <Video
-        id={files[0].id}
-        maskOrientation={maskOrientation}
-        maskRotation={maskRotation}
-        url={
-          files[0].provider === "cloudinary"
-            ? files[0].url
-            : `${process.env.REACT_APP_API_URL}${files[0].url}`
-        }
-      />
+      <Parallax className="w-full h-full" opacity={[1, 0.3]}>
+        <Video
+          id={files[0].id}
+          maskOrientation={maskOrientation}
+          maskRotation={maskRotation}
+          url={
+            files[0].provider === "cloudinary"
+              ? files[0].url
+              : `${process.env.REACT_APP_API_URL}${files[0].url}`
+          }
+        />
+      </Parallax>
     );
   };
   const renderSlider = () => {
@@ -54,11 +59,13 @@ export default function Media({
       return null;
     }
     return (
-      <Slider
-        files={files}
-        maskRotation={maskRotation}
-        maskOrientation={maskOrientation}
-      />
+      <Parallax className="w-full h-full" opacity={[1, 0.3]}>
+        <Slider
+          files={files}
+          maskRotation={maskRotation}
+          maskOrientation={maskOrientation}
+        />
+      </Parallax>
     );
   };
   return (

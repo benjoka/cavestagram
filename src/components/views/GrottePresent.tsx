@@ -42,26 +42,29 @@ export default function GrottePresent() {
   const renderStories = () => {
     return (
       <div>
-        <p className="text-center">
-          Dies ist die Höhle der Gegenwart. An den Wänden der Höhle wird
-          interaktiv verewigt, warum wir uns heute Bilder machen und diese mit
-          anderen teilen.
-          <br />
-          <br />
-          {!participateMode && (
-            <button
-              className="w-full max-w-[400px] caves-button"
-              onClick={() => setParticipateMode("selfie")}
-              style={{
-                backgroundImage: `url(${buttonBorder})`,
-                backgroundSize: "100% 100%",
-                padding: "30px 60px",
-              }}
-            >
-              TEILNEHMEN
-            </button>
-          )}
-        </p>
+        <div className="w-full flex justify-center">
+          <p className="text-center w-full md:w-1/2">
+            Dies ist die Höhle der Gegenwart. An den Wänden der Höhle wird
+            interaktiv verewigt, warum wir uns heute Bilder machen und diese mit
+            anderen teilen.
+            <br />
+            <br />
+            {!participateMode && (
+              <button
+                className="w-full max-w-[400px] caves-button"
+                onClick={() => setParticipateMode("selfie")}
+                style={{
+                  backgroundImage: `url(${buttonBorder})`,
+                  backgroundSize: "100% 100%",
+                  padding: "30px 60px",
+                }}
+              >
+                TEILNEHMEN
+              </button>
+            )}
+          </p>
+        </div>
+
         <div className="w-full h-full flex flex-wrap items-center justify-center">
           {stories?.map((story, index) => {
             return (
