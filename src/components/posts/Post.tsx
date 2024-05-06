@@ -1,8 +1,14 @@
 import { Post as PostProps } from "types/Post";
 import Media from "./Media";
 import { useEffect, useState } from "react";
-
-export default function Post({ reverse, title, text, media }: PostProps) {
+import { Parallax } from "react-scroll-parallax";
+export default function Post({
+  reverse,
+  title,
+  text,
+  media,
+  painting,
+}: PostProps) {
   const [randomMaskRotation, setRandomMaskRotation] = useState(0);
   const [randomPostRotation, setRandomPostRotation] = useState(0);
   const [randomScale, setRandomScale] = useState(0);
@@ -22,7 +28,7 @@ export default function Post({ reverse, title, text, media }: PostProps) {
     }
   }, []);
   return (
-    <div className="my-10">
+    <div className="my-10 relative">
       <h2 className="md:hidden text-center">{title}</h2>
       <div
         className={
@@ -37,12 +43,26 @@ export default function Post({ reverse, title, text, media }: PostProps) {
           maskRotation={randomMaskRotation}
           maskOrientation={randomMaskOrientation}
         />
-        <div className="flex-1 text-center md:text-left md:px-[40px] lg:px-[100px] flex flex-col items-center justify-center">
+        <div className="flex-1 text-center md:text-left md:px-[40px] lg:px-[100px] flex flex-col items-center justify-center relative ">
           <div className="w-full">
             <h2 className="hidden md:block">{title}</h2>
             <p>{text}</p>
           </div>
         </div>
+      </div>
+      <div className="h-[200px] relative">
+        {painting && (
+          <Parallax
+            className={`absolute z-20 top-[100px] flex items-center justify-center w-full`}
+            speed={-10}
+            opacity={[0.3, 0]}
+          >
+            <img
+              src={painting}
+              className={`absolute w-full md:w-1/2 lg:w-1/3`}
+            />
+          </Parallax>
+        )}
       </div>
     </div>
   );

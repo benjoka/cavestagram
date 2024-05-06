@@ -3,6 +3,14 @@ import Post from "components/posts/Post";
 import { useEffect } from "react";
 import { useAppStore } from "stores/AppStore";
 
+import Birdman from "assets/images/paintings/birdman.png";
+import Reindeers from "assets/images/paintings/reindeers_font_de_gaumes.png";
+import Deer from "assets/images/paintings/deer.png";
+import Bull from "assets/images/paintings/bull.png";
+import Unicorn from "assets/images/paintings/unicorn.png";
+
+const paintings = [Birdman, Reindeers, Deer, Bull, Unicorn];
+
 export default function GrottePasse() {
   const { data: posts } = usePostsQuery();
   const {
@@ -44,9 +52,15 @@ export default function GrottePasse() {
             location={post.location}
             references={post.references}
             media={post.media}
+            painting={
+              paintings.length > index
+                ? paintings[index]
+                : paintings[index - paintings.length]
+            }
           ></Post>
         );
       })}
+
       {/*
      <div className="w-full flex justify-end pb-[50px]">
         <h2 className="rotate-[-10deg] text-[15px] leading-[13px] text-center opacity-30">

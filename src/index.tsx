@@ -4,6 +4,7 @@ import App from "./App";
 import "./assets/scss/base.scss";
 import { QueryClient, QueryClientProvider } from "react-query";
 import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
+import { ParallaxProvider } from "react-scroll-parallax";
 
 const queryClient = new QueryClient();
 const root = ReactDOM.createRoot(
@@ -13,7 +14,9 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
-      <App />
+      <ParallaxProvider>
+        <App />
+      </ParallaxProvider>
     </QueryClientProvider>
   </React.StrictMode>
 );

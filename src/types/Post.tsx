@@ -12,4 +12,5 @@ export type Post = {
   updatedAt?: string;
   publishedAt?: string;
   reverse?: boolean;
+  painting?: any;
 };
