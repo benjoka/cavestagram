@@ -10,14 +10,14 @@ export default function App() {
   const { activeView, cavePasseeEntered } = useAppStore();
   const [scrollTop] = useState(0);
 
-  useEffect(() => {
+  /*useEffect(() => {
     if (cavePasseeEntered) {
       var ambientAudio = new Audio(Ambient);
       ambientAudio.loop = true;
       ambientAudio.volume = 0.2;
       ambientAudio.play();
     }
-  }, [cavePasseeEntered]);
+  }, [cavePasseeEntered]);*/
   return (
     <div className="cv-app flex flex-col">
       {!cavePasseeEntered && <Intro></Intro>}
