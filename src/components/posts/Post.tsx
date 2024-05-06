@@ -48,7 +48,7 @@ export default function Post({
             <Parallax
               className="w-full h-full mt-[30px]"
               speed={-5}
-              rotate={reverse ? [3, -2] : [-3, 2]}
+              rotate={reverse ? [4, -4] : [-4, 4]}
             >
               <h2 className="hidden md:block">{title}</h2>
               <p>{text}</p>
@@ -63,7 +63,7 @@ export default function Post({
             speed={-10}
             rotate={reverse ? [-5, 5] : [5, -5]}
             translateX={reverse ? [-4, 10] : [4, -10]}
-            opacity={[0.3, 0]}
+            opacity={[0.5, 0]}
           >
             <img
               src={painting}

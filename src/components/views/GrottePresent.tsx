@@ -3,7 +3,7 @@ import Story from "components/stories/Story";
 import Participate from "components/stories/Participate";
 import { useAppStore } from "stores/AppStore";
 import buttonBorder from "assets/images/icons/button_border.png";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export default function GrottePresent() {
   const {
@@ -68,7 +68,10 @@ export default function GrottePresent() {
         <div className="w-full h-full flex flex-wrap items-center justify-center">
           {stories?.map((story, index) => {
             return (
-              <div className="w-full md:w-1/3 md:px-[50px]" key={index}>
+              <div
+                className="w-full md:w-1/3 md:px-[50px] my-[20px]"
+                key={index}
+              >
                 <Story
                   key={`story_${story.id}`}
                   id={story.id}
