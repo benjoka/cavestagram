@@ -4,20 +4,35 @@ import { useEffect, useState } from "react";
 import { useAppStore } from "stores/AppStore";
 import navigationMask from "assets/images/navigation_mask.png";
 import Intro from "components/views/Intro";
-import Ambient from "assets/audio/ambient.mp3";
+import AudioMutedIcon from "assets/images/icons/icon_audio_muted.png";
+import AudioIcon from "assets/images/icons/icon_audio.png";
 
 export default function App() {
-  const { activeView, cavePasseeEntered } = useAppStore();
+  const {
+    activeView,
+    cavePasseeEntered,
+    muted,
+    setMuted,
+    currentlyPlayingAudio,
+    currentStoryAudio,
+  } = useAppStore();
   const [scrollTop] = useState(0);
 
-  /*useEffect(() => {
-    if (cavePasseeEntered) {
-      var ambientAudio = new Audio(Ambient);
-      ambientAudio.loop = true;
-      ambientAudio.volume = 0.2;
-      ambientAudio.play();
+  useEffect(() => {
+    if (muted && currentlyPlayingAudio) {
+      if ("setVolume" in currentlyPlayingAudio) {
+        currentlyPlayingAudio.setVolume(0);
+      } else {
+        currentlyPlayingAudio.volume = 0;
+      }
+    } else if (currentlyPlayingAudio) {
+      if ("setVolume" in currentlyPlayingAudio) {
+        currentlyPlayingAudio.setVolume(1);
+      } else {
+        currentlyPlayingAudio.volume = 1;
+      }
     }
-  }, [cavePasseeEntered]);*/
+  }, [muted]);
   return (
     <div className="cv-app flex flex-col">
       {!cavePasseeEntered && <Intro></Intro>}
@@ -62,6 +77,13 @@ export default function App() {
                 La Grotte du Présent
               </h1>
             )}
+          </div>
+          <div
+            onClick={() => setMuted(!muted)}
+            className="absolute right-[20px] top-[10px]"
+          >
+            {muted && <img src={AudioMutedIcon} width={50} height={50} />}
+            {!muted && <img src={AudioIcon} width={50} height={50} />}
           </div>
         </div>
         <main className="cv-content flex-1 flex w-full items-center justify-center pt-[90px] pb-[100px]">

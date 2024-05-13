@@ -15,6 +15,7 @@ export default function GrottePresent() {
     setParticipateMode,
     voicePresentAudio,
     voicePasseAudio,
+    setCurrentlyPlayingAudio,
   } = useAppStore();
 
   useEffect(() => {
@@ -23,6 +24,7 @@ export default function GrottePresent() {
       if (voicePresentAudio) {
         setTimeout(() => {
           voicePresentAudio.play();
+          setCurrentlyPlayingAudio(voicePresentAudio);
         }, 1000);
       }
     }

@@ -19,11 +19,13 @@ export default function GrottePasse() {
     setGrottePasseeIntroPlayed,
     voicePasseAudio,
     voicePresentAudio,
+    setCurrentlyPlayingAudio,
   } = useAppStore();
   useEffect(() => {
     if (!grottePasseeIntroPlayed && cavePasseeEntered) {
       if (voicePasseAudio) {
         voicePasseAudio.play();
+        setCurrentlyPlayingAudio(voicePasseAudio);
         setGrottePasseeIntroPlayed(true);
       }
     }

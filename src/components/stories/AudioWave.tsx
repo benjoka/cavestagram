@@ -10,8 +10,12 @@ export default function AudioWave({
   url: string;
   autoPlay?: boolean;
 }) {
-  const { currentStoryAudio, setCurrentStoryAudio, voicePresentAudio } =
-    useAppStore();
+  const {
+    currentStoryAudio,
+    setCurrentStoryAudio,
+    setCurrentlyPlayingAudio,
+    voicePresentAudio,
+  } = useAppStore();
   const waveContainer = useRef<HTMLDivElement | null>(null);
   const [loading, setLoading] = useState(true);
 
@@ -39,6 +43,7 @@ export default function AudioWave({
           voicePresentAudio?.pause();
           wavesurfer && wavesurfer.play();
           setCurrentStoryAudio(url);
+          setCurrentlyPlayingAudio(wavesurfer);
         }
       });
     }

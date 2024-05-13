@@ -72,8 +72,8 @@ export default function Post({
               onClick={() => setShowReferences(!showReferences)}
               className={`references absolute flex items-center ${
                 reverse
-                  ? "right-[-20px] md:left-[-50px]"
-                  : "right-[-20px] md:right-[-50px] flex-row-reverse"
+                  ? "right-[-20px] lg:left-[-50px]"
+                  : "right-[-20px] lg:right-[-50px] flex-row-reverse"
               } ${
                 showReferences ? "active" : ""
               } top-[-30px] md:top-[-50px] cursor-pointer hover:opacity-100`}

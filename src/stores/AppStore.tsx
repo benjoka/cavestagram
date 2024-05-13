@@ -19,7 +19,11 @@ export interface AppStore {
   voicePresentAudio: HTMLAudioElement | null;
   voicePasseAudio: HTMLAudioElement | null;
   currentStoryAudio: string | null;
+  muted: boolean;
+  currentlyPlayingAudio: HTMLAudioElement | WaveSurfer | null;
+  setMuted: (muted: boolean) => void;
   setCurrentStoryAudio: (url: string) => void;
+  setCurrentlyPlayingAudio: (audio: HTMLAudioElement | WaveSurfer) => void;
   setVoicePresentAudio: (audio: HTMLAudioElement) => void;
   setVoicePasseAudio: (audio: HTMLAudioElement) => void;
   setRecordingStatus: (status: string) => void;
@@ -50,6 +54,11 @@ export const useAppStore = create<AppStore>((set) => ({
   voicePresentAudio: new Audio(VoicePresentAudio),
   voicePasseAudio: new Audio(VoicePasseAudio),
   currentStoryAudio: null,
+  muted: false,
+  currentlyPlayingAudio: null,
+  setMuted: (value: boolean) => set(() => ({ muted: value })),
+  setCurrentlyPlayingAudio: (audio: HTMLAudioElement | WaveSurfer) =>
+    set(() => ({ currentlyPlayingAudio: audio })),
   setCurrentStoryAudio: (url: string) =>
     set(() => ({ currentStoryAudio: url })),
   setVoicePresentAudio: (audio: HTMLAudioElement) =>
