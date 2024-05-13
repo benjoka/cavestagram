@@ -2,18 +2,20 @@ import { Post as PostProps } from "types/Post";
 import Media from "./Media";
 import { useEffect, useState } from "react";
 import { Parallax } from "react-scroll-parallax";
+import fingerprintIcon from "assets/images/posts/fingerprint.png";
 export default function Post({
   reverse,
   title,
   text,
   media,
+  references,
   painting,
 }: PostProps) {
   const [randomMaskRotation, setRandomMaskRotation] = useState(0);
   const [randomPostRotation, setRandomPostRotation] = useState(0);
   const [randomScale, setRandomScale] = useState(0);
   const [randomMaskOrientation, setRandomMaskOrientation] = useState(1);
-
+  const [showReferences, setShowReferences] = useState(false);
   useEffect(() => {
     if (
       randomMaskRotation === 0 &&
@@ -27,8 +29,9 @@ export default function Post({
       setRandomMaskOrientation([-1, 1][Math.floor(Math.random() * 2)]);
     }
   }, []);
+
   return (
-    <div className="my-10 relative">
+    <div className="my-10 relative z-20">
       <h2 className="md:hidden text-center">{title}</h2>
       <div
         className={
@@ -51,12 +54,49 @@ export default function Post({
               rotate={reverse ? [4, -4] : [-4, 4]}
             >
               <h2 className="hidden md:block">{title}</h2>
-              <p>{text}</p>
+              <p className="mb-2">{text}</p>
+
+              <i
+                className={`overflow-hidden transition-all w-full break-all ${
+                  !showReferences ? "opacity-0" : "opacity-1"
+                }`}
+              >
+                {references}
+              </i>
             </Parallax>
           </div>
+          {references && (
+            <div
+              onClick={() => setShowReferences(!showReferences)}
+              className={`references absolute flex items-center ${
+                reverse
+                  ? "right-[-20px] md:left-[-50px]"
+                  : "right-[-20px] md:right-[-50px] flex-row-reverse"
+              } ${
+                showReferences ? "active" : ""
+              } top-[-30px] md:top-[-50px] cursor-pointer hover:opacity-100`}
+            >
+              <img
+                src={fingerprintIcon}
+                width={25}
+                height={30}
+                className={`w-[25px] h-[30px] ${reverse ? "mr-4" : "ml-4"}`}
+                style={{
+                  opacity: showReferences ? 1 : 0.5,
+                }}
+              />
+              <p
+                className={`references-info hidden md:block ${
+                  reverse ? "origin-left" : "origin-right"
+                }`}
+              >
+                Referenzen
+              </p>
+            </div>
+          )}
         </div>
       </div>
-      <div className="h-[200px] relative">
+      <div className="h-[200px] relative z-10 pointer-events-none">
         {painting && (
           <Parallax
             className={`absolute z-20 top-[100px] md:top-[150px] flex items-center justify-center w-full`}

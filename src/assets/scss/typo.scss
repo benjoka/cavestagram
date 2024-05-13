@@ -34,6 +34,19 @@ p {
   }
 }
 
+i {
+  font-family: "Teenidle", Arial, sans-serif;
+  font-weight: 400;
+  color: white;
+  font-size: 0.8rem;
+  line-height: 1rem;
+  text-align: left;
+  @media (min-width: 900px) {
+    font-size: 1rem;
+    line-height: 1.2rem;
+  }
+}
+
 .caves-button {
   font-family: "Travesty", Arial, sans-serif;
   font-size: 1.8rem;
