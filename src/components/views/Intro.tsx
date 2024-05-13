@@ -22,6 +22,18 @@ export default function Intro() {
   const mousePosition = useMousePosition();
   const [isTouch, setIsTouch] = useState(false);
 
+  const [paintingPositions, setPaitingPositions] = useState({
+    reindeers: { x: 0, y: 0 },
+    birdman: { x: 0, y: 0 },
+    bull: { x: 0, y: 0 },
+  });
+
+  const [paintingOpacities, setPaintingOpacities] = useState({
+    reindeers: 0,
+    birdman: 0,
+    bull: 0,
+  });
+
   const enterCave = () => {
     var fireAudio = new Audio(FireAudio);
     fireAudio.play();
@@ -34,13 +46,46 @@ export default function Intro() {
   };
 
   useEffect(() => {
-    console.log(window.matchMedia("(pointer: coarse)").matches);
+    if (isTouch) {
+      return;
+    }
+    if (lampLit) {
+      setPaintingOpacities({
+        reindeers: 1,
+        birdman: 1,
+        bull: 1,
+      });
+      return;
+    }
+    if (mousePosition.x && mousePosition.y) {
+      const distanceReindeers =
+        Math.abs(paintingPositions.reindeers.x - mousePosition.x) +
+        Math.abs(paintingPositions.reindeers.y - mousePosition.y);
+      const distanceBirdman =
+        Math.abs(paintingPositions.birdman.x - mousePosition.x) +
+        Math.abs(paintingPositions.birdman.y - mousePosition.y);
+      const distanceBull =
+        Math.abs(paintingPositions.bull.x - mousePosition.x) +
+        Math.abs(paintingPositions.bull.y - mousePosition.y);
+
+      const distance = 600;
+      const range = -0.3 / distance;
+      const offset = 0.3;
+
+      setPaintingOpacities({
+        reindeers:
+          distanceReindeers < distance ? range * distanceReindeers + offset : 0,
+        birdman:
+          distanceBirdman < distance ? range * distanceBirdman + offset : 0,
+        bull: distanceBull < distance ? range * distanceBull + offset : 0,
+      });
+    }
+  }, [mousePosition]);
+
+  useEffect(() => {
     if (window.matchMedia("(pointer: coarse)").matches) {
       setIsTouch(true);
     }
-  }, []);
-
-  useEffect(() => {
     document.body.classList.add("no-scroll");
     setIntroAudio(new Audio(IntroAudio));
   }, []);
@@ -74,26 +119,87 @@ export default function Intro() {
     >
       <div
         className={`w-full h-full absolute ${
-          lampLit ? "animate-pulse" : "animate-flash"
-        }`}
+          lampLit
+            ? "animate-pulse"
+            : isTouch
+            ? "animate-flash"
+            : "animate-pulse"
+        }
+        `}
         style={{
-          opacity: lampLit ? 1 : 0,
           transition: "opacity 2s ease",
         }}
       >
         <div className="w-full h-1/2 relative flex justify-between items-center lg:items-end sm:justify-center pt-[50px] px-[50px]">
           <div className="w-1/3 xl:p-[50px] hidden lg:block">
             <img
+              ref={(el) => {
+                if (!el) return;
+                let positions = paintingPositions;
+                positions.reindeers.x =
+                  el.getBoundingClientRect().left +
+                  el.getBoundingClientRect().width / 2;
+                positions.reindeers.y =
+                  el.getBoundingClientRect().top +
+                  el.getBoundingClientRect().height / 2;
+                setPaitingPositions(positions);
+              }}
               src={Reindeers}
+              style={
+                !isTouch
+                  ? {
+                      opacity: paintingOpacities.reindeers,
+                    }
+                  : {}
+              }
               className="rotate-[-30deg] pointer-events-none animate-motion"
             />
           </div>
           <div className="w-full sm:w-8/12 md:1/2 lg:w-1/3 lg:h-full">
-            <img src={Birdman} className="pointer-events-none animate-motion" />
+            <img
+              ref={(el) => {
+                if (!el) return;
+                let positions = paintingPositions;
+                positions.birdman.x =
+                  el.getBoundingClientRect().left +
+                  el.getBoundingClientRect().width / 2;
+                positions.birdman.y =
+                  el.getBoundingClientRect().top +
+                  el.getBoundingClientRect().height / 2;
+                setPaitingPositions(positions);
+              }}
+              src={Birdman}
+              className="pointer-events-none animate-motion"
+              style={
+                !isTouch
+                  ? {
+                      opacity: paintingOpacities.birdman,
+                    }
+                  : {}
+              }
+            />
           </div>
           <div className="w-1/3 xl:p-[100px] hidden lg:block">
             <img
+              ref={(el) => {
+                if (!el) return;
+                let positions = paintingPositions;
+                positions.bull.x =
+                  el.getBoundingClientRect().left +
+                  el.getBoundingClientRect().width / 2;
+                positions.bull.y =
+                  el.getBoundingClientRect().top +
+                  el.getBoundingClientRect().height / 2;
+                setPaitingPositions(positions);
+              }}
               src={Bull}
+              style={
+                !isTouch
+                  ? {
+                      opacity: paintingOpacities.bull,
+                    }
+                  : {}
+              }
               className="rotate-[20deg] opacity-80 pointer-events-none"
             />
           </div>
