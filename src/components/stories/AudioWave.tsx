@@ -36,7 +36,9 @@ export default function AudioWave({
       wavesurfer.on("ready", () => {
         setLoading(false);
         if (autoPlay) {
-          wavesurfer.play();
+          voicePresentAudio?.pause();
+          wavesurfer && wavesurfer.play();
+          setCurrentStoryAudio(url);
         }
       });
     }

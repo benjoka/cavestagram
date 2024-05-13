@@ -33,7 +33,7 @@ export default function GrottePasse() {
   }, [cavePasseeEntered]);
 
   return (
-    <div className="animate-pulse-soft">
+    <div>
       <div className="w-full flex justify-center">
         <p className="text-center w-full md:w-1/2">
           Du befindest dich in der Höhle der Vergangenheit. Die Höhlenwände

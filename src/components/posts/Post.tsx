@@ -56,13 +56,15 @@ export default function Post({
               <h2 className="hidden md:block">{title}</h2>
               <p className="mb-2">{text}</p>
 
-              <i
+              <a
+                target="_blank"
+                href={references}
                 className={`overflow-hidden transition-all w-full break-all ${
                   !showReferences ? "opacity-0" : "opacity-1"
                 }`}
               >
                 {references}
-              </i>
+              </a>
             </Parallax>
           </div>
           {references && (
@@ -96,14 +98,14 @@ export default function Post({
           )}
         </div>
       </div>
-      <div className="h-[200px] relative z-10 pointer-events-none">
+      <div className="h-[200px] relative z-10 pointer-events-none animate-pulse-soft">
         {painting && (
           <Parallax
             className={`absolute z-20 top-[100px] md:top-[150px] flex items-center justify-center w-full`}
             speed={-10}
             rotate={reverse ? [-5, 5] : [5, -5]}
             translateX={reverse ? [-4, 10] : [4, -10]}
-            opacity={[0.5, 0]}
+            opacity={[0.7, 0]}
           >
             <img
               src={painting}

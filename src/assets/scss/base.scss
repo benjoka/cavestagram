@@ -27,7 +27,7 @@ body {
 
 .references {
   .references-info {
-    transform: scaleX(0);
+    transform: scale(0);
     opacity: 0;
     overflow: hidden;
     transition: transform 0.5s ease, opacity 0.5s ease;
@@ -42,7 +42,7 @@ body {
       }
     }
     .references-info {
-      transform: scaleX(1);
+      transform: scale(1);
       opacity: 1;
     }
   }
@@ -52,7 +52,7 @@ body {
       opacity: 1 !important;
     }
     .references-info {
-      transform: scaleX(1);
+      transform: scale(1);
       opacity: 1;
     }
   }

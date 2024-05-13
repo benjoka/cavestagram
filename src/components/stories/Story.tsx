@@ -11,6 +11,7 @@ export default function Story({ id, media, selfie }: StoryProps) {
   const [randomMaskOrientation, setRandomMaskOrientation] = useState(1);
   const [randomSelfieSpeed, setRandomSelfieSpeed] = useState(0);
   const [randomSelfieScale, setRandomSelfieScale] = useState(0);
+  const [clicked, setClicked] = useState(false);
 
   useEffect(() => {
     if (randomMaskRotation === 0 && randomSelfieRotation === 0) {
@@ -27,14 +28,21 @@ export default function Story({ id, media, selfie }: StoryProps) {
     }
   }, []);
   return (
-    <div className="my-10 relative cursor-pointer">
+    <div
+      className="my-10 relative cursor-pointer"
+      onClick={() => {
+        if (!clicked) {
+          setClicked(true);
+        }
+      }}
+    >
       <Parallax
         className={`w-full h-full`}
         speed={randomSelfieSpeed}
         rotate={[-randomSelfieRotation, randomSelfieRotation]}
         translateX={[randomSelfieTranslation, -randomSelfieTranslation]}
         scale={[0.9, 1.1]}
-        opacity={[1, 0.4]}
+        opacity={[1, 0.9]}
         easing="easeOutCubic"
       >
         <Selfie
@@ -43,9 +51,10 @@ export default function Story({ id, media, selfie }: StoryProps) {
           maskRotation={randomMaskRotation}
           maskOrientation={randomMaskOrientation}
         />
-        {media.mime.includes("audio") && (
+        {media.mime.includes("audio") && clicked && (
           <div className="absolute top-0 w-full h-full audio-player">
             <AudioWave
+              autoPlay
               url={
                 media.provider === "cloudinary"
                   ? media.url

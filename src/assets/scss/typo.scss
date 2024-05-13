@@ -34,13 +34,14 @@ p {
   }
 }
 
-i {
+a {
   font-family: "Teenidle", Arial, sans-serif;
   font-weight: 400;
   color: white;
   font-size: 0.8rem;
   line-height: 1rem;
   text-align: left;
+  text-decoration: none;
   @media (min-width: 900px) {
     font-size: 1rem;
     line-height: 1.2rem;

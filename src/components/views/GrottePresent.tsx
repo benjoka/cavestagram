@@ -93,7 +93,7 @@ export default function GrottePresent() {
     );
   };
   return (
-    <div className="h-full animate-pulse-soft">
+    <div className="h-full">
       {!participateMode && renderStories()}
       {participateMode && renderParticipate()}
     </div>

@@ -21,7 +21,7 @@ export default function Media({
           }}
           className="absolute z-10 w-full h-full pointer-events-none bg-media-mask bg-cover bg-center"
         />
-        <Parallax className="w-full h-full" opacity={[1, 0.3]}>
+        <Parallax className="w-full h-full" opacity={[1, 0.5]}>
           <img
             loading="lazy"
             src={
@@ -40,7 +40,7 @@ export default function Media({
       return null;
     }
     return (
-      <Parallax className="w-full h-full" opacity={[1, 0.3]}>
+      <Parallax className="w-full h-full" opacity={[1, 0.5]}>
         <Video
           id={files[0].id}
           maskOrientation={maskOrientation}
@@ -59,7 +59,7 @@ export default function Media({
       return null;
     }
     return (
-      <Parallax className="w-full h-full" opacity={[1, 0.3]}>
+      <Parallax className="w-full h-full" opacity={[1, 0.5]}>
         <Slider
           files={files}
           maskRotation={maskRotation}
