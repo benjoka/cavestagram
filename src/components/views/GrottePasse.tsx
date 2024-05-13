@@ -62,12 +62,6 @@ export default function GrottePasse() {
           ></Post>
         );
       })}
-
-      <div className="w-full flex justify-end pb-[50px]">
-        <h2 className="rotate-[-10deg] text-[15px] leading-[13px] text-center opacity-30">
-          03 | 12
-        </h2>
-      </div>
     </div>
   );
 }
