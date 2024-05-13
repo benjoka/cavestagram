@@ -1,6 +1,7 @@
 import { useAppStore } from "stores/AppStore";
 import LogoUnfilled from "assets/images/logo/logo_unfilled.png";
 import LogoFilled from "assets/images/logo/logo_filled.png";
+import MatchIcon from "assets/images/icons/icon_match.png";
 import MatchIconFill from "assets/images/icons/icon_match_filled.png";
 import { useEffect, useState } from "react";
 import FireAudio from "assets/audio/fire.mp3";
@@ -9,6 +10,7 @@ import Birdman from "assets/images/paintings/birdman.png";
 import Reindeers from "assets/images/paintings/reindeers_font_de_gaumes.png";
 import Bull from "assets/images/paintings/bull.png";
 import buttonBorder from "assets/images/icons/button_border.png";
+import useMousePosition from "hooks/MousePosition";
 
 export default function Intro() {
   const { setCaveSound, setCavePasseeEntered } = useAppStore();
@@ -17,6 +19,8 @@ export default function Intro() {
   const [fadeOut, setFadeOut] = useState(false);
   const [introAudio, setIntroAudio] = useState<HTMLAudioElement | null>(null);
   const [playAudio, setPlayAudio] = useState(false);
+  const mousePosition = useMousePosition();
+  const [isTouch, setIsTouch] = useState(false);
 
   const enterCave = () => {
     var fireAudio = new Audio(FireAudio);
@@ -28,6 +32,13 @@ export default function Intro() {
       setEnlightCave(true);
     }, 1000);
   };
+
+  useEffect(() => {
+    console.log(window.matchMedia("(pointer: coarse)").matches);
+    if (window.matchMedia("(pointer: coarse)").matches) {
+      setIsTouch(true);
+    }
+  }, []);
 
   useEffect(() => {
     document.body.classList.add("no-scroll");
@@ -90,13 +101,15 @@ export default function Intro() {
       </div>
       <div className="w-10/12 sm:w-1/2 lg:w-1/4 aspect-square relative h-full flex justify-end items-center flex-col">
         <div className="w-10/12 max-w-[500px] aspect-square relative">
-          <img
-            className={`h-[70%] absolute top-[-100px] left-[calc(50%-50px)] mb-[20px] cursor-pointer	${
-              lampLit ? "hidden" : "animate-match"
-            }`}
-            src={MatchIconFill}
-            onClick={enterCave}
-          />
+          {isTouch && (
+            <img
+              className={`h-[70%] absolute top-[-100px] left-[calc(50%-50px)] mb-[20px] cursor-pointer	${
+                lampLit ? "hidden" : "animate-match"
+              }`}
+              src={MatchIconFill}
+              onClick={enterCave}
+            />
+          )}
           <img
             className={`h-full absolute bottom-0 left-0 mb-[20px] cursor-pointer	${
               lampLit ? "" : "animate-wiggle-immediate origin-center"
@@ -127,6 +140,24 @@ export default function Intro() {
           HÖHLE BETRETEN
         </button>
       </div>
+      {!lampLit && !isTouch && mousePosition.x && mousePosition.y && (
+        <div
+          className="absolute w-[150px] h-[150px]"
+          style={{
+            left: mousePosition.x - 20,
+            top: mousePosition.y - 150,
+          }}
+        >
+          <img
+            className="w-full h-full absolute cursor-pointer pointer-events-none"
+            src={MatchIcon}
+          />
+          <img
+            className="w-full h-full absolute cursor-pointer pointer-events-none animate-pulse"
+            src={MatchIconFill}
+          />
+        </div>
+      )}
     </div>
   );
 }
