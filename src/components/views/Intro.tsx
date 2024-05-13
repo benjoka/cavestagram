@@ -146,7 +146,7 @@ export default function Intro() {
               }}
               src={Reindeers}
               style={
-                !isTouch
+                !isTouch && !lampLit
                   ? {
                       opacity: paintingOpacities.reindeers,
                     }
@@ -171,7 +171,7 @@ export default function Intro() {
               src={Birdman}
               className="pointer-events-none animate-motion"
               style={
-                !isTouch
+                !isTouch && !lampLit
                   ? {
                       opacity: paintingOpacities.birdman,
                     }
@@ -194,7 +194,7 @@ export default function Intro() {
               }}
               src={Bull}
               style={
-                !isTouch
+                !isTouch && !lampLit
                   ? {
                       opacity: paintingOpacities.bull,
                     }
