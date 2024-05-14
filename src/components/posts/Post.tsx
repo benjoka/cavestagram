@@ -2,7 +2,9 @@ import { Post as PostProps } from "types/Post";
 import Media from "./Media";
 import { useEffect, useState } from "react";
 import { Parallax } from "react-scroll-parallax";
-import fingerprintIcon from "assets/images/posts/fingerprint.png";
+import FootIcon from "assets/images/icons/icon_foot.png";
+import FootIconFilled from "assets/images/icons/icon_foot_filled.png";
+
 export default function Post({
   reverse,
   title,
@@ -70,30 +72,29 @@ export default function Post({
           {references && (
             <div
               onClick={() => setShowReferences(!showReferences)}
-              className={`references absolute flex items-center ${
-                reverse
-                  ? "right-[-20px] lg:left-[-50px]"
-                  : "right-[-20px] lg:right-[-50px] flex-row-reverse"
-              } ${
+              className={`references absolute flex items-center right-[-20px] lg:right-0
+              ${
                 showReferences ? "active" : ""
-              } top-[-30px] md:top-[-50px] cursor-pointer hover:opacity-100`}
+              } bottom-[10px] cursor-pointer hover:opacity-100`}
             >
-              <img
-                src={fingerprintIcon}
-                width={25}
-                height={30}
-                className={`w-[25px] h-[30px] ${reverse ? "mr-4" : "ml-4"}`}
-                style={{
-                  opacity: showReferences ? 1 : 0.5,
-                }}
-              />
-              <p
-                className={`references-info hidden md:block ${
-                  reverse ? "origin-left" : "origin-right"
-                }`}
-              >
+              <p className={`references-info hidden md:block origin-right`}>
                 Referenzen
               </p>
+              <img
+                src={FootIcon}
+                width={50}
+                height={50}
+                className={`w-[50px] h-[50px]`}
+              />
+              <img
+                src={FootIconFilled}
+                width={50}
+                height={50}
+                className={`absolute top-0 right-0 w-[50px] h-[50px]`}
+                style={{
+                  opacity: showReferences ? 1 : 0,
+                }}
+              />
             </div>
           )}
         </div>

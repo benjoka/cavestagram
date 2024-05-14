@@ -69,8 +69,8 @@ export default function Intro() {
         Math.abs(paintingPositions.bull.y - mousePosition.y);
 
       const distance = 600;
-      const range = -0.3 / distance;
-      const offset = 0.3;
+      const range = -0.5 / distance;
+      const offset = 0.5;
 
       setPaintingOpacities({
         reindeers:
