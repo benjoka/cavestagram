@@ -77,24 +77,32 @@ export default function Post({
                 showReferences ? "active" : ""
               } bottom-[10px] cursor-pointer hover:opacity-100`}
             >
-              <p className={`references-info hidden md:block origin-right`}>
-                Referenzen
-              </p>
-              <img
-                src={FootIcon}
-                width={50}
-                height={50}
-                className={`w-[50px] h-[50px]`}
-              />
-              <img
-                src={FootIconFilled}
-                width={50}
-                height={50}
-                className={`absolute top-0 right-0 w-[50px] h-[50px]`}
-                style={{
-                  opacity: showReferences ? 1 : 0,
-                }}
-              />
+              <Parallax speed={-3} className="relativeright-[-20px] lg:right-0">
+                <p className={`references-info hidden md:block origin-right`}>
+                  Referenzen
+                </p>
+              </Parallax>
+              <Parallax
+                speed={-3}
+                rotate={[-5, -20]}
+                className="relative w-[50px] h-[50px] right-[-20px] lg:right-0"
+              >
+                <img
+                  src={FootIcon}
+                  width={50}
+                  height={50}
+                  className={`w-[50px] h-[50px]`}
+                />
+                <img
+                  src={FootIconFilled}
+                  width={50}
+                  height={50}
+                  className={`absolute top-0 right-0 w-[50px] h-[50px]`}
+                  style={{
+                    opacity: showReferences ? 1 : 0,
+                  }}
+                />
+              </Parallax>
             </div>
           )}
         </div>
