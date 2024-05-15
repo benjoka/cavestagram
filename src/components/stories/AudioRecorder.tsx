@@ -110,9 +110,30 @@ export default function AudioRecorder() {
         {!uploading && !audioBlob && (
           <div className="w-full h-full flex items-center justify-center">
             {permission && (
-              <div {...longPressEvent}>
-                {!recording && <img width={70} src={iconMicCircle} />}
-                {recording && <img width={70} src={iconStopCircle} />}
+              <div
+                {...longPressEvent}
+                style={{
+                  userSelect: "none",
+                }}
+              >
+                {!recording && (
+                  <img
+                    width={70}
+                    src={iconMicCircle}
+                    style={{
+                      userSelect: "none",
+                    }}
+                  />
+                )}
+                {recording && (
+                  <img
+                    width={70}
+                    src={iconStopCircle}
+                    style={{
+                      userSelect: "none",
+                    }}
+                  />
+                )}
               </div>
             )}
           </div>

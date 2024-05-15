@@ -13,6 +13,7 @@ body {
   height: 100dvh;
   color: white;
   background: black;
+  -webkit-touch-callout: none !important;
   &.no-scroll {
     overflow: hidden;
   }
