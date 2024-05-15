@@ -16,19 +16,15 @@ export default function Navigation() {
 
   const switchToGrottePasse = () => {
     fire.play();
-    setTimeout(() => {
-      setActiveView("grotte-passe");
-    }, 200);
+    setActiveView("grotte-passe");
   };
   const switchToGrottePresent = () => {
     lighter.play();
-    setTimeout(() => {
-      setActiveView("grotte-present");
-    }, 200);
+    setActiveView("grotte-present");
   };
 
   return (
-    <div className="cv-app w-full h-full max-w-[500px] lg:max-w-[90%] flex flex-row justify-around md:justify-between">
+    <div className="cv-app w-full h-full max-w-[500px] lg:max-w-[90%] flex flex-row justify-around md:justify-around">
       <img
         src={navigationMask}
         className="absolute w-full h-[40px] top-[-40px] left-0"
