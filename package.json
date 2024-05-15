@@ -22,6 +22,7 @@
     "react-scripts": "5.0.1",
     "react-scroll-parallax": "^3.4.5",
     "react-spring": "9.5.4",
+    "react-use": "^17.5.0",
     "react-webcam": "^7.2.0",
     "sass": "^1.72.0",
     "strapi-sdk-js": "^2.3.3",

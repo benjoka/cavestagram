@@ -112,26 +112,20 @@ export default function AudioRecorder() {
             {permission && (
               <div
                 {...longPressEvent}
-                style={{
-                  userSelect: "none",
-                }}
+                className="record-button"
               >
                 {!recording && (
                   <img
                     width={70}
                     src={iconMicCircle}
-                    style={{
-                      userSelect: "none",
-                    }}
+                    className="record-button"
                   />
                 )}
                 {recording && (
                   <img
                     width={70}
                     src={iconStopCircle}
-                    style={{
-                      userSelect: "none",
-                    }}
+                    className="record-button"
                   />
                 )}
               </div>
