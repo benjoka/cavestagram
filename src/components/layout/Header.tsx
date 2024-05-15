@@ -15,7 +15,6 @@ export default function Header() {
       />
       {activeView === "grotte-passe" && <h1>La Grotte du Passé</h1>}
       {activeView === "grotte-present" && <h1>La Grotte du Présent</h1>}
-      <p>MUTE</p>
     </div>
   );
 }

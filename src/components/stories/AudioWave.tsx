@@ -20,11 +20,15 @@ export default function AudioWave({
   const [loading, setLoading] = useState(true);
 
   const { wavesurfer, isPlaying } = useWavesurfer({
-    url: url
-      .replace(".wav", ".mp3")
-      .replace(".mp4", ".mp3")
-      .replace(".webm", ".mp3")
-      .replace("upload/", "upload/q_auto/"),
+    url: url.includes(
+      process.env.REACT_APP_API_URL ? process.env.REACT_APP_API_URL : ""
+    )
+      ? url
+          .replace(".wav", ".mp3")
+          .replace(".mp4", ".mp3")
+          .replace(".webm", ".mp3")
+          .replace("upload/", "upload/q_auto/")
+      : url,
     container: waveContainer,
     cursorColor: "transparent",
     height: "auto",
@@ -36,6 +40,7 @@ export default function AudioWave({
   });
 
   useEffect(() => {
+    console.log(url);
     if (wavesurfer) {
       wavesurfer.on("ready", () => {
         setLoading(false);

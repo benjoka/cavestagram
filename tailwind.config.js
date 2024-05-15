@@ -7,6 +7,7 @@ module.exports = {
       },
       animation: {
         "spin-slow": "spin 2s linear infinite",
+        record: "ping 0.4s linear infinite alternate",
         wiggle: "wiggle 4s linear infinite",
         "wiggle-immediate": "wiggle 2s linear infinite",
         "pulse-soft": "pulse-soft 2s cubic-bezier(0.4, 0, 0.6, 1) infinite",

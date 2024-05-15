@@ -2,6 +2,8 @@ import { useEffect, useRef, useState } from "react";
 import { useAppStore } from "stores/AppStore";
 import iconMicCircle from "assets/images/icons/icon_mic_circle.png";
 import iconStopCircle from "assets/images/icons/icon_stop_circle.png";
+import useLongPress from "hooks/LongPress";
+import { stat } from "fs";
 
 let mimeType: string | null = null;
 if (MediaRecorder.isTypeSupported("audio/webm")) {
@@ -27,8 +29,25 @@ export default function AudioRecorder() {
   const [permission, setPermission] = useState(false);
   const mediaRecorder = useRef<MediaRecorder | null>(null);
   const [audioUrl, setAudioUrl] = useState<string | null>(null);
-
+  const [recording, setRecording] = useState(false);
   const [audioChunks, setAudioChunks] = useState([]);
+
+  const onLongPress = () => {
+    setRecordingStatus("recording");
+    setRecording(true);
+    startRecording();
+  };
+
+  const onLongPressEnd = () => {
+    setRecordingStatus("inactive");
+    setRecording(false);
+    stopRecording();
+  };
+
+  const longPressEvent = useLongPress(onLongPress, onLongPressEnd, {
+    shouldPreventDefault: true,
+    delay: 0,
+  });
 
   useEffect(() => {
     setRecordingStatus("inactive");
@@ -90,16 +109,10 @@ export default function AudioRecorder() {
       <div className="w-full h-full">
         {!uploading && !audioBlob && (
           <div className="w-full h-full flex items-center justify-center">
-            {permission && recordingStatus === "inactive" && (
-              <button onClick={startRecording}>
-                <img width={70} src={iconMicCircle} />
-              </button>
-            )}
-            {permission && recordingStatus === "recording" && (
-              <div>
-                <button onClick={stopRecording}>
-                  <img width={70} src={iconStopCircle} />
-                </button>
+            {permission && (
+              <div {...longPressEvent}>
+                {!recording && <img width={70} src={iconMicCircle} />}
+                {recording && <img width={70} src={iconStopCircle} />}
               </div>
             )}
           </div>

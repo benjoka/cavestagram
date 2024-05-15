@@ -8,12 +8,13 @@ import buttonBorder from "assets/images/icons/button_border.png";
 import iconRetake from "assets/images/icons/icon_retake.png";
 import iconUpload from "assets/images/icons/icon_upload.png";
 import iconCircle from "assets/images/icons/icon_circle.png";
-import AudioAnalyser from "./AudioAnalyser";
+import iconMicCircle from "assets/images/icons/icon_mic_circle.png";
 import AudioWave from "./AudioWave";
 
 export default function Participate() {
   const webcamRef = useRef<any>(null);
   const [uploading, setUploading] = useState(false);
+  const [dataUrl, setDataUrl] = useState<string | null>(null);
 
   const {
     selfie,
@@ -32,6 +33,13 @@ export default function Participate() {
       voicePresentAudio.pause();
     }
   }, []);
+
+  useEffect(() => {
+    if (audioBlob) {
+      setDataUrl(URL.createObjectURL(audioBlob));
+    }
+  }, [audioBlob]);
+
   const capture = useCallback(() => {
     if (webcamRef.current) {
       const imageSrc = webcamRef.current.getScreenshot();
@@ -77,13 +85,14 @@ export default function Participate() {
                   <img src={selfie} className="w-full h-full object-cover" />
                   {audioStream &&
                     !audioBlob &&
-                    recordingStatus === "recording" && <></>}
-                  {audioBlob && (
+                    recordingStatus === "recording" && (
+                      <div className="w-full h-full absolute top-0 left-0 flex items-center justify-center">
+                        <img src={iconMicCircle} width={100} />
+                      </div>
+                    )}
+                  {dataUrl && (
                     <div className="absolute w-full h-full top-0">
-                      <AudioWave
-                        url={URL.createObjectURL(audioBlob)}
-                        autoPlay
-                      />
+                      <AudioWave url={dataUrl} autoPlay />
                     </div>
                   )}
                 </div>
