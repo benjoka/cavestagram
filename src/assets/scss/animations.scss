@@ -18,3 +18,48 @@
     opacity: 1;
   }
 }
+
+.recording-animation {
+  background: rgba(20,20,20,0.5);
+  width: 100%;
+  height: 100%;
+  padding: 40px;
+  display: flex;
+  align-items: center;
+}
+
+.wave {
+  height: 0px;
+  width: 20px;
+  border-radius: 20px;
+  background: white;
+  display: inline-block;
+  margin: 0px 15px;
+  animation: waveloader 0.5s infinite linear alternate;
+}
+
+.wave:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.wave:nth-child(2) {
+  animation-delay: 0.5s;
+}
+
+.wave:nth-child(3) {
+  animation-delay: 1s;
+}
+
+.wave:nth-child(4) {
+  animation-delay: 1.5s;
+}
+
+.wave:nth-child(5) {
+  animation-delay: 2s;
+}
+
+@keyframes waveloader {
+  to {
+    height: 100px;
+  }
+}

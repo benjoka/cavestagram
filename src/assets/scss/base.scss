@@ -5,6 +5,7 @@
 @import "font";
 @import "typo";
 @import "audio";
+@import "animations";
 
 html:has(> body.no-scroll) {
   overflow: hidden;

@@ -10,6 +10,7 @@ import iconUpload from "assets/images/icons/icon_upload.png";
 import iconCircle from "assets/images/icons/icon_circle.png";
 import iconMicCircle from "assets/images/icons/icon_mic_circle.png";
 import AudioWave from "./AudioWave";
+import RecordingAnimation from "./RecordingAnimation";
 
 export default function Participate() {
   const webcamRef = useRef<any>(null);
@@ -69,9 +70,19 @@ export default function Participate() {
 
   const renderParticipateView = () => {
     return (
-      <div className="w-full h-full max-w-[400px]">
+      <div className="w-full h-full max-w-[400px] flex flex-col justify-center">
+        {!selfie && (
+          <p className="text-center">
+            Nimm einen Selfie für die Höhlenwand auf oder lade ein Bild hoch.
+          </p>
+        )}
+        {selfie && (
+          <p className="text-center">
+            Berichte warum du dir Bilder machst.<br/><br/>
+          </p>
+        )}
         <div className="w-full relative">
-          <div className="w-full h-full flex">
+          <div className="w-full h-full flex flex-col">
             <div className="w-full h-full aspect-square ">
               <div className="absolute z-10 w-full h-full pointer-events-none bg-media-mask bg-cover bg-center" />
               {!selfie && (
@@ -87,7 +98,7 @@ export default function Participate() {
                     !audioBlob &&
                     recordingStatus === "recording" && (
                       <div className="w-full h-full absolute top-0 left-0 flex items-center justify-center">
-                        <img src={iconMicCircle} width={100} />
+                        <RecordingAnimation />
                       </div>
                     )}
                   {dataUrl && (
@@ -100,7 +111,7 @@ export default function Participate() {
             </div>
           </div>
         </div>
-        <div className="w-full h-[60px] flex items-center justify-center z-20 relative">
+        <div className="w-full h-[80px] flex items-center justify-center z-20 relative mt-[10px]">
           {!selfie && (
             <button onClick={capture}>
               <img width={80} src={iconRecordCircle} />
@@ -108,7 +119,7 @@ export default function Participate() {
           )}
           {selfie && !audioBlob && (
             <button
-              className="absolute bottom-0 right-0"
+              className="absolute bottom-[15px] right-0"
               onClick={() => setSelfie(null)}
             >
               <img width={50} src={iconRetake} />
@@ -118,7 +129,7 @@ export default function Participate() {
             <>
               <label
                 htmlFor="selfie-upload"
-                className="cursor-pointer absolute bottom-0 right-0"
+                className="cursor-pointer absolute bottom-[15px] right-0"
               >
                 <img src={iconUpload} width={50} />
               </label>
@@ -139,7 +150,7 @@ export default function Participate() {
           )}
           {audioBlob && (
             <button
-              className="absolute bottom-0 right-0"
+              className="absolute bottom-[15px] right-0"
               onClick={() => setAudioBlob(null)}
             >
               <img width={50} src={iconRetake} />

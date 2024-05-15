@@ -36,7 +36,7 @@ export default function App() {
   return (
     <div className="cv-app flex flex-col">
       {!cavePasseeEntered && <Intro></Intro>}
-      <div>
+      <div className="h-full">
         <div
           className="fixed w-full z-30"
           style={{
@@ -80,13 +80,13 @@ export default function App() {
           </div>
           <div
             onClick={() => setMuted(!muted)}
-            className="absolute right-[20px] top-[10px]"
+            className="absolute right-[5px] md:right-[20px] top-[10px]"
           >
             {muted && <img src={AudioMutedIcon} width={50} height={50} />}
             {!muted && <img src={AudioIcon} width={50} height={50} />}
           </div>
         </div>
-        <main className="cv-content flex-1 flex w-full items-center justify-center pt-[90px] pb-[100px]">
+        <main className="cv-content flex-1 flex w-full items-center justify-center pt-[90px] pb-[100px] h-full">
           <Content />
         </main>
         <footer className="cv-footer w-full h-[100px] pt-[5px] flex justify-center fixed z-20 bg-black bottom-0">
