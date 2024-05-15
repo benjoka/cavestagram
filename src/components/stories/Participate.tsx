@@ -62,7 +62,7 @@ export default function Participate() {
 
   const renderLoadingSpinner = () => {
     return (
-      <div className="flex items-center justify-center w-full h-full">
+      <div className="absolute top-0 left-0 flex items-center justify-center w-full h-full">
         <img src={iconCircle} width={70} className="animate-spin-slow" />
       </div>
     );
@@ -73,17 +73,21 @@ export default function Participate() {
       <div className="w-full h-full max-w-[400px] flex flex-col justify-center">
         {!selfie && (
           <p className="text-center">
-            Nimm einen Selfie für die Höhlenwand<br/>auf oder lade ein Bild hoch.
+            Nimm einen Selfie für die Höhlenwand
+            <br />
+            auf oder lade ein Bild hoch.
           </p>
         )}
         {selfie && !audioBlob && (
           <p className="text-center">
-            Klicke auf das Mikrofon und<br/>berichte warum du dir Bilder machst.
+            Klicke auf das Mikrofon und
+            <br />
+            berichte warum du dir Bilder machst.
           </p>
         )}
         {audioBlob && (
           <p className="text-center">
-            Teile deine Story <br/> in der Grotte du Présent.
+            Teile deine Story <br /> in der Grotte du Présent.
           </p>
         )}
         <div className="w-full relative">
