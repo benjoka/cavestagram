@@ -32,23 +32,6 @@ export default function AudioRecorder() {
   const [recording, setRecording] = useState(false);
   const [audioChunks, setAudioChunks] = useState([]);
 
-  const onLongPress = () => {
-    setRecordingStatus("recording");
-    setRecording(true);
-    startRecording();
-  };
-
-  const onLongPressEnd = () => {
-    setRecordingStatus("inactive");
-    setRecording(false);
-    stopRecording();
-  };
-
-  const longPressEvent = useLongPress(onLongPress, onLongPressEnd, {
-    shouldPreventDefault: true,
-    delay: 0,
-  });
-
   useEffect(() => {
     setRecordingStatus("inactive");
     getMicrophonePermission();
@@ -109,26 +92,11 @@ export default function AudioRecorder() {
       <div className="w-full h-full">
         {!uploading && !audioBlob && (
           <div className="w-full h-full flex items-center justify-center">
-            {permission && (
-              <div
-                {...longPressEvent}
-                className="record-button"
-              >
-                {!recording && (
-                  <img
-                    width={70}
-                    src={iconMicCircle}
-                    className="record-button"
-                  />
-                )}
-                {recording && (
-                  <img
-                    width={70}
-                    src={iconStopCircle}
-                    className="record-button"
-                  />
-                )}
-              </div>
+            {permission && recordingStatus === "inactive" && (
+              <img onClick={startRecording} width={70} src={iconMicCircle} className="record-button" />
+            )}
+            {permission && recordingStatus === "recording" && (
+              <img onClick={stopRecording} width={70} src={iconStopCircle} className="record-button" />
             )}
           </div>
         )}

@@ -73,12 +73,17 @@ export default function Participate() {
       <div className="w-full h-full max-w-[400px] flex flex-col justify-center">
         {!selfie && (
           <p className="text-center">
-            Nimm einen Selfie für die Höhlenwand auf oder lade ein Bild hoch.
+            Nimm einen Selfie für die Höhlenwand<br/>auf oder lade ein Bild hoch.
           </p>
         )}
-        {selfie && (
+        {selfie && !audioBlob && (
           <p className="text-center">
-            Berichte warum du dir Bilder machst.<br/><br/>
+            Klicke auf das Mikrofon und<br/>berichte warum du dir Bilder machst.
+          </p>
+        )}
+        {audioBlob && (
+          <p className="text-center">
+            Teile deine Story <br/> in der Grotte du Présent.
           </p>
         )}
         <div className="w-full relative">
