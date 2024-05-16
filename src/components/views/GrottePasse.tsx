@@ -8,8 +8,9 @@ import Reindeers from "assets/images/paintings/reindeers_font_de_gaumes.png";
 import Deer from "assets/images/paintings/deer.png";
 import Bull from "assets/images/paintings/bull.png";
 import Unicorn from "assets/images/paintings/unicorn.png";
+import LascauxRondell from "assets/images/paintings/lascaux_rondell.png";
 
-const paintings = [Birdman, Reindeers, Deer, Bull, Unicorn];
+const paintings = [Birdman, Reindeers, LascauxRondell, Deer, Bull, Unicorn];
 
 export default function GrottePasse() {
   const { data: posts } = usePostsQuery();
